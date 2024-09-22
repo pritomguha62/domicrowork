@@ -137,15 +137,9 @@ class MemberUserController extends Controller
 
         $user_code = abs(intval($string_user_code)+$last_number);
 
-        $last_member_user->user_code = $user_code;
+        $last_member_user->user_code = strval($user_code);
 
         $last_member_user->update();
-
-        $member_user = Member_user::where('email', session()->get('email'))->first();
-
-        $member_user->user_code = strval($user_code);
-
-        $member_user->update();
 
         session()->put('name', $last_member_user->name);
 
@@ -164,7 +158,7 @@ class MemberUserController extends Controller
 
         $last_member_user = Member_user::where('email', session()->get('email'))->first();
 
-        return redirect()->route('member_panel.signin')->with('success', 'Registration complete, please contact us for activation..!');
+        return redirect()->route('member.token_verify')->with('success', 'দয়া করে ইমেইল যাচাই করুন..');
 
     }
 
@@ -212,7 +206,7 @@ class MemberUserController extends Controller
                 session()->put('email_verified', 1);
                 session()->forget('verify_token');
 
-                return redirect(route('member_panel.signin'))->with('success', 'Email successfully verified..!');
+                return redirect(route('member_panel.signin'))->with('success', 'ইমেইল যাচাই সম্পন্ন হয়েছে, একাউন্ট সচল করতে প্যাকেজ কিনুন..!');
             }else {
                 return redirect(route('member_panel.token_verify'))->with('error', 'Email can not be verified, please retry..!');
             }
@@ -471,9 +465,13 @@ class MemberUserController extends Controller
 
         $buy_package_member_info->status = $request->status;
 
-        $member_info->package_id = $request->package_id;
+        $member_info->status = $request->status;
+
+        $member_info->package_id = $buy_package_member_info->package_id;
 
         $buy_package_member_info->update();
+
+        $member_info->update();
 
         return redirect()->back()->with('success', 'User Updated..!');
 

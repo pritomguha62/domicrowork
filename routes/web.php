@@ -106,7 +106,7 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
 
 
     Route::get('/member_package_requests', [MemberUserController::class, 'member_package_requests']
-    )->name('admin_panel.member_package_requests');
+    )->name('admin_panel.member_package_requests')->middleware('admin');
 
     Route::get('/update_member/{member_id?}', [MemberUserController::class, 'update_member']
     )->name('admin_panel.update_member')->middleware('admin');

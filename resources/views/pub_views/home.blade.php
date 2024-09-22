@@ -26,6 +26,14 @@ home
 
 @section('content')
 
+
+@if (session()->has('error'))
+<p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
+@endif
+@if (session()->has('success'))
+<p class="mb-0 alert alert-success">{{ session()->get('success') }}</p>
+@endif
+
 <!-- About Start -->
 <div class="container-fluid about py-5">
     <div class="container py-5" id="about_us">
