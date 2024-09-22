@@ -1,0 +1,232 @@
+<?php
+
+use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\ClientUserController;
+use App\Http\Controllers\LogOutController;
+use App\Http\Controllers\MemberUserController;
+use App\Http\Controllers\PackageController;
+use Illuminate\Support\Facades\Route;
+
+
+
+// puglic panel routes
+
+Route::get('/', [MemberUserController::class, 'home']
+)->name('home');
+
+Route::post('/contact_us', [MemberUserController::class, 'contact_us']
+)->name('contact_us');
+
+
+// common panel routes
+
+Route::get('/logout', [LogOutController::class, 'logout']
+)->name('logout');
+
+
+// admin panel routes
+
+// sign in
+
+Route::get('admin_panel/signin', [AdminUserController::class, 'signin']
+)->name('admin_panel.signin')->middleware('logged_in_admin');
+
+Route::post('/admin_signin_info', [AdminUserController::class, 'admin_signin_info']
+)->name('admin_signin_info');
+
+// sign up
+
+Route::get('admin_panel/signup', [AdminUserController::class, 'signup']
+)->name('admin_panel.signup');
+
+Route::post('/admin_register_info', [AdminUserController::class, 'admin_register_info']
+)->name('admin_register_info');
+
+Route::get('/admin_user_token_verify', [AdminUserController::class, 'admin_user_token_verify']
+)->name('admin_user.token_verify')->middleware('email_verified');
+
+Route::post('/admin_user_token_verification', [AdminUserController::class, 'admin_user_token_verification']
+)->name('admin_user.token_verification');
+
+Route::get('/admin_deactive', [AdminUserController::class, 'admin_deactive']
+)->name('admin_deactive');
+
+// forgot password
+
+Route::get('/admin_forgot_password', [AdminUserController::class, 'admin_forgot_password']
+)->name('admin_forgot_password');
+
+Route::post('/admin_otp_verification', [AdminUserController::class, 'admin_otp_verification']
+)->name('admin_otp_verification');
+
+Route::post('/admin_otp_verification_submit', [AdminUserController::class, 'admin_otp_verification_submit']
+)->name('admin_otp_verification_submit');
+
+Route::post('/admin_reset_password_submit', [AdminUserController::class, 'admin_reset_password_submit']
+)->name('admin_reset_password_submit');
+
+
+
+
+
+Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
+
+    Route::get('/dashboard', [AdminUserController::class, 'dashboard']
+    )->name('admin_panel.dashboard')->middleware('email_verify');
+
+    Route::get('/', function () {
+        return redirect()->route('admin_panel.dashboard');
+    });
+
+    Route::get('/admin_users', [AdminUserController::class, 'admin_users']
+    )->name('admin_panel.admin_users')->middleware('admin');
+
+    Route::get('/admin_user_requests', [AdminUserController::class, 'admin_user_requests']
+    )->name('admin_panel.admin_user_requests')->middleware('admin');
+
+    Route::get('/update_admin/{admin_id?}', [AdminUserController::class, 'update_admin']
+    )->name('admin_panel.update_admin')->middleware('admin');
+
+    Route::post('/update_admin_info', [AdminUserController::class, 'update_admin_info']
+    )->name('admin_panel.update_admin_info')->middleware('admin');
+
+    // package
+
+    Route::get('/add_package', [PackageController::class, 'add_package']
+    )->name('admin_panel.add_package');
+
+    Route::post('/add_package_info', [PackageController::class, 'add_package_info']
+    )->name('admin_panel.add_package_info');
+
+    Route::get('/packages', [PackageController::class, 'packages']
+    )->name('admin_panel.packages');
+
+
+    // member package
+
+
+    Route::get('/member_package_requests', [MemberUserController::class, 'member_package_requests']
+    )->name('admin_panel.member_package_requests');
+
+    Route::get('/update_member/{member_id?}', [MemberUserController::class, 'update_member']
+    )->name('admin_panel.update_member')->middleware('admin');
+
+    Route::get('/buy_package_member/{member_id?}', [MemberUserController::class, 'buy_package_member']
+    )->name('admin_panel.buy_package_member')->middleware('admin');
+
+    Route::post('/buy_package_member_info', [MemberUserController::class, 'buy_package_member_info']
+    )->name('admin_panel.buy_package_member_info')->middleware('admin');
+
+    Route::post('/update_member_info', [MemberUserController::class, 'update_member_info']
+    )->name('admin_panel.update_member_info')->middleware('admin');
+
+
+});
+
+
+
+// member panel routes
+
+
+Route::prefix('/member_panel')->group(function(){
+
+    // log in
+
+    Route::get('/signin', [MemberUserController::class, 'member_signin']
+    )->name('member_panel.signin')->middleware('logged_in_member');
+
+    Route::post('/check_login', [MemberUserController::class, 'check_login']
+    )->name('check_login');
+
+    // register
+
+    Route::get('/signup', [MemberUserController::class, 'member_signup']
+    )->name('member_panel.signup');
+
+    Route::post('/member_register_info', [MemberUserController::class, 'member_register_info']
+    )->name('member_register_info');
+
+    Route::get('/token_verify', [MemberUserController::class, 'member_token_verify']
+    )->name('member.token_verify')->middleware('email_verified');
+
+    Route::post('/token_verication', [MemberUserController::class, 'member_token_verification']
+    )->name('member.token_verification');
+
+    Route::get('/member_deactive', [MemberUserController::class, 'member_deactive']
+    )->name('member_deactive')->middleware('status_check');
+
+    Route::get('/member_forgot_password', [MemberUserController::class, 'member_forgot_password']
+    )->name('member_forgot_password');
+
+    Route::post('/member_otp_verification', [MemberUserController::class, 'member_otp_verification']
+    )->name('member_otp_verification');
+
+    Route::post('/member_otp_verification_submit', [MemberUserController::class, 'member_otp_verification_submit']
+    )->name('member_otp_verification_submit');
+
+    Route::post('/member_reset_password', [MemberUserController::class, 'member_reset_password']
+    )->name('member_reset_password');
+
+    Route::post('/member_reset_password_submit', [MemberUserController::class, 'member_reset_password_submit']
+    )->name('member_reset_password_submit');
+
+    Route::get('/member_packages', [PackageController::class, 'member_packages']
+    )->name('member_panel.member_packages');
+
+    Route::get('/activate_package/{package_id}', [PackageController::class, 'activate_package']
+    )->name('member_panel.activate_package');
+
+    Route::post('/activate_package_info', [PackageController::class, 'activate_package_info']
+    )->name('member_panel.activate_package_info');
+
+
+});
+
+
+
+// worker panel routes
+
+
+
+Route::prefix('/worker_panel')->middleware('worker')->group(function(){
+
+    Route::get('/dashboard', [MemberUserController::class, 'worker_dashboard']
+    )->name('worker_panel.dashboard');
+
+    Route::get('/', function () {
+        return redirect()->route('worker_panel.dashboard');
+    });
+
+});
+
+
+
+
+// client panel routes
+
+
+
+
+Route::prefix('/client_panel')->middleware('client')->group(function(){
+
+    Route::get('/dashboard', [MemberUserController::class, 'client_dashboard']
+    )->name('client_panel.dashboard');
+
+    Route::get('/', function () {
+        return redirect()->route('client_panel.dashboard');
+    });
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
