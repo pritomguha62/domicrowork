@@ -191,7 +191,7 @@ Route::prefix('/member_panel')->group(function(){
 Route::prefix('/worker_panel')->middleware('worker')->group(function(){
 
     Route::get('/dashboard', [MemberUserController::class, 'worker_dashboard']
-    )->name('worker_panel.dashboard');
+    )->name('worker_panel.dashboard')->middleware('email_verify');
 
     Route::get('/', function () {
         return redirect()->route('worker_panel.dashboard');
@@ -210,7 +210,7 @@ Route::prefix('/worker_panel')->middleware('worker')->group(function(){
 Route::prefix('/client_panel')->middleware('client')->group(function(){
 
     Route::get('/dashboard', [MemberUserController::class, 'client_dashboard']
-    )->name('client_panel.dashboard');
+    )->name('client_panel.dashboard')->middleware('email_verify');
 
     Route::get('/', function () {
         return redirect()->route('client_panel.dashboard');

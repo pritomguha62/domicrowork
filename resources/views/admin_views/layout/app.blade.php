@@ -191,8 +191,8 @@
                                 <div class="profileset">
                                     <span class="user-img"><img src="{{ asset('admin_assets/img/profiles/avator1.jpg') }}" alt="" /> <span class="status online"></span></span>
                                     <div class="profilesets">
-                                        <h6>John Doe</h6>
-                                        <h5>Admin</h5>
+                                        <h6>{{ session()->get('name') }}</h6>
+                                        <h5>{{ session()->get('role_name') }}</h5>
                                     </div>
                                 </div>
                                 <hr class="m-0" />
@@ -223,6 +223,18 @@
                                 <a href="{{ route('admin_panel.dashboard') }}"><img src="{{ asset('admin_assets/img/icons/dashboard.svg') }}" alt="img" /><span> Dashboard</span> </a>
                             </li>
                             <li class="submenu">
+                                <a href="javascript:void(0);"><img src="{{ asset('admin_assets/img/icons/time.svg') }}" alt="img" /><span> Tasks</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="purchaseorderreport.html">Social Media</a></li>
+                                    <li><a href="inventoryreport.html">Click Task</a></li>
+                                    {{-- <li><a href="salesreport.html">Sales Report</a></li>
+                                    <li><a href="invoicereport.html">Invoice Report</a></li>
+                                    <li><a href="purchasereport.html">Purchase Report</a></li>
+                                    <li><a href="supplierreport.html">Supplier Report</a></li>
+                                    <li><a href="customerreport.html">Customer Report</a></li> --}}
+                                </ul>
+                            </li>
+                            <li class="submenu">
                                 <a href="javascript:void(0);"><img src="{{ asset('admin_assets/img/icons/product.svg') }}" alt="img" /><span> Package</span> <span class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="{{ route('admin_panel.packages') }}">Package List</a></li>
@@ -231,18 +243,6 @@
                             </li>
                             <li>
                                 <a href="components.html"><i data-feather="layers"></i><span> Components</span> </a>
-                            </li>
-                            <li class="submenu">
-                                <a href="javascript:void(0);"><img src="{{ asset('admin_assets/img/icons/time.svg') }}" alt="img" /><span> Report</span> <span class="menu-arrow"></span></a>
-                                <ul>
-                                    <li><a href="purchaseorderreport.html">Purchase order report</a></li>
-                                    <li><a href="inventoryreport.html">Inventory Report</a></li>
-                                    <li><a href="salesreport.html">Sales Report</a></li>
-                                    <li><a href="invoicereport.html">Invoice Report</a></li>
-                                    <li><a href="purchasereport.html">Purchase Report</a></li>
-                                    <li><a href="supplierreport.html">Supplier Report</a></li>
-                                    <li><a href="customerreport.html">Customer Report</a></li>
-                                </ul>
                             </li>
                             @if (session()->get('is_admin') == 1 && session()->get('role_id') < 3)
                                 <li class="submenu">

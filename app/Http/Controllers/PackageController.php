@@ -77,7 +77,7 @@ class PackageController extends Controller
 
         $request->validate([
             "user_code" => "required",
-            "trxid" => "required",
+            "trxid" => "required|unique:buy_packages,trxid",
             "paid_from" => "required",
         ]);
 

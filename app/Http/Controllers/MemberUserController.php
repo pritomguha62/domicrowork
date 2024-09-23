@@ -285,6 +285,7 @@ class MemberUserController extends Controller
 
         $buy_package_member = Buy_package::with('member', 'package')->where('member_id', $member_id)->first();
 
+
         if (!empty($buy_package_member)) {
             return view('admin_views.common.buy_package_member', compact('buy_package_member'));
         }else{

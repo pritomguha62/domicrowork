@@ -76,7 +76,7 @@ class AdminUserController extends Controller
         $parent_user = Admin_user::where('user_code', $request->parent_user_code)->first();
 
         if (empty($parent_user->admin_id)) {
-            return redirect()->back()->with('error', 'Please join with a refer code..!');
+            return redirect()->back()->with('error', 'Please join with a valid refer code..!');
         }
 
         $admin_user = new Admin_user();

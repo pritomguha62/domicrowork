@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('buy_packages', function (Blueprint $table) {
             $table->id('buy_package_id');
             $table->string('paid_from')->nullable();
-            $table->string('trxid')->nullable();
+            $table->string('trxid')->nullable()->unique();
             $table->string('user_code')->nullable();
             $table->unsignedBigInteger('member_id')->nullable();
             $table->foreign('member_id')->references('member_id')->on('member_users');

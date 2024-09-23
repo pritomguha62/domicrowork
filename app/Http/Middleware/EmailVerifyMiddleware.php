@@ -15,9 +15,9 @@ class EmailVerifyMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (session()->get('email_verified') != 1 && session()->get('role_id') > 4) {
+        if (session()->get('email_verified') != 1 && session()->get('role_id') >= 4) {
             return redirect()->route('member.token_verify');
-        }elseif (session()->get('email_verified') != 1 && session()->get('role_id') <= 3) {
+        }elseif (session()->get('email_verified') != 1 && session()->get('role_id') < 4) {
             return redirect()->route('admin_user.token_verify');
         }else {
             return $next($request);
