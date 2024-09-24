@@ -5,6 +5,7 @@ use App\Http\Controllers\ClientUserController;
 use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\MemberUserController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -119,6 +120,15 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
 
     Route::post('/update_member_info', [MemberUserController::class, 'update_member_info']
     )->name('admin_panel.update_member_info')->middleware('admin');
+
+
+    // passbook
+
+    Route::get('/total_passbooks', [AdminUserController::class, 'total_passbooks']
+    )->name('admin_panel.total_passbooks')->middleware('admin');
+
+
+
 
 
 });

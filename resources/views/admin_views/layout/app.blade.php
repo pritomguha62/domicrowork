@@ -241,10 +241,13 @@
                                     <li><a href="{{ route('admin_panel.add_package') }}">Add Package</a></li>
                                 </ul>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="components.html"><i data-feather="layers"></i><span> Components</span> </a>
-                            </li>
+                            </li> --}}
                             @if (session()->get('is_admin') == 1 && session()->get('role_id') < 3)
+                                <li>
+                                    <a href="{{ route('admin_panel.total_passbooks') }}"><img src="{{ asset('admin_assets/img/icons/task-list.svg') }}" alt="img" /><span> Total Passbooks</span> </a>
+                                </li>
                                 <li class="submenu">
                                     <a href="javascript:void(0);"><img src="{{ asset('admin_assets/img/icons/users1.svg') }}" alt="img" /><span> Member Panel</span> <span class="menu-arrow"></span></a>
                                     <ul>

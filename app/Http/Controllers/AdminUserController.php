@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\SendMail;
 use App\Models\Admin_user;
+use App\Models\Passbook;
 use App\Models\Role;
 use Hash;
 use Illuminate\Http\Request;
@@ -379,6 +380,14 @@ class AdminUserController extends Controller
         }else {
             return redirect()->back()->with('error', 'Please re-try..!');
         }
+
+    }
+
+    public function total_passbooks(){
+
+        $total_passbooks = Passbook::all();
+
+        return view('admin_views.common.total_passbooks', compact('total_passbooks'));
 
     }
 

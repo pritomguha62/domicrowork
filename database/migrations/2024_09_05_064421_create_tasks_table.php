@@ -21,8 +21,7 @@ return new class extends Migration
             $table->string('client_file')->nullable();
             $table->string('worker_file')->nullable();
             $table->string('limit')->nullable();
-            $table->string('worker_task_status')->nullable();
-            $table->string('status')->nullable();
+            $table->integer('status')->nullable()->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
