@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id('task_id');
             $table->string('title')->nullable();
             $table->text('description')->nullable();
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('member_id')->on('member_users')->onDelete('cascade');
             $table->string('client_link')->nullable();
             $table->string('client_file')->nullable();
             $table->string('worker_file')->nullable();

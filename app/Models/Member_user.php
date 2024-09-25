@@ -63,6 +63,12 @@ class Member_user extends Model
 
     }
 
+    public function task(){
+
+        return $this->belongsToMany(Task::class, 'member_users', 'worker_id', 'task_id');
+
+    }
+
 
 
 

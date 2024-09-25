@@ -14,18 +14,11 @@ class Task_assignments extends Model
     protected $primaryKey = 'task_id';
 
 
-    public function admin(){
+    // public function admin(){
 
-        return $this->belongsToMany(Admin_user::class, 'admin_users', 'admin_id', 'admin_id');
+    //     return $this->belongsToMany(Admin_user::class, 'admin_users', 'admin_id', 'admin_id');
 
-    }
-
-    public function client(){
-
-        return $this->belongsToMany(Member_user::class, 'member_users', 'worker_id', 'member_id');
-
-    }
-
+    // }
 
 
 
