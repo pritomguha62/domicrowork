@@ -97,7 +97,6 @@ Add Task
                             </div>
                             <div class="form-group row text-center">
                                 <div class="col-md-10 mx-auto">
-                                    <input type="hidden" name="member_id" hidden value="{{ $update_member->member_id }}">
                                     <input type="submit" class="btn btn-warning" value="Update">
                                 </div>
                             </div>

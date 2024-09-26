@@ -52,6 +52,18 @@ class Admin_user extends Model
 
     }
 
+    public function task(){
+
+        return $this->belongsToMany(Task::class, 'member_users', 'worker_id', 'task_id');
+
+    }
+
+
+    public function admin_task(){
+
+        return $this->belongsTo(Task::class, 'admin_id', 'admin_id');
+
+    }
 
 
 
