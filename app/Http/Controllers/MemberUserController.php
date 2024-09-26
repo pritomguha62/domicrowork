@@ -506,6 +506,7 @@ class MemberUserController extends Controller
     }
 
     public function contact_us(Request $request){
+        
         $request->validate([
             'name'=>'required',
             'email'=>'required|email',

@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreign('admin_id')->references('admin_id')->on('admin_users')->onDelete('cascade');
             $table->string('client_link')->nullable();
             $table->string('client_file')->nullable();
-            $table->string('worker_file')->nullable();
             $table->string('code')->nullable();
             $table->string('limit')->nullable();
             $table->string('expire_date_time')->nullable();

@@ -225,7 +225,7 @@
                             <li class="submenu">
                                 <a href="javascript:void(0);"><img src="{{ asset('admin_assets/img/icons/time.svg') }}" alt="img" /><span> Tasks</span> <span class="menu-arrow"></span></a>
                                 <ul>
-                                    <li><a href="purchaseorderreport.html">Social Media</a></li>
+                                    <li><a href="{{ route('admin_panel.add_social_task') }}">Social Media</a></li>
                                     <li><a href="inventoryreport.html">Click Task</a></li>
                                     {{-- <li><a href="salesreport.html">Sales Report</a></li>
                                     <li><a href="invoicereport.html">Invoice Report</a></li>

@@ -13,6 +13,14 @@ class Task_assignments extends Model
 
     protected $primaryKey = 'task_id';
 
+    protected $fillable = [
+        'task_id',
+        'worker_id',
+        'worker_file',
+        'code',
+        'status',
+    ];
+
 
     // public function admin(){
 
@@ -23,3 +31,4 @@ class Task_assignments extends Model
 
 
 }
+

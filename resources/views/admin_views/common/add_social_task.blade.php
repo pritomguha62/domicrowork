@@ -25,10 +25,10 @@ Add Task
                 <div class="card">
 
                     <div class="card-header">
-                        <h5 class="card-title">Update Member</h5>
+                        <h5 class="card-title">Add Social Media Task</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin_panel.update_member_info') }}" method="POST">
+                        <form action="{{ route('admin_panel.add_social_task_info') }}" method="POST">
 
                             @if (session()->has('error'))
                                 <p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
@@ -42,13 +42,13 @@ Add Task
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Title</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="title" class="form-control" />
+                                    <input type="text" name="title" required class="form-control" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Description</label>
                                 <div class="col-md-10">
-                                    <textarea name="description" name="description" id="" cols="30" rows="10"></textarea>
+                                    <textarea name="description" name="description" required id="" cols="30" rows="10"></textarea>
                                 </div>
                             </div>
 
@@ -76,7 +76,7 @@ Add Task
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Expire Date Time</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="expire_date_time" class="form-control" />
+                                    <input type="datetime-local" name="expire_date_time" class="form-control" />
                                 </div>
                             </div>
 
@@ -85,16 +85,19 @@ Add Task
                                 <div class="col-md-10">
                                     {{-- <p>Use select2() function on select element to convert it to Select 2.</p> --}}
                                     <select name="status" class="js-example-basic-single select2 form-control">
-                                        @if ($update_member->status == 1)
-                                            <option value="1">Active</option>
-                                            <option value="0">Deactive</option>
-                                        @else
-                                            <option value="0">Deactive</option>
-                                            <option value="1">Active</option>
-                                        @endif
+                                        <option value="1">Active</option>
+                                        <option value="0">Deactive</option>
                                     </select>
                                 </div>
                             </div>
+
+                            {{-- <div class="form-group row">
+                                <label class="col-form-label col-md-2">Upload Image</label>
+                                <div class="col-md-10">
+                                    <input type="datetime-local" name="client_file" class="form-control" />
+                                </div>
+                            </div> --}}
+
                             <div class="form-group row text-center">
                                 <div class="col-md-10 mx-auto">
                                     <input type="submit" class="btn btn-warning" value="Update">
