@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('code')->nullable();
             $table->string('limit')->nullable();
             $table->string('expire_date_time')->nullable();
-            $table->integer('status')->nullable()->default(0);
+            $table->integer('status')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('task_id')->references('task_id')->on('tasks')->onDelete('cascade');
             $table->foreign('worker_id')->references('member_id')->on('member_users')->onDelete('cascade');
             $table->string('code')->nullable();
-            $table->integer('status')->nullable()->default(0);
+            $table->integer('status')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
