@@ -36,6 +36,7 @@ return new class extends Migration
             $table->integer('status')->default(0);
             $table->unsignedBigInteger('approver_id')->nullable();
             $table->foreign('approver_id')->references('admin_id')->on('admin_users');
+            $table->integer('is_admin')->default(0);
             $table->string('password');
             $table->text('comment')->nullable();
             $table->timestamp('created_at')->useCurrent();

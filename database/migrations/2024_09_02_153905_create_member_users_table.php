@@ -36,6 +36,8 @@ return new class extends Migration
             $table->foreign('role_id')->references('role_id')->on('roles');
             $table->unsignedBigInteger('approver_id')->nullable();
             $table->foreign('approver_id')->references('admin_id')->on('admin_users');
+            $table->integer('is_client')->default(0);
+            $table->integer('is_worker')->default(0);
             $table->integer('status')->default(0);
             $table->text('comment')->nullable();
             $table->string('password');
