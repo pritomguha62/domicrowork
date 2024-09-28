@@ -29,7 +29,7 @@ class ClientMiddleware
         }else{
 
             // return redirect()->route('logout');
-            return redirect()->route('home')->with('error', session()->get('name'));
+            return redirect()->route('home')->with('error', 'Please register first..!');
 
         }
 

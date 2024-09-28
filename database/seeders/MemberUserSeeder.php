@@ -26,7 +26,7 @@ class MemberUserSeeder extends Seeder
             'verify_token' => 657434,
             'user_code' => strval(abs(intval($string_user_code)+1)),
             'status' => 1,
-            'role_id' => 1,
+            'role_id' => 4,
             'approver_id' => 1,
             'is_worker' => 1,
             'password' => Hash::make('Itzf142@12#'),
@@ -44,7 +44,7 @@ class MemberUserSeeder extends Seeder
             'parent_id' => 1,
             'parent_user_code' => $developer->user_code,
             'status' => 1,
-            'role_id' => 2,
+            'role_id' => 4,
             'is_worker' => 1,
             'password' => Hash::make('Domicrowork@'),
         ]);
@@ -59,7 +59,7 @@ class MemberUserSeeder extends Seeder
             'parent_id' => 1,
             'parent_user_code' => $developer->user_code,
             'status' => 1,
-            'role_id' => 3,
+            'role_id' => 4,
             'is_worker' => 1,
             'password' => Hash::make('12345678'),
         ]);
@@ -74,7 +74,7 @@ class MemberUserSeeder extends Seeder
             'parent_id' => 1,
             'parent_user_code' => $developer->user_code,
             'status' => 1,
-            'role_id' => 3,
+            'role_id' => 4,
             'is_worker' => 1,
             'password' => Hash::make('Dada1122@'),
         ]);

@@ -127,8 +127,12 @@
                             </div>
                         </div> --}}
                         <a href="{{ route('home') }}#contact_us" class="nav-item nav-link">যোগাযোগ করুন</a>
+                        @if (session()->has('role_id'))
+                        <a href="{{ route('logout') }}" class="nav-item nav-link">লগআউট</a>
+                        @else
                         <a href="{{ route('member_panel.signin') }}" class="nav-item nav-link">লগইন</a>
                         <a href="{{ route('member_panel.signup') }}" class="nav-item nav-link">রেজিস্টার</a>
+                        @endif
                     </div>
                     {{-- <a href="#" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">চলুন শুরু করা যাক</a> --}}
                 </div>

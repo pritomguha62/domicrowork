@@ -235,7 +235,7 @@ Route::prefix('/client_panel')->middleware('client')->group(function(){
         return redirect()->route('client_panel.dashboard');
     });
 
-    
+
     // task
 
 
