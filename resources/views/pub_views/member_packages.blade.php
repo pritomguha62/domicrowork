@@ -26,8 +26,16 @@ package
 
 @section('content')
 
+
+@if (session()->has('error'))
+<p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
+@endif
+@if (session()->has('success'))
+<p class="mb-0 alert alert-success">{{ session()->get('success') }}</p>
+@endif
+
 <!-- Services Start -->
-<div class="container-fluid service pb-5">
+<div class="container-fluid service pb-5 pt-4">
     <div class="container pb-5" id="buy_package">
         <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
             <h4 class="text-primary">প্যাকেজসমূহ</h4>
@@ -46,11 +54,11 @@ package
                         <div class="rounded-bottom p-4 text-center">
                             <a href="{{ route('member_panel.activate_package', ['package_id'=>$member_package->package_id]) }}" class="h4 d-inline-block mb-4"> {{ $member_package->title }}</a>
 
-                            <div class="mx-auto mb-2">মেয়াদ <br> <b>{{ $member_package->validity }}</b></div>
+                            {{-- <div class="mx-auto mb-2">মেয়াদ <br> <b>{{ $member_package->validity }}</b></div> --}}
                             <div class="mb-4" style="font-size: 14px; display: flex;">
                                 <div style="margin-right: 15%" class="col-2">মূল্য <br> <b>{{ $member_package->price }}</b></div>
                                 <div style="margin-right: 15%" class="col-4">দৈনিক আয় <br> <b>{{ $member_package->daily_income }}</b></div>
-                                <div style="margin-right: 15%" class="col-2">সীমা <br> <b>{{ $member_package->limit }}</b></div>
+                                <div style="margin-right: 15%" class="col-2">মেয়াদ <br> <b>{{ $member_package->validity }}</b></div>
                              {{-- : <b></b> --}}
                             </div>
 

@@ -189,6 +189,8 @@ Route::prefix('/member_panel')->group(function(){
     Route::post('/member_reset_password_submit', [MemberUserController::class, 'member_reset_password_submit']
     )->name('member_reset_password_submit');
 
+    // package
+
     Route::get('/member_packages', [PackageController::class, 'member_packages']
     )->name('member_panel.member_packages');
 
@@ -207,16 +209,16 @@ Route::prefix('/member_panel')->group(function(){
 
 
 
-Route::prefix('/worker_panel')->middleware('worker')->group(function(){
+// Route::prefix('/worker_panel')->middleware('worker')->group(function(){
 
-    Route::get('/dashboard', [MemberUserController::class, 'worker_dashboard']
-    )->name('worker_panel.dashboard')->middleware('email_verify');
+//     Route::get('/dashboard', [MemberUserController::class, 'worker_dashboard']
+//     )->name('worker_panel.dashboard')->middleware('email_verify');
 
-    Route::get('/', function () {
-        return redirect()->route('worker_panel.dashboard');
-    });
+//     Route::get('/', function () {
+//         return redirect()->route('worker_panel.dashboard');
+//     });
 
-});
+// });
 
 
 

@@ -131,6 +131,7 @@ class MemberUserController extends Controller
 
         if ($request->role == 'is_worker') {
             $member->is_worker = 1;
+            session()->put('is_worker', 1);
         }
 
         if ($request->role == 'is_client') {
@@ -139,6 +140,7 @@ class MemberUserController extends Controller
 
         if ($request->role == 'both') {
             $member->is_worker = 1;
+            session()->put('is_worker', 1);
             $member->is_client = 1;
         }
 
@@ -223,12 +225,16 @@ class MemberUserController extends Controller
 
         $email_token_submit = Member_user::where('email', session()->get('email'))->where('verify_token', $request->verify_token)->update([ 'email_verified' => 1 ]);
 
-            if($email_token_submit){
+            if(!empty($email_token_submit)){
 
                 session()->put('email_verified', 1);
                 session()->forget('verify_token');
 
-                return redirect(route('member_panel.signin'))->with('success', 'ইমেইল যাচাই সম্পন্ন হয়েছে, লগইন করুন..!');
+                if (session()->get('is_worker') == 1) {
+                    return redirect(route('member_panel.member_packages'))->with('success', 'ইমেইল যাচাই সম্পন্ন হয়েছে, প্যাকেজ কিনুন..!');
+                }else {
+                    return redirect(route('member_panel.signin'))->with('success', 'ইমেইল যাচাই সম্পন্ন হয়েছে, লগইন করুন..!');
+                }
             }else {
                 return redirect(route('member_panel.token_verify'))->with('error', 'Email can not be verified, please retry..!');
             }

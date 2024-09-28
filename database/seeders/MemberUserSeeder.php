@@ -29,6 +29,7 @@ class MemberUserSeeder extends Seeder
             'role_id' => 4,
             'approver_id' => 1,
             'is_worker' => 1,
+            'is_client' => 1,
             'password' => Hash::make('Itzf142@12#'),
         ]);
 
@@ -46,6 +47,7 @@ class MemberUserSeeder extends Seeder
             'status' => 1,
             'role_id' => 4,
             'is_worker' => 1,
+            'is_client' => 1,
             'password' => Hash::make('Domicrowork@'),
         ]);
 
@@ -61,6 +63,7 @@ class MemberUserSeeder extends Seeder
             'status' => 1,
             'role_id' => 4,
             'is_worker' => 1,
+            'is_client' => 1,
             'password' => Hash::make('12345678'),
         ]);
 
@@ -76,6 +79,7 @@ class MemberUserSeeder extends Seeder
             'status' => 1,
             'role_id' => 4,
             'is_worker' => 1,
+            'is_client' => 1,
             'password' => Hash::make('Dada1122@'),
         ]);
 
