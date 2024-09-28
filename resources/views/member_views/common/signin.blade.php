@@ -90,13 +90,13 @@
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-4">
+                            {{-- <div class="d-flex align-items-center justify-content-between mb-4">
                                 <div class="form-check">
                                     <input type="checkbox" name="is_client" class="form-check-input" id="exampleCheck1">
                                     <label class="form-check-label" for="exampleCheck1">Log in as <b>Client</b></label>
                                 </div>
-                                {{-- <a href="">Forgot Password</a> --}}
-                            </div>
+                                <a href="">Forgot Password</a>
+                            </div> --}}
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <div class="form-check">
                                     <input type="checkbox" name="rememberme" class="form-check-input" id="exampleCheck2" checked>

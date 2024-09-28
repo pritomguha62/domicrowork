@@ -101,7 +101,28 @@
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <div class="form-check">
-                                    {{-- <input type="checkbox" name="terms_condition" class="form-check-input" id="exampleCheck1">
+                                    <input type="radio" name="role" class="form-check-input" id="exampleCheck1" value="is_worker">
+                                    <label class="form-check-label" for="exampleCheck1">I am a worker</label>
+                                </div>
+                                {{-- <a href="">Forgot Password</a> --}}
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div class="form-check">
+                                    <input type="radio" name="role" class="form-check-input" id="exampleCheck2" value="is_client">
+                                    <label class="form-check-label" for="exampleCheck2">I am a client</label>
+                                </div>
+                                {{-- <a href="">Forgot Password</a> --}}
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div class="form-check">
+                                    <input type="radio" name="role" class="form-check-input" id="exampleCheck3" value="both">
+                                    <label class="form-check-label" for="exampleCheck3">Both</label>
+                                </div>
+                                {{-- <a href="">Forgot Password</a> --}}
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div class="form-check">
+                                    {{-- <input type="radio" name="terms_condition" class="form-check-input" id="exampleCheck1">
                                     <label class="form-check-label" for="exampleCheck1">Check me out</label> --}}
                                 </div>
                                 <a href="">Forgot Password</a>

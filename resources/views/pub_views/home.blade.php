@@ -40,6 +40,7 @@ home
         <div class="row g-5 align-items-center">
             <div class="col-xl-7 wow fadeInLeft" data-wow-delay="0.2s">
                 <div>
+                    <h4 class="text-primary">{{ session()->get('role_id') }}..</h4>
                     <h4 class="text-primary">আমাদের সম্পর্কে</h4>
                     <h2 class="display-5 mb-4">আমাদের মূল লক্ষ্য হলো, বেকারত্ব দূর করা...</h2>
                     <p class="mb-4">এখনই রেজিস্ট্রেশন করুন এবং আপনার ভাগ্য পরিবর্তন করুন।

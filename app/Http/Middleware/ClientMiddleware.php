@@ -18,17 +18,18 @@ class ClientMiddleware
 
         if (session()->get('role_id') == 4 && session()->get('is_client') == 1) {
 
-            if ( session()->get('status') == 1) {
+            // if ( session()->get('status') == 1) {
 
                 return $next($request);
 
-            }else {
-                return redirect()->route('member_deactive');
-            }
+            // }else {
+            //     return redirect()->route('member_deactive');
+            // }
 
         }else{
 
-            return redirect()->route('logout');
+            // return redirect()->route('logout');
+            return redirect()->route('home')->with('error', session()->get('name'));
 
         }
 

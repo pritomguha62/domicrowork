@@ -51,7 +51,7 @@ class TaskController extends Controller
             'title'=>'required',
             'description'=>'required',
             'client_link'=>'required',
-            'code'=>'required',
+            // 'code'=>'required',
             'limit'=>'required',
             'status'=>'required',
         ]);

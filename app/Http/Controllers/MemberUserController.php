@@ -32,11 +32,11 @@ class MemberUserController extends Controller
 
         // }
 
-        if (session()->get('is_client') == 1) {
+        // if (session()->get('is_client') == 1) {
 
-            return redirect()->route('client_panel.dashboard');
+        //     return redirect()->route('client_panel.dashboard');
 
-        }
+        // }
 
         return view('member_views.common.worker_dashboard');
     }
@@ -50,11 +50,11 @@ class MemberUserController extends Controller
         // }
 
 
-        if (session()->get('is_worker') == 1) {
+        // if (session()->get('is_worker') == 1) {
 
-            return redirect()->route('worker_panel.dashboard');
+        //     return redirect()->route('worker_panel.dashboard');
 
-        }
+        // }
 
         return view('member_views.common.client_dashboard');
     }
@@ -97,6 +97,7 @@ class MemberUserController extends Controller
             "email" => "required|email|unique:member_users,email",
             "password"=> "required|min:8|max:16",
             "confirm_password"=> "required|same:password",
+            "role" => "required",
             // "terms_condition"=> "required",
         ]);
 
@@ -107,19 +108,40 @@ class MemberUserController extends Controller
         $member = new Member_user();
 
         $member->name = $request->name;
+
         $member->email = $request->email;
+
         $member->parent_user_code = $request->parent_user_code;
 
         if (!empty($parent_user_admin)) {
+
             $member->parent_user_code = $parent_user_admin->user_code;
+
         }elseif (!empty($parent_user_member)) {
+
             $member->parent_user_code = $parent_user_member->user_code;
+
             $member->parent_id = $parent_user_member->member_id;
+
         }else {
 
             $member->parent_user_code = null;
 
         }
+
+        if ($request->role == 'is_worker') {
+            $member->is_worker = 1;
+        }
+
+        if ($request->role == 'is_client') {
+            $member->is_client = 1;
+        }
+
+        if ($request->role == 'both') {
+            $member->is_worker = 1;
+            $member->is_client = 1;
+        }
+
 
         $member->role_id = 4;
 
@@ -206,7 +228,7 @@ class MemberUserController extends Controller
                 session()->put('email_verified', 1);
                 session()->forget('verify_token');
 
-                return redirect(route('member_panel.signin'))->with('success', 'ইমেইল যাচাই সম্পন্ন হয়েছে, একাউন্ট সচল করতে প্যাকেজ কিনুন..!');
+                return redirect(route('member_panel.signin'))->with('success', 'ইমেইল যাচাই সম্পন্ন হয়েছে, লগইন করুন..!');
             }else {
                 return redirect(route('member_panel.token_verify'))->with('error', 'Email can not be verified, please retry..!');
             }
@@ -245,16 +267,18 @@ class MemberUserController extends Controller
             session()->put('user_code', $member_user->user_code);
             session()->put('email_verified', $member_user->email_verified);
             session()->put('status', $member_user->status);
-            if ($request->is_client == 'on') {
-                session()->forget('is_worker');
+            if ($member_user->is_client == 1) {
+                // session()->forget('is_worker');
                 session()->put('is_client', 1);
-                return redirect(route('client_panel.dashboard'));
-            }else {
-                session()->forget('is_client');
-                session()->put('is_worker', 1);
-                return redirect(route('worker_panel.dashboard'));
             }
 
+            if ($member_user->is_worker == 1) {
+                // session()->forget('is_client');
+                session()->put('is_worker', 1);
+            }
+
+            return redirect(route('client_panel.dashboard'));
+            // return redirect(route('worker_panel.dashboard'));
 
         }else{
 
@@ -506,7 +530,7 @@ class MemberUserController extends Controller
     }
 
     public function contact_us(Request $request){
-        
+
         $request->validate([
             'name'=>'required',
             'email'=>'required|email',
