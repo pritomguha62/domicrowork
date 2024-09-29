@@ -21,7 +21,7 @@ history
                         <th scope="col">Sender User Code</th>
                         <th scope="col">Receiver User Code</th>
                         <th scope="col">Amount</th>
-                        <th scope="col">Date-Time</th>
+                        <th scope="col">Created At</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,7 +30,7 @@ history
                     @endphp
                     @foreach ($histories as $history)
                     <tr>
-                        <th scope="row">1</th>
+                        <th scope="row">{{ $i }}</th>
                         <td>{{ $history->sender_name }}</td>
                         <td>{{ $history->receiver_name }}</td>
                         <td>{{ $history->sender_user_code }}</td>

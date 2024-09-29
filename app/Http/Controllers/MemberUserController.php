@@ -9,6 +9,7 @@ use App\Models\Member_user;
 use App\Models\Package;
 use App\Models\Passbook;
 use App\Models\Role;
+use App\Models\Withdraw;
 use Hash;
 use Illuminate\Http\Request;
 use Mail;
@@ -573,6 +574,14 @@ class MemberUserController extends Controller
         $refers = Member_user::where('parent_user_code', session()->get('user_code'))->get();
 
         return view('member_views.common.refers', compact('refers'));
+
+    }
+
+    public function withdraws(){
+
+        $withdraws = Withdraw::where('user_code', session()->get('user_code'))->where('member_id', session()->get('member_id'))->get();
+
+        return view('member_views.common.withdraws', compact('withdraws'));
 
     }
 

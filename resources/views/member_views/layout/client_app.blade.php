@@ -51,7 +51,7 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="{{ asset('member_assets/img/user.jpg') }}" alt="" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle" src="{{ asset('member_assets/img/user.png') }}" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
@@ -71,8 +71,8 @@
                     </div>
                     <a href="{{ route('client_panel.histories') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>History</a>
                     <a href="{{ route('client_panel.refers') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Refers</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
+                    <a href="{{ route('client_panel.withdraws') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Withdraws</a>
+                    <a href="{{ route('member_panel.member_packages') }}#buy_package" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Buy Package</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -167,7 +167,7 @@
                     </div> --}}
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="{{ asset('member_assets/img/user.jpg') }}" alt="" style="width: 40px; height: 40px;">
+                            <img class="rounded-circle me-lg-2" src="{{ asset('member_assets/img/user.png') }}" alt="" style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex">{{ session()->get('name') }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
@@ -193,7 +193,7 @@
 
 
             <!-- Footer Start -->
-            <div class="container-fluid pt-4 px-4" style="margin-top: 50vh;">
+            <div class="container-fluid pt-4 px-4" style="margin-top: 80vh;">
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">

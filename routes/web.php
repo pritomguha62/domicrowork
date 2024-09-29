@@ -245,6 +245,10 @@ Route::prefix('/client_panel')->middleware('client')->group(function(){
     )->name('client_panel.refers');
 
 
+    Route::get('/withdraws', [MemberUserController::class, 'withdraws']
+    )->name('client_panel.withdraws');
+
+
     // task
 
 
