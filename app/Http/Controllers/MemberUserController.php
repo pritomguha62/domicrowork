@@ -559,6 +559,23 @@ class MemberUserController extends Controller
     }
 
 
+    public function histories(){
+
+        $histories = Passbook::where('receiver_user_code', session()->get('user_code'))->orWhere('sender_user_code', session()->get('user_code'))->get();
+
+        return view('member_views.common.histories', compact('histories'));
+
+    }
+
+
+    public function refers(){
+
+        $refers = Member_user::where('parent_user_code', session()->get('user_code'))->get();
+
+        return view('member_views.common.refers', compact('refers'));
+
+    }
+
 
 
 

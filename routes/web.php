@@ -235,17 +235,24 @@ Route::prefix('/client_panel')->middleware('client')->group(function(){
 
     Route::get('/', function () {
         return redirect()->route('client_panel.dashboard');
+
     });
+
+    Route::get('/histories', [MemberUserController::class, 'histories']
+    )->name('client_panel.histories');
+
+    Route::get('/refers', [MemberUserController::class, 'refers']
+    )->name('client_panel.refers');
 
 
     // task
 
 
-    Route::get('/add_social_task', [TaskController::class, 'admin_add_social_task']
-    )->name('admin_panel.add_social_task');
+    // Route::get('/add_social_task', [TaskController::class, 'admin_add_social_task']
+    // )->name('admin_panel.add_social_task');
 
-    Route::post('/add_social_task_info', [TaskController::class, 'admin_add_social_task_info']
-    )->name('admin_panel.add_social_task_info');
+    // Route::post('/add_social_task_info', [TaskController::class, 'admin_add_social_task_info']
+    // )->name('admin_panel.add_social_task_info');
 
 
 });
