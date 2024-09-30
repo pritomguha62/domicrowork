@@ -4,7 +4,9 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ClientUserController;
 use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\MemberUserController;
+use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -128,6 +130,16 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
     )->name('admin_panel.total_passbooks')->middleware('admin');
 
 
+
+    // notice
+
+    Route::get('/create_notice', [NoticeController::class, 'create_notice']
+    )->name('admin_panel.create_notice');
+
+    Route::post('/create_notice_info', [NoticeController::class, 'create_notice_info']
+    )->name('admin_panel.create_notice_info');
+
+
     // task
 
 
@@ -199,6 +211,12 @@ Route::prefix('/member_panel')->group(function(){
 
     Route::post('/activate_package_info', [PackageController::class, 'activate_package_info']
     )->name('member_panel.activate_package_info');
+
+
+    // payment method
+
+    Route::post('/add_member_payment_method', [PaymentMethodController::class, 'add_member_payment_method']
+    )->name('member_panel.add_member_payment_method');
 
 
 });

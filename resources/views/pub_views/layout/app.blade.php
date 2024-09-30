@@ -128,6 +128,7 @@
                         </div> --}}
                         <a href="{{ route('home') }}#contact_us" class="nav-item nav-link">যোগাযোগ করুন</a>
                         @if (session()->has('role_id'))
+                        <a href="{{ route('client_panel.dashboard') }}" class="nav-item nav-link">ড্যাশবোর্ড</a>
                         <a href="{{ route('logout') }}" class="nav-item nav-link">লগআউট</a>
                         @else
                         <a href="{{ route('member_panel.signin') }}" class="nav-item nav-link">লগইন</a>

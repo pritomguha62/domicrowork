@@ -52,7 +52,7 @@
                                 <div class="form-login">
                                     <label>Full Name</label>
                                     <div class="form-addons">
-                                        <input type="text" name="name" placeholder="Enter your full name" />
+                                        <input type="text" name="name" required placeholder="Enter your full name" />
                                         <img src="{{ asset('admin_assets/img/icons/users1.svg') }}" alt="img" />
                                     </div>
                                     @error('name')
@@ -62,7 +62,7 @@
                                 <div class="form-login">
                                     <label>Refer Code</label>
                                     <div class="form-addons">
-                                        <input type="text" name="parent_user_code" placeholder="Enter refer code" />
+                                        <input type="text" name="parent_user_code" required placeholder="Enter refer code" />
                                         <img src="{{ asset('admin_assets/img/icons/users1.svg') }}" alt="img" />
                                     </div>
                                     @error('parent_user_code')
@@ -72,7 +72,7 @@
                                 <div class="form-login">
                                     <label>Email</label>
                                     <div class="form-addons">
-                                        <input type="email" name="email" placeholder="Enter your email address" />
+                                        <input type="email" name="email" required placeholder="Enter your email address" />
                                         <img src="{{ asset('admin_assets/img/icons/mail.svg') }}" alt="img" />
                                     </div>
                                     @error('email')
@@ -82,7 +82,7 @@
                                 <div class="form-login">
                                     <label>Password</label>
                                     <div class="pass-group">
-                                        <input type="password" name="password" class="pass-input" placeholder="Enter your password" />
+                                        <input type="password" name="password" required class="pass-input" placeholder="Enter your password" />
                                         <span class="fas toggle-password fa-eye-slash"></span>
                                     </div>
                                     @error('password')
@@ -92,7 +92,7 @@
                                 <div class="form-login">
                                     <label>Confirm Password</label>
                                     <div class="pass-group">
-                                        <input type="password" name="confirm_password" class="pass-input" placeholder="Enter your password" />
+                                        <input type="password" name="confirm_password" required class="pass-input" placeholder="Enter your password" />
                                         <span class="fas toggle-password fa-eye-slash"></span>
                                     </div>
                                     @error('confirm_password')

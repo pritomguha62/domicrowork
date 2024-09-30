@@ -77,14 +77,14 @@
                                 <h3>Sign In</h3>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" name="email" class="form-control" id="floatingInput" value="{{ $cookie_email }}" placeholder="name@example.com">
+                                <input type="email" name="email" required class="form-control" id="floatingInput" value="{{ $cookie_email }}" placeholder="name@example.com">
                                 <label for="floatingInput">Email address</label>
                                 @error('email')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="password" name="password" class="form-control" id="floatingPassword" value="{{ $cookie_password }}" placeholder="Password">
+                                <input type="password" name="password" required class="form-control" id="floatingPassword" value="{{ $cookie_password }}" placeholder="Password">
                                 <label for="floatingPassword">Password</label>
                                 @error('password')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>

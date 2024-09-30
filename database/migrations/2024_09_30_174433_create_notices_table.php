@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payment_methods', function (Blueprint $table) {
-            $table->id('method_id');
-            $table->string('name');
-            $table->string('icon')->nullable();
-            $table->string('account_num');
+        Schema::create('notices', function (Blueprint $table) {
+            $table->id('notice_id');
+            $table->string('title');
+            $table->text('description')->nullable();
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->foreign('admin_id')->references('admin_id')->on('admin_users');
-            $table->unsignedBigInteger('member_id')->nullable();
-            $table->foreign('member_id')->references('member_id')->on('member_users');
-            $table->string('user_code')->nullable();
+            $table->string('admin_user_code')->nullable();
+            $table->integer('status')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
@@ -31,7 +29,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payment_methods');
+        Schema::dropIfExists('notices');
     }
 };
+
 

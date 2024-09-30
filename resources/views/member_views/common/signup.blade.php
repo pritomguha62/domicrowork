@@ -65,35 +65,35 @@
                             @csrf
 
                             <div class="form-floating mb-3">
-                                <input type="text" name="name" class="form-control" id="floatingText" placeholder="jhondoe">
+                                <input type="text" name="name" required class="form-control" id="floatingText" placeholder="jhondoe">
                                 <label for="floatingText">Name</label>
                                 @error('name')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="number" name="parent_user_code" class="form-control" id="floatingReferCode" placeholder="24********">
+                                <input type="number" name="parent_user_code" required class="form-control" id="floatingReferCode" placeholder="24********">
                                 <label for="floatingReferCode">Refer Code (Optional)</label>
                                 @error('parent_user_code')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                <input type="email" name="email" required class="form-control" id="floatingInput" placeholder="name@example.com">
                                 <label for="floatingInput">Email address</label>
                                 @error('email')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <input type="password" name="password" required class="form-control" id="floatingPassword" placeholder="Password">
                                 <label for="floatingPassword">Password</label>
                                 @error('password')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="password" name="confirm_password" class="form-control" id="floatingConfirmPassword" placeholder="Password">
+                                <input type="password" name="confirm_password" required class="form-control" id="floatingConfirmPassword" placeholder="Password">
                                 <label for="floatingConfirmPassword">Confirm Password</label>
                                 @error('confirm_password')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>

@@ -241,6 +241,13 @@
                                     <li><a href="{{ route('admin_panel.add_package') }}">Add Package</a></li>
                                 </ul>
                             </li>
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><img src="{{ asset('admin_assets/img/icons/list.svg') }}" alt="img" /><span> Notice</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="{{ route('admin_panel.packages') }}">View Notices</a></li>
+                                    <li><a href="{{ route('admin_panel.create_notice') }}">Create Notice</a></li>
+                                </ul>
+                            </li>
                             {{-- <li>
                                 <a href="components.html"><i data-feather="layers"></i><span> Components</span> </a>
                             </li> --}}

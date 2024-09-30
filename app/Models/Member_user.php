@@ -23,7 +23,7 @@ class Member_user extends Model
         'city',
         'country',
         'balance',
-        'withdrawl',
+        'withdraws',
         'user_code',
         'parent_user_code',
         'parent_id',

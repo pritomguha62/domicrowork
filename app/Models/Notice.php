@@ -5,23 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Payment_method extends Model
+class Notice extends Model
 {
     use HasFactory;
 
-    protected $table = 'payment_methods';
+    protected $table = 'notices';
 
-    protected $primaryKey = 'method_id ';
+    protected $primaryKey = 'notice_id ';
 
     protected $fillable =[
-        'name',
-        'icon',
-        'account_num',
+        'title',
+        'description',
         'admin_id',
-        'member_id',
+        'admin_user_code',
+        'status',
     ];
 
 
-
 }
+
 

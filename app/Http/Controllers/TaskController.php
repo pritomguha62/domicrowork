@@ -14,6 +14,8 @@ class TaskController extends Controller
 
     }
 
+    
+
     public function admin_add_social_task_info(Request $request){
 
         $request->validate([
@@ -38,6 +40,8 @@ class TaskController extends Controller
         return redirect()->back()->with('success', 'Task created..!');
 
     }
+
+
 
     public function client_add_social_task(){
 

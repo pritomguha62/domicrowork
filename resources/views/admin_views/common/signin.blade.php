@@ -63,7 +63,7 @@
                                 <div class="form-login">
                                     <label>Email</label>
                                     <div class="form-addons">
-                                        <input type="email" name="email" value="{{ $cookie_email }}" placeholder="Enter your email address" />
+                                        <input type="email" name="email" required value="{{ $cookie_email }}" placeholder="Enter your email address" />
                                         <img src="{{ asset('admin_assets/img/icons/mail.svg') }}" alt="img" />
                                     </div>
                                     @error('email')
@@ -73,7 +73,7 @@
                                 <div class="form-login">
                                     <label>Password</label>
                                     <div class="pass-group">
-                                        <input type="password" name="password" class="pass-input" value="{{ $cookie_password }}" placeholder="Enter your password" />
+                                        <input type="password" name="password" required class="pass-input" value="{{ $cookie_password }}" placeholder="Enter your password" />
                                         <span class="fas toggle-password fa-eye-slash"></span>
                                     </div>
                                     @error('password')

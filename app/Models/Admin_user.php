@@ -23,7 +23,7 @@ class Admin_user extends Model
         'city',
         'country',
         'balance',
-        'withdrawl',
+        'withdraws',
         'parent_id',
         'user_code',
         'parent_user_code',
