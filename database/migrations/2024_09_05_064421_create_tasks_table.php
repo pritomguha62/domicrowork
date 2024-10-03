@@ -16,12 +16,16 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->text('work_link')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('category_id')->on('categories')->onDelete('cascade');
             $table->unsignedBigInteger('sub_category_id')->nullable();
             $table->foreign('sub_category_id')->references('sub_category_id')->on('sub_categories')->onDelete('cascade');
+            $table->unsignedBigInteger('client_id')->nullable();
+            $table->foreign('client_id')->references('member_id')->on('member_users')->onDelete('cascade');
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->foreign('admin_id')->references('admin_id')->on('admin_users')->onDelete('cascade');
             $table->string('ss_thumbnail')->nullable();
-            $table->string('required_proof')->nullable();
+            $table->text('required_proof')->nullable();
             $table->string('ss_number')->nullable();
             $table->string('task_price_rate')->nullable();
             $table->string('work_amount')->nullable();

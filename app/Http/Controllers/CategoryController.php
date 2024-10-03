@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Sub_category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -65,6 +66,26 @@ class CategoryController extends Controller
 
     }
 
+    public function getSubcategories($category_id)
+    {
+        // Fetch subcategories based on category_id
+        $subcategories = Sub_category::where('category_id', $category_id)->get();
+
+        // Return the data as JSON
+        return response()->json($subcategories);
+        
+    }
+
+
+
+
+
+
+
+
+
 
 }
+
+
 

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('balance')->nullable();
+            $table->string('deposit_balance')->nullable();
             $table->string('withdraws')->nullable();
             $table->string('user_code')->nullable();
             $table->string('parent_user_code')->nullable();
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->string('nid_birth_status')->nullable();
             $table->string('nid_birth')->nullable();
             $table->string('birth_date')->nullable();
+            $table->string('task_charge')->nullable();
             $table->unsignedBigInteger('package_id')->nullable();
             $table->foreign('package_id')->references('package_id')->on('packages');
             $table->string('task_amount')->nullable();
