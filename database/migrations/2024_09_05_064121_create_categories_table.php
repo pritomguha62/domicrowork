@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id('category_id');
-            $table->string('title')->nullable();
+            $table->string('title')->unique();
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->foreign('admin_id')->references('admin_id')->on('admin_users');
             $table->integer('status')->default(0);
@@ -30,3 +30,5 @@ return new class extends Migration
         Schema::dropIfExists('categories');
     }
 };
+
+

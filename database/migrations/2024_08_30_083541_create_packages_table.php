@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id('package_id');
-            $table->string('title');
+            $table->string('title')->unique();
             $table->string('validity')->nullable();
             $table->string('price')->nullable();
             $table->string('limit')->nullable();

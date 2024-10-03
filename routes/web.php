@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientUserController;
 use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\MemberUserController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PaymentMethodController;
+use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -81,6 +83,8 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
         return redirect()->route('admin_panel.dashboard');
     });
 
+    // admin panel users
+
     Route::get('/admin_users', [AdminUserController::class, 'admin_users']
     )->name('admin_panel.admin_users')->middleware('admin');
 
@@ -93,7 +97,29 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
     Route::post('/update_admin_info', [AdminUserController::class, 'update_admin_info']
     )->name('admin_panel.update_admin_info')->middleware('admin');
 
+
+
+    // category
+
+
+    Route::get('/add_category', [CategoryController::class, 'add_category']
+    )->name('admin_panel.add_category');
+
+    Route::post('/add_category_info', [CategoryController::class, 'add_category_info']
+    )->name('admin_panel.add_category_info');
+
+    // category
+
+
+    Route::get('/add_sub_category', [SubCategoryController::class, 'add_sub_category']
+    )->name('admin_panel.add_sub_category');
+
+    Route::post('/add_sub_category_info', [SubCategoryController::class, 'add_sub_category_info']
+    )->name('admin_panel.add_sub_category_info');
+
+
     // package
+
 
     Route::get('/add_package', [PackageController::class, 'add_package']
     )->name('admin_panel.add_package');
@@ -105,7 +131,9 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
     )->name('admin_panel.packages');
 
 
+
     // member package
+
 
 
     Route::get('/member_package_requests', [MemberUserController::class, 'member_package_requests']
@@ -124,20 +152,12 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
     )->name('admin_panel.update_member_info')->middleware('admin');
 
 
+
     // passbook
+
 
     Route::get('/total_passbooks', [AdminUserController::class, 'total_passbooks']
     )->name('admin_panel.total_passbooks')->middleware('admin');
-
-
-
-    // notice
-
-    Route::get('/create_notice', [NoticeController::class, 'create_notice']
-    )->name('admin_panel.create_notice');
-
-    Route::post('/create_notice_info', [NoticeController::class, 'create_notice_info']
-    )->name('admin_panel.create_notice_info');
 
 
     // task
@@ -148,6 +168,16 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
 
     Route::post('/add_social_task_info', [TaskController::class, 'admin_add_social_task_info']
     )->name('admin_panel.add_social_task_info');
+
+
+
+    // notice
+
+    Route::get('/create_notice', [NoticeController::class, 'create_notice']
+    )->name('admin_panel.create_notice');
+
+    Route::post('/create_notice_info', [NoticeController::class, 'create_notice_info']
+    )->name('admin_panel.create_notice_info');
 
 
 

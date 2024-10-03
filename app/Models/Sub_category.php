@@ -15,8 +15,10 @@ class Sub_category extends Model
 
     protected $fillable = [
         'title',
-        'status',
+        'price',
         'admin_id',
+        'category_id',
+        'status',
     ];
 
 }

@@ -223,6 +223,18 @@
                                 <a href="{{ route('admin_panel.dashboard') }}"><img src="{{ asset('admin_assets/img/icons/dashboard.svg') }}" alt="img" /><span> Dashboard</span> </a>
                             </li>
                             <li class="submenu">
+                                <a href="javascript:void(0);"><img src="{{ asset('admin_assets/img/icons/category.svg') }}" alt="img" /><span> Category</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="{{ route('admin_panel.add_category') }}">Add Category</a></li>
+                                    <li><a href="{{ route('admin_panel.add_sub_category') }}">Add Sub Category</a></li>
+                                    {{-- <li><a href="salesreport.html">Sales Report</a></li>
+                                    <li><a href="invoicereport.html">Invoice Report</a></li>
+                                    <li><a href="purchasereport.html">Purchase Report</a></li>
+                                    <li><a href="supplierreport.html">Supplier Report</a></li>
+                                    <li><a href="customerreport.html">Customer Report</a></li> --}}
+                                </ul>
+                            </li>
+                            <li class="submenu">
                                 <a href="javascript:void(0);"><img src="{{ asset('admin_assets/img/icons/time.svg') }}" alt="img" /><span> Tasks</span> <span class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="{{ route('admin_panel.add_social_task') }}">Social Media</a></li>
