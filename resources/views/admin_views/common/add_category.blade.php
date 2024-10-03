@@ -28,7 +28,7 @@ Add Category
                         <h5 class="card-title">Add Category</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin_panel.add_sub_category_info') }}" method="POST">
+                        <form action="{{ route('admin_panel.add_category_info') }}" method="POST">
 
                             @if (session()->has('error'))
                                 <p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
