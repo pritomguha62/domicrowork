@@ -226,6 +226,7 @@
                                 <a href="javascript:void(0);"><img src="{{ asset('admin_assets/img/icons/category.svg') }}" alt="img" /><span> Category</span> <span class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="{{ route('admin_panel.add_category') }}">Add Category</a></li>
+                                    <li><a href="{{ route('admin_panel.categories') }}">View Categories</a></li>
                                     <li><a href="{{ route('admin_panel.add_sub_category') }}">Add Sub Category</a></li>
                                     {{-- <li><a href="salesreport.html">Sales Report</a></li>
                                     <li><a href="invoicereport.html">Invoice Report</a></li>

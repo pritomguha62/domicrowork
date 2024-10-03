@@ -31,6 +31,32 @@ class CategoryController extends Controller
 
     }
 
+    public function categories(){
+
+        $categories = Category::all();
+
+        return view('admin_views.common.categories', compact('categories'));
+
+    }
+
+    public function update_category(Request $request){
+
+        $request->validate([
+            'title'=>'required',
+            'category_id'=>'required',
+            'status'=>'required',
+        ]);
+
+        $update_category = Category::find($request->category_id);
+        $update_category->title = $request->title;
+        $update_category->admin_id = session()->get('admin_id');
+        $update_category->status = $request->status;
+        $update_category->update();
+
+        return redirect()->back()->with('success', 'Category updated..!');
+
+    }
+
 
 }
 
