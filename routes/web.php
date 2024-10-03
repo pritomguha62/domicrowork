@@ -190,6 +190,9 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
     Route::post('/add_social_task_info', [TaskController::class, 'admin_add_social_task_info']
     )->name('admin_panel.add_social_task_info');
 
+    Route::get('/update_social_task/{task_id?}', [TaskController::class, 'admin_update_social_task']
+    )->name('admin_panel.update_social_task');
+
 
 
     // notice

@@ -1,7 +1,7 @@
 @extends('admin_views.layout.app')
 
 @section('title')
-Add Social Task
+Upadate Social Task
 @endsection
 
 @section('content')
@@ -27,10 +27,10 @@ Add Social Task
                 <div class="card">
 
                     <div class="card-header">
-                        <h5 class="card-title">Add Social Task</h5>
+                        <h5 class="card-title">Update Social Task</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin_panel.add_social_task_info') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin_panel.update_social_task_info') }}" method="POST" enctype="multipart/form-data">
 
                             @if (session()->has('error'))
                                 <p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
@@ -44,7 +44,7 @@ Add Social Task
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Title</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="title" required class="form-control" />
+                                    <input type="text" name="title" required class="form-control" value="{{ $task->title }}" />
                                 </div>
                                 @error('title')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
@@ -54,8 +54,8 @@ Add Social Task
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Category</label>
                                 <div class="col-md-8">
-                                    <select name="category_id" id="category" class="js-example-basic-single select2 form-control">
-                                        <option value="">--Select Category--</option>
+                                    <select name="category_id" required id="category" class="js-example-basic-single select2 form-control">
+                                        <option value="{{ $task->category->category_id }}">{{ $task->category->title }}</option>
                                         @foreach($categories as $category)
                                             <option value="{{ $category->category_id }}">{{ $category->title }}</option>
                                         @endforeach
@@ -69,8 +69,8 @@ Add Social Task
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Sub Category</label>
                                 <div class="col-md-8">
-                                    <select name="sub_category_id" id="sub_category" class="js-example-basic-single select2 form-control">
-                                        <option value="">--Select Subcategory--</option>
+                                    <select name="sub_category_id" required id="sub_category" class="js-example-basic-single select2 form-control">
+                                        <option value="{{ $task->sub_category->sub_category_id }}">{{ $task->sub_category->title }}</option>
                                     </select>
                                 </div>
                                 @error('sub_category_id')
@@ -81,7 +81,7 @@ Add Social Task
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Description</label>
                                 <div class="col-md-10">
-                                    <textarea name="description" name="description" required id="" cols="30" rows="10"></textarea>
+                                    <textarea name="description" name="description" required id="" cols="30" rows="10">{{ $task->description }}</textarea>
                                 </div>
                                 @error('description')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
@@ -91,7 +91,7 @@ Add Social Task
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Content Link</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="work_link" required class="form-control" />
+                                    <input type="text" name="work_link" required class="form-control" value="{{ $task->work_link }}" />
                                 </div>
                                 @error('work_link')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
@@ -111,7 +111,7 @@ Add Social Task
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Required Proof</label>
                                 <div class="col-md-10">
-                                    <textarea name="required_proof" class="form-control" id="" cols="30" rows="10"></textarea>
+                                    <textarea name="required_proof" class="form-control" id="" cols="30" rows="10">{{ $task->required_proof }}</textarea>
                                 </div>
                                 @error('required_proof')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
@@ -128,7 +128,7 @@ Add Social Task
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Price Per Work</label>
                                 <div class="col-md-10">
-                                    <input type="string" name="task_price_rate" class="form-control" />
+                                    <input type="text" name="task_price_rate" class="form-control" value="{{ $task->task_price_rate }}" />
                                 </div>
                                 @error('task_price_rate')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
@@ -138,7 +138,7 @@ Add Social Task
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Number Of Works</label>
                                 <div class="col-md-10">
-                                    <input type="number" name="work_amount" class="form-control" />
+                                    <input type="number" name="work_amount" class="form-control" value="{{ $task->work_amount }}" />
                                 </div>
                                 @error('work_amount')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
@@ -168,7 +168,8 @@ Add Social Task
 
                             <div class="form-group row text-center">
                                 <div class="col-md-10 mx-auto">
-                                    <input type="submit" class="btn btn-primary" value="Add">
+                                    <input type="disable" name="task_id" required disabled class="form-control" />
+                                    <input type="submit" class="btn btn-primary" value="Update">
                                 </div>
                             </div>
                         </form>
