@@ -28,7 +28,7 @@ Update Sub Category
                         <h5 class="card-title">Update Sub Category</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin_panel.update_member_info') }}" method="POST">
+                        <form action="{{ route('admin_panel.update_sub_category_info') }}" method="POST">
 
                             @if (session()->has('error'))
                                 <p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
@@ -55,6 +55,21 @@ Update Sub Category
                                     <input type="text" name="price" class="form-control" value="{{ $update_sub_category->price }}" />
                                 </div>
                                 @error('price')
+                                    <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2">Select Category</label>
+                                <div class="col-md-8">
+                                    <select name="category_id" class="js-example-basic-single select2 form-control">
+                                        <option value="{{ $update_sub_category->category->category_id }}">{{ $update_sub_category->category->title }}</option>
+                                        @foreach ($categories as $category)
+                                        <option value="{{ $category->category_id }}">{{ $category->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('category_id')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                                 @enderror
                             </div>

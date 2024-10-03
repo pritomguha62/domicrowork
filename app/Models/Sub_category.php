@@ -21,6 +21,13 @@ class Sub_category extends Model
         'status',
     ];
 
+    public function category(){
+
+        return $this->belongsTo(Category::class, 'category_id', 'category_id');
+
+    }
+
+
 }
 
 

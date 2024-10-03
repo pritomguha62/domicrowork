@@ -40,6 +40,7 @@ Sub Categories
                                 <thead>
                                     <tr>
                                         <th>Title</th>
+                                        <th>Category</th>
                                         <th>Price Per Work</th>
                                         <th>Status</th>
                                         <th>Created At</th>
@@ -47,18 +48,19 @@ Sub Categories
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $category)
+                                    @foreach ($sub_categories as $sub_category)
                                         {{-- <form action="{{ route('admin_panel.update_admin') }}" method="POST"> --}}
 
                                             {{-- @csrf --}}
 
                                             <tr>
-                                                <td>{{ $category->title }}</td>
-                                                <td>{{ $category->price }}</td>
-                                                <td>{{ $category->status == 1 ? 'Active' : 'Deactive' }}</td>
-                                                <td>{{ $category->created_at }}</td>
+                                                <td>{{ $sub_category->title }}</td>
+                                                <td>{{ $sub_category->category->title }}</td>
+                                                <td>{{ $sub_category->price }}</td>
+                                                <td>{{ $sub_category->status == 1 ? 'Active' : 'Deactive' }}</td>
+                                                <td>{{ $sub_category->created_at }}</td>
                                                 <td>
-                                                    <a class="btn btn-success text-white" href="{{ route('admin_panel.update_sub_category', ['category_id'=>$category->category_id]) }}">Update</a>
+                                                    <a class="btn btn-success text-white" href="{{ route('admin_panel.update_sub_category', ['sub_category_id'=>$sub_category->sub_category_id]) }}">Update</a>
                                                 </td>
                                             </tr>
 

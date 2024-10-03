@@ -126,13 +126,13 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
     Route::post('/add_sub_category_info', [SubCategoryController::class, 'add_sub_category_info']
     )->name('admin_panel.add_sub_category_info');
 
-    Route::get('/sub_categories', [CategoryController::class, 'sub_categories']
+    Route::get('/sub_categories', [SubCategoryController::class, 'sub_categories']
     )->name('admin_panel.sub_categories');
 
-    Route::get('/update_sub_category/{category_id?}', [CategoryController::class, 'update_sub_category']
+    Route::get('/update_sub_category/{sub_category_id?}', [SubCategoryController::class, 'update_sub_category']
     )->name('admin_panel.update_sub_category');
 
-    Route::post('/update_sub_category_info', [CategoryController::class, 'update_sub_category_info']
+    Route::post('/update_sub_category_info', [SubCategoryController::class, 'update_sub_category_info']
     )->name('admin_panel.update_sub_category_info');
 
 
