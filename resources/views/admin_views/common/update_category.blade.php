@@ -14,7 +14,7 @@ Update Category
                 <div class="col">
                     <h3 class="page-title">Data Tables</h3>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('worker_panel.dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin_panel.dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item active">Data Tables</li>
                     </ul>
                 </div>
@@ -42,9 +42,12 @@ Update Category
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Title</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" disabled="disabled" value="{{ $update_category->title }}" />
+                                    <input type="text" name="title" class="form-control" value="{{ $update_category->title }}" />
                                 </div>
                             </div>
+                            @error('title')
+                                <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                            @enderror
 
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Status</label>
@@ -60,7 +63,11 @@ Update Category
                                         @endif
                                     </select>
                                 </div>
+                                @error('status')
+                                    <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                                @enderror
                             </div>
+
                             <div class="form-group row text-center">
                                 <div class="col-md-10 mx-auto">
                                     <input type="hidden" name="category_id" hidden value="{{ $update_category->category_id }}">

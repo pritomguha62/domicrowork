@@ -1,7 +1,7 @@
 @extends('admin_views.layout.app')
 
 @section('title')
-Member User Update
+Update Sub Category
 @endsection
 
 @section('content')
@@ -25,7 +25,7 @@ Member User Update
                 <div class="card">
 
                     <div class="card-header">
-                        <h5 class="card-title">Update Member</h5>
+                        <h5 class="card-title">Update Sub Category</h5>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('admin_panel.update_member_info') }}" method="POST">
@@ -40,31 +40,23 @@ Member User Update
                             @csrf
 
                             <div class="form-group row">
-                                <label class="col-form-label col-md-2">Name</label>
+                                <label class="col-form-label col-md-2">Title</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" disabled="disabled" value="{{ $update_member->name }}" />
+                                    <input type="text" name="title" class="form-control" value="{{ $update_sub_category->title }}" />
                                 </div>
+                                @error('title')
+                                    <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-form-label col-md-2">Package</label>
+                                <label class="col-form-label col-md-2">Price Per Single Work</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" disabled="disabled" value="{{ !empty($update_member->package->title) ? $update_member->package->title : '' }}" />
+                                    <input type="text" name="price" class="form-control" value="{{ $update_sub_category->price }}" />
                                 </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2">Package Price</label>
-                                <div class="col-md-10">
-                                    <input type="text" class="form-control" disabled="disabled" value="{{ !empty($update_member->package->price) ? $update_member->package->price : '' }}" />
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2">Comment</label>
-                                <div class="col-md-10">
-                                    <input type="text" class="form-control" disabled="disabled" value="{{ $update_member->comment }}" />
-                                </div>
+                                @error('price')
+                                    <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="form-group row">
@@ -72,7 +64,7 @@ Member User Update
                                 <div class="col-md-10">
                                     {{-- <p>Use select2() function on select element to convert it to Select 2.</p> --}}
                                     <select name="status" class="js-example-basic-single select2 form-control">
-                                        @if ($update_member->status == 1)
+                                        @if ($update_sub_category->status == 1)
                                             <option value="1">Active</option>
                                             <option value="0">Deactive</option>
                                         @else
@@ -81,10 +73,14 @@ Member User Update
                                         @endif
                                     </select>
                                 </div>
+                                @error('status')
+                                    <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                                @enderror
                             </div>
+
                             <div class="form-group row text-center">
                                 <div class="col-md-10 mx-auto">
-                                    <input type="hidden" name="member_id" hidden value="{{ $update_member->member_id }}">
+                                    <input type="hidden" name="sub_category_id" hidden value="{{ $update_sub_category->sub_category_id }}">
                                     <input type="submit" class="btn btn-warning" value="Update">
                                 </div>
                             </div>

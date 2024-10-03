@@ -1,7 +1,7 @@
 @extends('admin_views.layout.app')
 
 @section('title')
-Categories
+Sub Categories
 @endsection
 
 @section('content')
@@ -40,6 +40,7 @@ Categories
                                 <thead>
                                     <tr>
                                         <th>Title</th>
+                                        <th>Price Per Work</th>
                                         <th>Status</th>
                                         <th>Created At</th>
                                         <th>Action</th>
@@ -47,20 +48,21 @@ Categories
                                 </thead>
                                 <tbody>
                                     @foreach ($categories as $category)
-                                        <form action="{{ route('admin_panel.update_admin') }}" method="POST">
+                                        {{-- <form action="{{ route('admin_panel.update_admin') }}" method="POST"> --}}
 
-                                            @csrf
+                                            {{-- @csrf --}}
 
                                             <tr>
                                                 <td>{{ $category->title }}</td>
+                                                <td>{{ $category->price }}</td>
                                                 <td>{{ $category->status == 1 ? 'Active' : 'Deactive' }}</td>
                                                 <td>{{ $category->created_at }}</td>
                                                 <td>
-                                                    <a class="btn btn-success text-white" href="{{ route('admin_panel.update_category', ['category_id'=>$category->category_id]) }}">Update</a>
+                                                    <a class="btn btn-success text-white" href="{{ route('admin_panel.update_sub_category', ['category_id'=>$category->category_id]) }}">Update</a>
                                                 </td>
                                             </tr>
 
-                                        </form>
+                                        {{-- </form> --}}
                                     @endforeach
 
                                 </tbody>

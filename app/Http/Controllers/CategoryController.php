@@ -39,7 +39,15 @@ class CategoryController extends Controller
 
     }
 
-    public function update_category(Request $request){
+    public function update_category($category_id){
+
+        $update_category = Category::find($category_id);
+
+        return view('admin_views.common.update_category', compact('update_category'));
+
+    }
+
+    public function update_category_info(Request $request){
 
         $request->validate([
             'title'=>'required',
