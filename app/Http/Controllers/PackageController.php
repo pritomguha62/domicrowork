@@ -43,6 +43,7 @@ class PackageController extends Controller
         $package->title = $request->title;
         $package->validity = $validity;
         $package->price = $request->price;
+        $package->task_amount = $request->task_amount;
         $package->limit = $request->limit;
         $package->status = $request->status;
         $package->save();

@@ -32,6 +32,7 @@ class Member_user extends Model
         'nid_birth',
         'birth_date',
         'package_id',
+        'task_amount',
         'role_id',
         'approver_id',
         'status',

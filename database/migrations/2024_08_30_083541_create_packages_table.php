@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('validity')->nullable();
             $table->string('price')->nullable();
             $table->string('limit')->nullable();
-            $table->string('daily_income')->nullable();
+            $table->string('task_amount')->nullable();
             $table->text('file')->nullable();
             $table->string('total_sold')->nullable();
             $table->string('refer_commission_one')->nullable();

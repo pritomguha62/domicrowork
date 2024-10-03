@@ -71,6 +71,15 @@ Add Package
                                 @enderror
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-md-2">Daily Amount Of Task</label>
+                                <div class="col-md-8">
+                                    <input name="task_amount" type="text" class="form-control" />
+                                </div>
+                                @error('task_amount')
+                                    <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-md-2">Limit</label>
                                 <div class="col-md-8">
                                     <input name="limit" type="number" class="form-control" />

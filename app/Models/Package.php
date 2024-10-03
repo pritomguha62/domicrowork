@@ -18,7 +18,7 @@ class Package extends Model
         'validity',
         'price',
         'limit',
-        'daily_income',
+        'task_amount',
         'file',
         'total_sold',
         'refer_commission_one',

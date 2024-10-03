@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string('birth_date')->nullable();
             $table->unsignedBigInteger('package_id')->nullable();
             $table->foreign('package_id')->references('package_id')->on('packages');
+            $table->string('task_amount')->nullable();
             $table->unsignedBigInteger('role_id')->default(4);
             $table->foreign('role_id')->references('role_id')->on('roles');
             $table->unsignedBigInteger('approver_id')->nullable();
