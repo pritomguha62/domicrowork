@@ -42,27 +42,23 @@ Social Tasks
                                         <th>Title</th>
                                         <th>Description</th>
                                         <th>Price</th>
-                                        <th>Limit</th>
-                                        <th>Status</th>
                                         <th>Created At</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($packages as $package)
+                                    @foreach ($tasks as $task)
                                         <form action="{{ route('admin_panel.update_admin') }}" method="POST">
 
                                             @csrf
 
                                             <tr>
-                                                <td>{{ $package->title }}</td>
-                                                <td>{{ $package->description }}</td>
-                                                <td>{{ $package->price }}</td>
-                                                <td>{{ $package->limit }}</td>
-                                                <td>{{ $package->status }}</td>
-                                                <td>{{ $package->created_at }}</td>
+                                                <td>{{ $task->title }}</td>
+                                                <td>{{ $task->description }}</td>
+                                                <td>{{ $task->price }}</td>
+                                                <td>{{ $task->created_at }}</td>
                                                 <td>
-                                                    <a class="btn btn-success text-white" href="{{ route('admin_panel.update_package', ['package_id'=>$package->package_id]) }}">Update</a>
+                                                    <a class="btn btn-success text-white" href="{{ route('admin_panel.update_social_task', ['task_id'=>$task->task_id]) }}">Update</a>
                                                 </td>
                                             </tr>
 

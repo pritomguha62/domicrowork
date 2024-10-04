@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('buy_packages', function (Blueprint $table) {
-            $table->id('buy_package_id');
+        Schema::create('deposit_balances', function (Blueprint $table) {
+            $table->id('deposit_id');
             $table->string('paid_from')->nullable();
             $table->string('trxid')->nullable();
+            $table->string('deposit_balance')->nullable();
             $table->string('user_code')->nullable();
             $table->unsignedBigInteger('member_id')->nullable();
             $table->foreign('member_id')->references('member_id')->on('member_users');
-            $table->unsignedBigInteger('package_id')->nullable();
-            $table->foreign('package_id')->references('package_id')->on('packages');
             $table->integer('status')->default(0);
             $table->unsignedBigInteger('approver_id')->nullable();
             $table->foreign('approver_id')->references('admin_id')->on('admin_users');
@@ -34,7 +33,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('buy_packages');
+        Schema::dropIfExists('deposit_balances');
     }
 };
+
 

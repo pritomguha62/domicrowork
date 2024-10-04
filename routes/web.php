@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientUserController;
+use App\Http\Controllers\DepositBalanceController;
 use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\MemberUserController;
 use App\Http\Controllers\NoticeController;
@@ -148,6 +149,9 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
     Route::get('/packages', [PackageController::class, 'packages']
     )->name('admin_panel.packages');
 
+    Route::post('/update_package_info', [PackageController::class, 'update_package_info']
+    )->name('admin_panel.update_package_info');
+
 
 
     // member package
@@ -184,11 +188,17 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
     Route::get('/add_social_task', [TaskController::class, 'admin_add_social_task']
     )->name('admin_panel.add_social_task');
 
+    Route::get('/social_task', [TaskController::class, 'admin_social_task']
+    )->name('admin_panel.social_task');
+
     Route::get('/get-subcategories/{category_id?}', [CategoryController::class, 'getSubcategories'])->name('get.subcategories');
 
 
     Route::post('/add_social_task_info', [TaskController::class, 'admin_add_social_task_info']
     )->name('admin_panel.add_social_task_info');
+
+    Route::post('/update_social_task_info', [TaskController::class, 'admin_update_social_task_info']
+    )->name('admin_panel.update_social_task_info');
 
     Route::get('/update_social_task/{task_id?}', [TaskController::class, 'admin_update_social_task']
     )->name('admin_panel.update_social_task');
@@ -260,7 +270,7 @@ Route::prefix('/member_panel')->group(function(){
     Route::get('/member_packages', [PackageController::class, 'member_packages']
     )->name('member_panel.member_packages');
 
-    Route::get('/activate_package/{package_id}', [PackageController::class, 'activate_package']
+    Route::get('/activate_package/{package_id?}', [PackageController::class, 'activate_package']
     )->name('member_panel.activate_package');
 
     Route::post('/activate_package_info', [PackageController::class, 'activate_package_info']
@@ -309,6 +319,12 @@ Route::prefix('/client_panel')->middleware('client')->group(function(){
         return redirect()->route('client_panel.dashboard');
 
     });
+
+    Route::get('/deposit', [MemberUserController::class, 'deposit']
+    )->name('member_panel.deposit');
+
+    Route::post('/deposit_balance_info', [DepositBalanceController::class, 'deposit_balance_info']
+    )->name('member_panel.deposit_balance_info');
 
     Route::get('/histories', [MemberUserController::class, 'histories']
     )->name('client_panel.histories');

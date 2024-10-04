@@ -36,6 +36,7 @@ class TaskController extends Controller
         $social_task->category_id = $request->category_id;
         $social_task->sub_category_id = $request->sub_category_id;
         $social_task->description = $request->description;
+        $social_task->work_link = $request->work_link;
 
         if (!empty($request->ss_thumbnail)) {
 
@@ -47,7 +48,7 @@ class TaskController extends Controller
             $image_name = $name.'_ss_thumbnail_'.date("Y_m_d_h_i_sa").'.'.$request->file('ss_thumbnail')->getClientOriginalExtension();
             $request->file('ss_thumbnail')->move(public_path('storage/uploads/image/'), $image_name);
 
-            $social_task->ss_thumbnail = $request->image_name;
+            $social_task->ss_thumbnail = $image_name;
 
 
         }
@@ -62,6 +63,16 @@ class TaskController extends Controller
         $social_task->save();
 
         return redirect()->back()->with('success', 'Task created..!');
+
+    }
+
+    public function admin_social_task(){
+
+        $tasks = Task::all();
+
+        $categories = Category::where('status', 1)->get();
+
+        return view('admin_views.common.tasks', compact('tasks', 'categories'));
 
     }
 
@@ -93,8 +104,14 @@ class TaskController extends Controller
         $social_task->category_id = $request->category_id;
         $social_task->sub_category_id = $request->sub_category_id;
         $social_task->description = $request->description;
+        $social_task->work_link = $request->work_link;
 
         if (!empty($request->ss_thumbnail)) {
+
+            if (!empty($social_task->ss_thumbnail)) {
+                unlink(public_path('storage/uploads/image/'.$social_task->ss_thumbnail));
+            }
+
 
             $request->validate([
                 "ss_thumbnail"=> "required|max:7240",
@@ -104,7 +121,7 @@ class TaskController extends Controller
             $image_name = $name.'_ss_thumbnail_'.date("Y_m_d_h_i_sa").'.'.$request->file('ss_thumbnail')->getClientOriginalExtension();
             $request->file('ss_thumbnail')->move(public_path('storage/uploads/image/'), $image_name);
 
-            $social_task->ss_thumbnail = $request->image_name;
+            $social_task->ss_thumbnail = $image_name;
 
 
         }
@@ -116,9 +133,9 @@ class TaskController extends Controller
         $social_task->admin_id = session()->get('admin_id');
         $social_task->status = $request->status;
         $social_task->expire_date = $request->expire_date;
-        $social_task->save();
+        $social_task->update();
 
-        return redirect()->back()->with('success', 'Task created..!');
+        return redirect()->back()->with('success', 'Task updated..!');
 
     }
 

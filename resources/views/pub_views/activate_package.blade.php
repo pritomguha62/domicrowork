@@ -59,7 +59,7 @@ activate package
                                 <p>মূল্যঃ <b>{{ $package->price }}</b></p>
                                 <div class="col-12">
                                     <div class="form-floating" style="display: flex;">
-                                        <p>সেন্ডমানি করুন</p>
+                                        <p>সেন্ডমানি করুন (Bkash)</p>
                                         <input type="text" readonly class="form-control" id="account_number" value="">
                                         <button type="button" class="btn btn-warning" value="copy" onclick="copyClipboardFunction()">Copy!</button>
                                     </div>

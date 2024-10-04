@@ -69,6 +69,7 @@
                             <a href="element.html" class="dropdown-item">Other Elements</a>
                         </div>
                     </div>
+                    <a href="{{ route('member_panel.deposit') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Deposit</a>
                     <a href="{{ route('client_panel.histories') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>History</a>
                     <a href="{{ route('client_panel.refers') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Refers</a>
                     <a href="{{ route('client_panel.withdraws') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Withdraws</a>

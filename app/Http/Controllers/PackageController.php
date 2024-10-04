@@ -52,6 +52,42 @@ class PackageController extends Controller
 
     }
 
+    public function update_package($package_id){
+
+        $package = Package::find($package_id);
+
+        return view('admin_views.common.update_package', compact('package'));
+
+    }
+
+    public function update_package_info(Request $request){
+
+        $request->validate([
+            "title" => "required",
+            "validity" => "required",
+            "price" => "required",
+        ]);
+
+        if ($request->month_year == 'year') {
+            $validity = intval(round($request->validity))*365;
+        }else {
+            $validity = intval(round($request->validity))*30;
+        }
+
+        $package = Package::find('');
+
+        $package->title = $request->title;
+        // $package->validity = $validity;
+        $package->price = $request->price;
+        $package->task_amount = $request->task_amount;
+        $package->limit = $request->limit;
+        $package->status = $request->status;
+        $package->update();
+
+        return redirect()->back()->with('success', 'Package successfully updated..!');
+
+    }
+
     public function member_packages(){
 
         $member_packages = Package::where('status', 1)->get();

@@ -150,8 +150,13 @@ Upadate Social Task
                                 <div class="col-md-10">
                                     {{-- <p>Use select2() function on select element to convert it to Select 2.</p> --}}
                                     <select name="status" class="js-example-basic-single select2 form-control">
-                                        <option value="1">Active</option>
-                                        <option value="0">Deactive</option>
+                                        @if ($task->status == 1)
+                                            <option value="1">Active</option>
+                                            <option value="0">Deactive</option>
+                                        @else
+                                            <option value="0">Deactive</option>
+                                            <option value="1">Active</option>
+                                        @endif
                                     </select>
                                 </div>
                                 @error('status')
@@ -168,7 +173,7 @@ Upadate Social Task
 
                             <div class="form-group row text-center">
                                 <div class="col-md-10 mx-auto">
-                                    <input type="disable" name="task_id" required disabled class="form-control" />
+                                    <input type="hidden" name="task_id" required hidden value="{{ $task->task_id }}" />
                                     <input type="submit" class="btn btn-primary" value="Update">
                                 </div>
                             </div>

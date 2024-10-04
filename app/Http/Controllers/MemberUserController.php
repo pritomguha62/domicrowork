@@ -569,6 +569,14 @@ class MemberUserController extends Controller
 
     }
 
+    public function deposit(){
+
+        // $histories = Passbook::where('receiver_user_code', session()->get('user_code'))->orWhere('sender_user_code', session()->get('user_code'))->get();
+
+        return view('member_views.common.deposit');
+
+    }
+
 
     public function refers(){
 
