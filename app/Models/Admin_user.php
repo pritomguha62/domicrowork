@@ -34,6 +34,14 @@ class Admin_user extends Model
         'password',
     ];
 
+
+    static public function admin(){
+
+        return self::find(session()->get('admin_id'));
+
+    }
+
+
     public function parent(){
 
         return $this->belongsTo(Admin_user::class, 'parent_id', 'admin_id');

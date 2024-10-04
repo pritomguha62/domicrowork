@@ -43,6 +43,23 @@
         </style>
     </head>
     <body>
+
+    @php
+
+        $admin = App\Models\Admin_user::admin();
+
+        if (!empty($admin)) {
+
+            session()->put('is_client', $admin->is_admin);
+
+            session()->put('status', $admin->status);
+
+            session()->put('balance', $admin->balance);
+
+        }
+
+    @endphp
+
         <div id="global-loader">
             <div class="whirly-loader"></div>
         </div>
@@ -239,8 +256,8 @@
                             <li class="submenu">
                                 <a href="javascript:void(0);"><img src="{{ asset('admin_assets/img/icons/time.svg') }}" alt="img" /><span> Tasks</span> <span class="menu-arrow"></span></a>
                                 <ul>
-                                    <li><a href="{{ route('admin_panel.add_social_task') }}">Add Social Media</a></li>
-                                    <li><a href="{{ route('admin_panel.social_task') }}">View Social Media</a></li>
+                                    <li><a href="{{ route('admin_panel.add_social_task') }}">Add Social Task</a></li>
+                                    <li><a href="{{ route('admin_panel.social_task') }}">View Social Task</a></li>
                                     <li><a href="inventoryreport.html">Click Task</a></li>
                                     {{-- <li><a href="salesreport.html">Sales Report</a></li>
                                     <li><a href="invoicereport.html">Invoice Report</a></li>
@@ -274,7 +291,8 @@
                                     <a href="javascript:void(0);"><img src="{{ asset('admin_assets/img/icons/users1.svg') }}" alt="img" /><span> Member Panel</span> <span class="menu-arrow"></span></a>
                                     <ul>
                                         {{-- <li><a href="{{ route('admin_panel.admin_users') }}">Member Users </a></li> --}}
-                                        <li><a href="{{ route('admin_panel.member_package_requests') }}">Member Request</a></li>
+                                        <li><a href="{{ route('admin_panel.member_package_requests') }}">Worker Request</a></li>
+                                        <li><a href="{{ route('admin_panel.deposit_requests') }}">Deposit Requests</a></li>
                                     </ul>
                                 </li>
                                 <li class="submenu">

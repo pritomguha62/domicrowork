@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('home_town')->nullable();
             $table->string('city')->nullable();
             $table->string('country')->nullable();
-            $table->string('balance')->nullable();
+            $table->string('balance')->default(0)->nullable();
             $table->string('withdraws')->nullable();
             $table->string('user_code')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();

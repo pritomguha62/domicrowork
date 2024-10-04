@@ -100,6 +100,16 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
 
 
 
+    // deposit
+
+    Route::get('/deposit_requests', [DepositBalanceController::class, 'deposit_requests']
+    )->name('admin_panel.deposit_requests');
+
+    Route::get('/update_deposit/{deposit_id}', [DepositBalanceController::class, 'update_deposit']
+    )->name('admin_panel.update_deposit');
+
+
+
     // category
 
 
@@ -148,6 +158,9 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
 
     Route::get('/packages', [PackageController::class, 'packages']
     )->name('admin_panel.packages');
+
+    Route::get('/update_package/{package_id?}', [PackageController::class, 'update_package']
+    )->name('admin_panel.update_package');
 
     Route::post('/update_package_info', [PackageController::class, 'update_package_info']
     )->name('admin_panel.update_package_info');

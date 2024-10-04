@@ -42,6 +42,14 @@ class Member_user extends Model
         'password',
     ];
 
+
+    static public function member(){
+
+        return self::find(session()->get('member_id'));
+        
+    }
+
+
     public function approver(){
 
         return $this->belongsTo(Admin_user::class, 'approver_id', 'admin_id');

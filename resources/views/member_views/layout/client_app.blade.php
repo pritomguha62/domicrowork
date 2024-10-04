@@ -33,6 +33,23 @@
 </head>
 
 <body>
+
+    @php
+
+        $member = App\Models\Member_user::member();
+
+        if (!empty($member)) {
+
+            session()->put('is_client', $member->is_client);
+
+            session()->put('status', $member->status);
+
+            session()->put('balance', $member->balance);
+
+        }
+
+    @endphp
+
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -57,6 +74,7 @@
                     <div class="ms-3">
                         <h6 class="mb-0">{{ session()->get('name') }}</h6>
                         <span>{{ session()->get('user_code') }}</span>
+                        <span>Balance : {{ session()->get('balance') }}</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
@@ -69,7 +87,7 @@
                             <a href="element.html" class="dropdown-item">Other Elements</a>
                         </div>
                     </div>
-                    <a href="{{ route('member_panel.deposit') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Deposit</a>
+                    <a href="{{ route('member_panel.deposit') }}" class="nav-item nav-link"><i class="fa fa-download me-2"></i>Deposit</a>
                     <a href="{{ route('client_panel.histories') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>History</a>
                     <a href="{{ route('client_panel.refers') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Refers</a>
                     <a href="{{ route('client_panel.withdraws') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Withdraws</a>
@@ -229,6 +247,7 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('member_assets/js/main.js') }}"></script>
+
 </body>
 
 </html>

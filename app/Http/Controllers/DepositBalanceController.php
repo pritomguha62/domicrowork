@@ -39,6 +39,23 @@ class DepositBalanceController extends Controller
     }
 
 
+    public function deposit_requests(){
+
+        $deposit_requests = Deposit_balance::with('member')->where('status', '!=', 1)->where('approver_id', null)->get();
+
+        return view('admin_views.common.deposit_requests', compact('deposit_requests'));
+
+    }
+
+    public function update_deposit($deposit_id){
+
+        $update_deposit = Deposit_balance::with('member')->find($deposit_id);
+
+        return view('admin_views.common.update_deposit', compact('update_deposit'));
+
+    }
+
+
 
 }
 

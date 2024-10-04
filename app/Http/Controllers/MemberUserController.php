@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\SendMail;
 use App\Models\Admin_user;
 use App\Models\Buy_package;
+use App\Models\Deposit_balance;
 use App\Models\Member_user;
 use App\Models\Package;
 use App\Models\Passbook;
@@ -326,6 +327,16 @@ class MemberUserController extends Controller
 
     }
 
+    public function update_deposit_info($deposit_id){
+
+        $update_deposit_info = Deposit_balance::with('member')->find($deposit_id);
+
+        $update_member = Member_user::with('role', 'package')->find($update_deposit_info->member_id);
+
+        return view('admin_views.common.update_member', compact('update_member'));
+
+    }
+
     public function buy_package_member_info(Request $request){
 
         $buy_package_member_info = Buy_package::with('package', 'member')->where('member_id', $request->member_id)->first();
@@ -512,7 +523,7 @@ class MemberUserController extends Controller
 
     public function update_member($member_id){
 
-        $update_member = Member_user::with('role', 'package')->find($member_id);
+        $update_member = Member_user::with('role', 'package', 'parent')->find($member_id);
 
         return view('admin_views.common.update_member', compact('update_member'));
 

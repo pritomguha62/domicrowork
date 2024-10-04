@@ -64,7 +64,8 @@ class PackageController extends Controller
 
         $request->validate([
             "title" => "required",
-            "validity" => "required",
+            // "validity" => "required",
+            "task_amount" => "required",
             "price" => "required",
         ]);
 
@@ -74,7 +75,7 @@ class PackageController extends Controller
             $validity = intval(round($request->validity))*30;
         }
 
-        $package = Package::find('');
+        $package = Package::find($request->package_id);
 
         $package->title = $request->title;
         // $package->validity = $validity;
@@ -106,7 +107,18 @@ class PackageController extends Controller
 
         $package = Package::where('status', 1)->where('package_id', $package_id)->first();
 
-        return view('pub_views.activate_package', compact('package'));
+        $member = Member_user::find(session()->get('member_id'));
+
+        if ($package->price < $member->deposit_balance or $package->price < $member->balance) {
+
+            return view('pub_views.activate_package', compact('package'));
+
+        }else {
+
+            return redirect()->route('member_panel.deposit');
+
+        }
+
 
     }
 
