@@ -58,52 +58,6 @@ activate package
                                 </div>
                                 <p>মূল্যঃ <b>{{ $package->price }}</b></p>
                                 <div class="col-12">
-                                    <div class="form-floating" style="display: flex;">
-                                        <p>সেন্ডমানি করুন (Bkash)</p>
-                                        <input type="text" readonly class="form-control" id="account_number" value="">
-                                        <button type="button" class="btn btn-warning" value="copy" onclick="copyClipboardFunction()">Copy!</button>
-                                    </div>
-                                    @error('account_number')
-                                        <p class="mb-0 alert alert-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                {{-- <div class="col-lg-12 col-xl-6">
-                                    <div class="form-floating">
-                                        <input type="text" name="paid_from" class="form-control border-0" id="paid_from" placeholder="Account Number">
-                                        <label for="paid_from">যে নাম্বার থেকে টাকা পাঠানো হয়েছে সেই নাম্বারটি দিন</label>
-                                    </div>
-                                    @error('paid_from')
-                                        <p class="mb-0 alert alert-danger">{{ $message }}</p>
-                                    @enderror
-                                </div> --}}
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" required name="paid_from" class="form-control border-0" id="paid_from" placeholder="01*********">
-                                        <label for="paid_from">সেন্ডমানি নাম্বার</label>
-                                    </div>
-                                    @error('paid_from')
-                                        <p class="mb-0 alert alert-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" name="trxid" required class="form-control border-0" id="trxid" placeholder="TrxID">
-                                        <label for="trxid">TrxID</label>
-                                    </div>
-                                    @error('trxid')
-                                        <p class="mb-0 alert alert-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                {{-- <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control border-0" name="message" placeholder="Leave a message here" id="message" style="height: 160px"></textarea>
-                                        <label for="message">বার্তা</label>
-                                    </div>
-                                    @error('message')
-                                        <p class="mb-0 alert alert-danger">{{ $message }}</p>
-                                    @enderror
-                                </div> --}}
-                                <div class="col-12">
                                     <input type="hidden" hidden name="package_id" id="package_id" value="{{ $package->package_id }}">
                                     <input type="hidden" hidden name="member_id" id="member_id" value="{{ session()->get('member_id') }}">
                                     <button type="submit" class="btn btn-primary w-100 py-3">কিনুন</button>

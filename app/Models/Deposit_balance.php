@@ -18,6 +18,8 @@ class Deposit_balance extends Model
         'trxid',
         'deposit_balance',
         'user_code',
+        'admin_payment_id',
+        'member_payment_id',
         'member_id',
         'package_id',
         'approver_id',

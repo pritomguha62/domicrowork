@@ -28,12 +28,12 @@ Update Deposit
                         <h5 class="card-title">Update Deposit</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin_panel.update_deposit_info') }}" method="POST">
+                        <form action="{{ route('admin_panel.update_deposit_info') }}" method="POST" id="paymentForm">
 
                             @if (session()->has('error'))
                                 <p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
                             @endif
-                            
+
                             @if (session()->has('success'))
                                 <p class="mb-0 alert alert-success">{{ session()->get('success') }}</p>
                             @endif
@@ -103,11 +103,11 @@ Update Deposit
                                 <div class="col-md-8">
                                     <select name="status" class="js-example-basic-single select2 form-control">
                                         @if ($update_deposit->status == 1)
-                                            <option value="1">Active</option>
-                                            <option value="0">Deactive</option>
+                                            <option value="1">Approve</option>
+                                            <option value="0">Reject</option>
                                         @else
-                                            <option value="0">Deactive</option>
-                                            <option value="1">Active</option>
+                                            <option value="0">Reject</option>
+                                            <option value="1">Approve</option>
                                         @endif
                                     </select>
                                 </div>
@@ -118,7 +118,8 @@ Update Deposit
                             <div class="form-group row text-center">
                                 <div class="col-md-8 mx-auto">
                                     <input type="hidden" name="deposit_id" hidden value="{{ $update_deposit->deposit_id }}">
-                                    <input type="submit" class="btn btn-warning" value="Update">
+                                    <input type="hidden" name="admin_payment_id" hidden value="{{ uniqid() }}">
+                                    <input type="submit" id="payButton" class="btn btn-warning" value="Update">
                                 </div>
                             </div>
                         </form>
@@ -132,6 +133,11 @@ Update Deposit
 </div>
 
 
+<script>
+    document.getElementById('paymentForm').onsubmit = function() {
+        document.getElementById('payButton').disabled = true;
+    };
+</script>
 
 @endsection
 

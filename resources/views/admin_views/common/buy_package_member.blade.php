@@ -14,7 +14,7 @@ Member Package Approval
                 <div class="col">
                     <h3 class="page-title">Data Tables</h3>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('worker_panel.dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('client_panel.dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item active">Data Tables</li>
                     </ul>
                 </div>

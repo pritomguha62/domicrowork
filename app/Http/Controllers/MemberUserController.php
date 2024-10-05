@@ -320,20 +320,75 @@ class MemberUserController extends Controller
 
 
         if (!empty($buy_package_member)) {
+
             return view('admin_views.common.buy_package_member', compact('buy_package_member'));
+
         }else{
+
             return redirect()->back()->with('error', 'No Package bought..!');
+
         }
 
     }
 
-    public function update_deposit_info($deposit_id){
+    public function update_deposit_info(Request $request){
 
-        $update_deposit_info = Deposit_balance::with('member')->find($deposit_id);
+        $update_deposit_info = Deposit_balance::with('member')->find($request->deposit_id);
 
         $update_member = Member_user::with('role', 'package')->find($update_deposit_info->member_id);
 
-        return view('admin_views.common.update_member', compact('update_member'));
+        if (($update_deposit_info->approver_id != null)) {
+
+            return redirect()->back()->with('error', 'Request expired..!');
+
+        }
+
+        $check_submission =Deposit_balance::where('admin_payment_id', $request->admin_payment_id)->where('member_id', $update_deposit_info->member_id)->first();
+
+        // Check if this payment has already been processed
+        if (!empty($check_submission)) {
+
+            // return response()->json(['error' => 'Payment already processed..!'], 400);
+
+            return redirect()->back()->with('error', 'Payment already processed..!');
+
+        }
+
+        $update_deposit_info->admin_payment_id = $request->admin_payment_id;
+
+        if ($request->status == 1) {
+
+            $update_deposit_info->status = $request->status;
+
+            $update_member->deposit_balance = round(intval($update_member->deposit_balance) + intval($request->deposit_balance));
+
+            $passbook = new Passbook();
+
+            $passbook->sender_name = 'Deposit';
+
+            $passbook->receiver_name = $update_member->name;
+
+            $passbook->sender_admin_id = session()->get('admin_id');
+
+            $passbook->receiver_member_id = $update_member->member_id;
+
+            $passbook->amount = $update_deposit_info->deposit_balance;
+
+            $passbook->sender_user_code = session()->get('user_code');
+
+            $passbook->receiver_user_code = $update_member->user_code;
+
+            $passbook->save();
+
+            $update_member->update();
+
+        }
+
+        $update_deposit_info->approver_id = session()->get('admin_id');
+
+        $update_deposit_info->update();
+
+        return redirect()->route('admin_panel.deposit_requests')->with('success', 'Deposit request checked..!');
 
     }
 
@@ -582,9 +637,22 @@ class MemberUserController extends Controller
 
     public function deposit(){
 
-        // $histories = Passbook::where('receiver_user_code', session()->get('user_code'))->orWhere('sender_user_code', session()->get('user_code'))->get();
-
         return view('member_views.common.deposit');
+
+
+    }
+
+
+    public function package_deposit($package_id){
+
+        $package = Package::find($package_id);
+
+        $package_charge = intval($package->price)*0.02;
+
+        $package_price = round(intval($package->price) + $package_charge);
+
+        return view('member_views.common.deposit', compact('package_price'));
+
 
     }
 

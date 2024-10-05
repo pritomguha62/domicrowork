@@ -107,6 +107,8 @@ class PackageController extends Controller
 
         $package = Package::where('status', 1)->where('package_id', $package_id)->first();
 
+        $package_id = $package->package_id;
+
         $member = Member_user::find(session()->get('member_id'));
 
         if ($package->price < $member->deposit_balance or $package->price < $member->balance) {
@@ -115,7 +117,7 @@ class PackageController extends Controller
 
         }else {
 
-            return redirect()->route('member_panel.deposit');
+            return redirect()->route('member_panel.package_deposit', ['package_id' => $package_id]);
 
         }
 

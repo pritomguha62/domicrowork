@@ -2,7 +2,7 @@
 
 
 @section('title')
-history
+deposit
 @endsection
 
 @section('content')
@@ -13,12 +13,12 @@ history
         <div class="bg-light p-5 rounded h-100 wow fadeInUp" data-wow-delay="0.2s">
             <h4 class="text-primary">Deposit</h4>
             <p class="mb-4 text-warning">Deposit Balance To Buy A Package..</p>
-            <form action="{{ route('member_panel.deposit_balance_info') }}" method="POST">
+            <form action="{{ route('member_panel.deposit_balance_info') }}" method="POST" id="paymentForm">
 
                 @if (session()->has('error'))
                     <p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
                 @endif
-                
+
                 @if (session()->has('success'))
                     <p class="mb-0 alert alert-success">{{ session()->get('success') }}</p>
                 @endif
@@ -37,17 +37,30 @@ history
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" name="deposit_balance" class="form-control border-0" id="deposit_balance" placeholder="Deposit Balance">
+                            <input type="text" name="deposit_balance" class="form-control border-0" id="deposit_balance" placeholder="Deposit Balance" value="{{ !empty($package_price) ? $package_price : '' }}" >
                             <label for="deposit_balance">Deposit Balance</label>
                         </div>
                         @error('deposit_balance')
                             <p class="mb-0 alert alert-danger">{{ $message }}</p>
                         @enderror
                     </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <select name="payment_method" class="form-select mb-3" id="">
+                                <option value="">Select</option>
+                                <option value="bkash">Bkash</option>
+                                <option value="nagad">Nagad</option>
+                                <option value="rocket">Rocket</option>
+                            </select>
+                            <label for="payment_method">Select Payment Method</label>
+                        </div>
+                        @error('payment_method')
+                            <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
                     {{-- <p>মূল্যঃ <b>{{ $package->price }}</b></p> --}}
                     <div class="col-12">
                         <div class="form-floating" style="display: flex;">
-                            <p>Send Money (Bkash)</p>
                             <input type="text" readonly class="form-control" id="account_number" value="">
                             <button type="button" class="btn btn-warning" value="copy" onclick="copyClipboardFunction()">Copy!</button>
                         </div>
@@ -76,7 +89,8 @@ history
                     <div class="col-12">
                         {{-- <input type="hidden" hidden name="package_id" id="package_id" value="{{ $package->package_id }}"> --}}
                         {{-- <input type="hidden" hidden name="member_id" id="member_id" value="{{ session()->get('member_id') }}"> --}}
-                        <button type="submit" class="btn btn-primary w-100 py-3">Deposit</button>
+                        <input type="hidden" hidden name="member_payment_id" id="member_payment_id" value="{{ uniqid() }}">
+                        <input type="submit" id="payButton" class="btn btn-primary w-100 py-3" value="Deposit">
                     </div>
                 </div>
             </form>
@@ -85,6 +99,7 @@ history
 </div>
 
 <script>
+
     function copyClipboardFunction() {
         // Get the text field
         var copyText = document.getElementById("account_number");
@@ -99,6 +114,12 @@ history
         // Alert the copied text
         alert("Copied the text: " + copyText.value);
     }
+
+    document.getElementById('paymentForm').onsubmit = function() {
+        document.getElementById('payButton').disabled = true;
+    };
+
+
 </script>
 
 @endsection

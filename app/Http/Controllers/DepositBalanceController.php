@@ -20,11 +20,27 @@ class DepositBalanceController extends Controller
 
         // $member = Member_user::find($request->member_id);
 
+        $check_submission =Deposit_balance::where('member_payment_id', $request->member_payment_id)->where('member_id', session()->get('member_id'))->first();
+
+        // Check if this payment has already been processed
+        if (!empty($check_submission)) {
+
+            // return response()->json(['error' => 'Payment already processed..!'], 400);
+
+            return redirect()->back()->with('error', 'Payment already processed..!');
+
+        }
+
+
         $deposit_balance = new Deposit_balance();
 
         $deposit_balance->paid_from = $request->paid_from;
 
         $deposit_balance->trxid = $request->trxid;
+
+        $deposit_balance->payment_method = $request->payment_method;
+
+        $deposit_balance->member_payment_id = $request->member_payment_id;
 
         $deposit_balance->deposit_balance = $request->deposit_balance;
 
@@ -34,7 +50,7 @@ class DepositBalanceController extends Controller
 
         $deposit_balance->save();
 
-        return redirect()->back()->with('success', 'Information submited, your blance will be added soon after verification..!');
+        return redirect()->route('client_panel.dashboard')->with('success', 'Information submitted, your balance will be added soon after verification..!');
 
     }
 

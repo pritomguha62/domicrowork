@@ -109,6 +109,10 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
     )->name('admin_panel.update_deposit');
 
 
+    Route::post('/update_deposit_info', [MemberUserController::class, 'update_deposit_info']
+    )->name('admin_panel.update_deposit_info');
+
+
 
     // category
 
@@ -335,6 +339,9 @@ Route::prefix('/client_panel')->middleware('client')->group(function(){
 
     Route::get('/deposit', [MemberUserController::class, 'deposit']
     )->name('member_panel.deposit');
+
+    Route::get('/package_deposit/{package_id?}', [MemberUserController::class, 'package_deposit']
+    )->name('member_panel.package_deposit');
 
     Route::post('/deposit_balance_info', [DepositBalanceController::class, 'deposit_balance_info']
     )->name('member_panel.deposit_balance_info');

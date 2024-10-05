@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('trxid')->nullable();
             $table->string('deposit_balance')->nullable();
             $table->string('user_code')->nullable();
+            $table->string('admin_payment_id')->unique()->nullable();
+            $table->string('member_payment_id')->unique()->nullable();
+            $table->string('payment_method')->nullable();
             $table->unsignedBigInteger('member_id')->nullable();
             $table->foreign('member_id')->references('member_id')->on('member_users');
             $table->integer('status')->default(0);

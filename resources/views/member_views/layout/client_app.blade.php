@@ -44,6 +44,8 @@
 
             session()->put('status', $member->status);
 
+            session()->put('deposit_balance', $member->deposit_balance);
+
             session()->put('balance', $member->balance);
 
         }
@@ -74,7 +76,7 @@
                     <div class="ms-3">
                         <h6 class="mb-0">{{ session()->get('name') }}</h6>
                         <span>{{ session()->get('user_code') }}</span>
-                        <span>Balance : {{ session()->get('balance') }}</span>
+                        <span>Balance : {{ session()->get('balance')+session()->get('deposit_balance') }}</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
