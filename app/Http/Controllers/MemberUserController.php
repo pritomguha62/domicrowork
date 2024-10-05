@@ -358,9 +358,33 @@ class MemberUserController extends Controller
 
         if ($request->status == 1) {
 
+            $admin = Admin_user::find(2);
+
             $update_deposit_info->status = $request->status;
 
             $update_member->deposit_balance = round(intval($update_member->deposit_balance) + intval($request->deposit_balance));
+
+            $admin->balance = round(intval($admin->balance) + intval($request->deposit_balance));
+
+            $passbook = new Passbook();
+
+            $passbook->sender_name = 'Deposit';
+
+            $passbook->receiver_name = $admin->name;
+
+            $passbook->receiver_admin_id = $admin->admin_id;
+
+            $passbook->sender_member_id = $update_member->member_id;
+
+            $passbook->amount = $update_deposit_info->deposit_balance;
+
+            $passbook->sender_user_code = $update_member->user_code;
+
+            $passbook->receiver_user_code = $admin->user_code;
+
+            $passbook->save();
+
+            $admin->update();
 
             $passbook = new Passbook();
 
@@ -396,6 +420,8 @@ class MemberUserController extends Controller
 
         // $buy_package_member_info = Buy_package::with('package', 'member')->where('member_id', $request->member_id)->first();
 
+        $admin = Admin_user::find(2);
+
         $member_info = Member_user::with('parent')->find($request->member_id);
 
         $package = Package::find($request->package_id);
@@ -410,9 +436,16 @@ class MemberUserController extends Controller
 
         // }
 
-        if ($member_info->deposit_balance <= $package_price or $member_info->balance <= $package_price) {
+        // echo $member_info->deposit_balance;
+        // exit;
 
-            return redirect()->back()->with('error', 'Not enough balance, please deposit first..!');
+        if ($member_info->deposit_balance <= $package_price) {
+
+            if ($member_info->balance <= $package_price) {
+
+                return redirect()->back()->with('error', 'Not enough balance, please deposit first..!');
+
+            }
 
         }
 
@@ -420,9 +453,52 @@ class MemberUserController extends Controller
 
             $member_info->deposit_balance = intval($member_info->deposit_balance) - intval($package_price);
 
+            $member_info->status = 1;
+
+            $passbook = new Passbook();
+
+            $passbook->sender_name = $member_info->name;
+
+            $passbook->receiver_name = 'Admin';
+
+            $passbook->sender_member_id = $member_info->member_id;
+
+            $passbook->receiver_member_id = $admin->admin_id;
+
+            $passbook->sender_user_code = $member_info->user_code;
+
+            $passbook->receiver_user_code = $admin->user_code;
+
+            $passbook->amount = $package_price;
+
+            $passbook->save();
+
+
+
         }else {
 
-            $member_info->balance = intval($member_info->deposit_balance) - intval($package_price);
+            $member_info->balance = intval($member_info->balance) - intval($package_price);
+
+            $member_info->status = 1;
+
+            $passbook = new Passbook();
+
+            $passbook->sender_name = $member_info->name;
+
+            $passbook->receiver_name = 'Admin';
+
+            $passbook->sender_member_id = $member_info->member_id;
+
+            $passbook->receiver_member_id = $admin->admin_id;
+
+            $passbook->sender_user_code = $member_info->user_code;
+
+            $passbook->receiver_user_code = $admin->user_code;
+
+            $passbook->amount = $package_price;
+
+            $passbook->save();
+
 
         }
 
@@ -585,8 +661,6 @@ class MemberUserController extends Controller
 
         // $buy_package_member_info->status = $request->status;
 
-        $member_info->status = $request->status;
-
         $member_info->package_id = $package->package_id;
 
         // $buy_package_member_info->update();
@@ -670,7 +744,7 @@ class MemberUserController extends Controller
 
         $package_charge = intval($package->price)*0.02;
 
-        $package_price = round(intval($package->price) + $package_charge);
+        $package_price = round(intval($package->price) + $package_charge + 1);
 
         return view('member_views.common.deposit', compact('package_price'));
 

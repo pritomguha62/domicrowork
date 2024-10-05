@@ -40,6 +40,7 @@ activate package
                             @if (session()->has('error'))
                                 <p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
                             @endif
+
                             @if (session()->has('success'))
                                 <p class="mb-0 alert alert-success">{{ session()->get('success') }}</p>
                             @endif
@@ -56,7 +57,7 @@ activate package
                                         <p class="mb-0 alert alert-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-                                <p>মূল্যঃ <b>{{ $package->price }}</b></p>
+                                <p>মূল্যঃ <b>{{ $package->price }}</b> + চার্জঃ <b>{{ round(intval($package->price) * 0.02) + 1 }}</b> = মোটঃ <b>{{ round(intval($package->price) + round(intval($package->price) * 0.02)) + 1 }}</b></p>
                                 <div class="col-12">
                                     <input type="hidden" hidden name="package_id" id="package_id" value="{{ $package->package_id }}">
                                     <input type="hidden" hidden name="member_id" id="member_id" value="{{ session()->get('member_id') }}">
