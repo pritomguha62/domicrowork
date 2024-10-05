@@ -291,7 +291,7 @@
                                     <a href="javascript:void(0);"><img src="{{ asset('admin_assets/img/icons/users1.svg') }}" alt="img" /><span> Member Panel</span> <span class="menu-arrow"></span></a>
                                     <ul>
                                         {{-- <li><a href="{{ route('admin_panel.admin_users') }}">Member Users </a></li> --}}
-                                        <li><a href="{{ route('admin_panel.member_package_requests') }}">Worker Request</a></li>
+                                        {{-- <li><a href="{{ route('admin_panel.member_package_requests') }}">Worker Request</a></li> --}}
                                         <li><a href="{{ route('admin_panel.deposit_requests') }}">Deposit Requests</a></li>
                                     </ul>
                                 </li>

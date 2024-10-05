@@ -42,6 +42,7 @@ class AdminUserSeeder extends Seeder
             'parent_user_code' => $developer->user_code,
             'status' => 1,
             'role_id' => 2,
+            'approver_id' => 1,
             'is_admin' => 1,
             'password' => Hash::make('Domicrowork@'),
         ]);
@@ -57,6 +58,7 @@ class AdminUserSeeder extends Seeder
             'parent_user_code' => $developer->user_code,
             'status' => 1,
             'role_id' => 3,
+            'approver_id' => 1,
             'is_admin' => 1,
             'password' => Hash::make('12345678'),
         ]);
@@ -72,6 +74,7 @@ class AdminUserSeeder extends Seeder
             'parent_user_code' => $developer->user_code,
             'status' => 1,
             'role_id' => 3,
+            'approver_id' => 1,
             'is_admin' => 1,
             'password' => Hash::make('Dada1122@'),
         ]);

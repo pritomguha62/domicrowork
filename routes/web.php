@@ -103,14 +103,14 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
     // deposit
 
     Route::get('/deposit_requests', [DepositBalanceController::class, 'deposit_requests']
-    )->name('admin_panel.deposit_requests');
+    )->name('admin_panel.deposit_requests')->middleware('admin');
 
     Route::get('/update_deposit/{deposit_id}', [DepositBalanceController::class, 'update_deposit']
-    )->name('admin_panel.update_deposit');
+    )->name('admin_panel.update_deposit')->middleware('admin');
 
 
     Route::post('/update_deposit_info', [MemberUserController::class, 'update_deposit_info']
-    )->name('admin_panel.update_deposit_info');
+    )->name('admin_panel.update_deposit_info')->middleware('admin');
 
 
 
@@ -340,6 +340,10 @@ Route::prefix('/client_panel')->middleware('client')->group(function(){
 
     });
 
+
+    // diposit
+
+
     Route::get('/deposit', [MemberUserController::class, 'deposit']
     )->name('member_panel.deposit');
 
@@ -349,25 +353,42 @@ Route::prefix('/client_panel')->middleware('client')->group(function(){
     Route::post('/deposit_balance_info', [DepositBalanceController::class, 'deposit_balance_info']
     )->name('member_panel.deposit_balance_info');
 
+
+    // task
+
+
+    Route::get('/add_client_social_task', [TaskController::class, 'add_client_social_task']
+    )->name('client_panel.add_client_social_task');
+
+
+    Route::get('/get-subcategories/{category_id?}', [CategoryController::class, 'getSubcategories'])->name('client_panel.get.subcategories');
+
+    Route::get('/get-subcategorie_info/{subcategory_id?}', [CategoryController::class, 'getSubcategorieinfo'])->name('client_panel.get.subcategorieinfo');
+
+
+
+
+    // history
+
+
     Route::get('/histories', [MemberUserController::class, 'histories']
     )->name('client_panel.histories');
+
+
+    // refers
+
 
     Route::get('/refers', [MemberUserController::class, 'refers']
     )->name('client_panel.refers');
 
 
+    // withdraws
+
+
+
     Route::get('/withdraws', [MemberUserController::class, 'withdraws']
     )->name('client_panel.withdraws');
 
-
-    // task
-
-
-    // Route::get('/add_social_task', [TaskController::class, 'admin_add_social_task']
-    // )->name('admin_panel.add_social_task');
-
-    // Route::post('/add_social_task_info', [TaskController::class, 'admin_add_social_task_info']
-    // )->name('admin_panel.add_social_task_info');
 
 
 });

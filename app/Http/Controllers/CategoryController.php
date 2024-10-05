@@ -73,7 +73,17 @@ class CategoryController extends Controller
 
         // Return the data as JSON
         return response()->json($subcategories);
-        
+
+    }
+
+    public function getSubcategorieinfo($sub_category_id)
+    {
+        // Fetch subcategories based on category_id
+        $subcategorie_info = Sub_category::find($sub_category_id);
+
+        // Return the data as JSON
+        return response()->json($subcategorie_info);
+
     }
 
 

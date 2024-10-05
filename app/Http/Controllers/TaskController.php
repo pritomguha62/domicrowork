@@ -146,7 +146,17 @@ class TaskController extends Controller
 
     }
 
-    public function client_add_social_task_info(Request $request){
+
+    public function add_client_social_task(){
+
+        $categories = Category::where('status', 1)->get();
+
+        return view('member_views.common.add_client_social_task', compact('categories'));
+
+    }
+
+
+    public function add_client_social_task_info(Request $request){
 
         $request->validate([
             'title'=>'required',
@@ -154,10 +164,8 @@ class TaskController extends Controller
             'sub_category_id'=>'required',
             'description'=>'required',
             'required_proof'=>'required',
-            'task_price_rate'=>'required',
-            'work_amount'=>'required',
-            'price'=>'required',
-            'status'=>'required',
+            'task_price_rate'=>'required|min:2.5',
+            'work_amount'=>'required|min:5',
         ]);
 
         $social_task = new Task();
@@ -165,19 +173,51 @@ class TaskController extends Controller
         $social_task->category_id = $request->category_id;
         $social_task->sub_category_id = $request->sub_category_id;
         $social_task->description = $request->description;
-        $social_task->ss_thumbnail = $request->ss_thumbnail;
+        $social_task->work_link = $request->work_link;
+
+        if (!empty($request->ss_thumbnail)) {
+
+            $request->validate([
+                "ss_thumbnail"=> "required|max:7240",
+            ]);
+
+            $name = $request->title;
+            $image_name = $name.'_ss_thumbnail_'.date("Y_m_d_h_i_sa").'.'.$request->file('ss_thumbnail')->getClientOriginalExtension();
+            $request->file('ss_thumbnail')->move(public_path('storage/uploads/image/'), $image_name);
+
+            $social_task->ss_thumbnail = $image_name;
+
+
+        }
+
         $social_task->required_proof = $request->required_proof;
         $social_task->task_price_rate = $request->task_price_rate;
         $social_task->work_amount = $request->work_amount;
         $social_task->price = $request->price;
-        $social_task->client_id = session()->get('member_id');
-        $social_task->status = $request->status;
-        $social_task->expire_date = $request->expire_date;
+        $social_task->member_id = session()->get('member_id');
         $social_task->save();
 
-        return redirect()->back()->with('success', 'Task created, please wait for approval..!');
+        return redirect()->back()->with('success', 'Task created..!');
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

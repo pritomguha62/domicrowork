@@ -128,7 +128,7 @@ Add Social Task
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Price Per Work</label>
                                 <div class="col-md-10">
-                                    <input type="string" name="task_price_rate" class="form-control" />
+                                    <input type="text" name="task_price_rate" class="form-control" />
                                 </div>
                                 @error('task_price_rate')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
