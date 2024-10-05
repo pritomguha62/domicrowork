@@ -72,7 +72,7 @@
                                 @enderror
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="number" name="parent_user_code" required class="form-control" id="floatingReferCode" placeholder="24********">
+                                <input type="number" name="parent_user_code" required class="form-control" id="floatingReferCode" {{ !empty($_GET['user_code']) ? "readonly value=".$_GET['user_code'] : "required" }} placeholder="24********">
                                 <label for="floatingReferCode">Refer Code (Optional)</label>
                                 @error('parent_user_code')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>

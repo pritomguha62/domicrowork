@@ -14,8 +14,8 @@ add social task
 <div class="col-12 col-md-12 col-lg-12">
     <div class="bg-light rounded h-100 p-4">
         <div class="bg-light p-5 rounded h-100 wow fadeInUp" data-wow-delay="0.2s">
-            <h4 class="text-primary">Deposit</h4>
-            <p class="mb-4 text-warning">Deposit Balance To Buy A Package..</p>
+            <h4 class="text-primary">Create Task</h4>
+            <p class="mb-4 text-warning">Provide the task information..</p>
             <form action="{{ route('member_panel.deposit_balance_info') }}" method="POST" id="paymentForm">
 
                 @if (session()->has('error'))
@@ -133,7 +133,7 @@ add social task
                         {{-- <input type="hidden" hidden name="package_id" id="package_id" value="{{ $package->package_id }}"> --}}
                         {{-- <input type="hidden" hidden name="member_id" id="member_id" value="{{ session()->get('member_id') }}"> --}}
                         <input type="hidden" hidden name="member_payment_id" id="member_payment_id" value="{{ uniqid() }}">
-                        <input type="submit" id="payButton" class="btn btn-primary w-100 py-3" value="Deposit">
+                        <input type="submit" id="payButton" class="btn btn-primary w-100 py-3" value="Create">
                     </div>
                 </div>
             </form>
