@@ -44,9 +44,9 @@
 
             session()->put('status', $member->status);
 
-            session()->put('deposit_balance', $member->deposit_balance);
-
             session()->put('balance', $member->balance);
+
+            session()->put('deposit_balance', $member->deposit_balance);
 
         }
 

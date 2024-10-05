@@ -394,25 +394,47 @@ class MemberUserController extends Controller
 
     public function buy_package_member_info(Request $request){
 
-        $buy_package_member_info = Buy_package::with('package', 'member')->where('member_id', $request->member_id)->first();
+        // $buy_package_member_info = Buy_package::with('package', 'member')->where('member_id', $request->member_id)->first();
 
         $member_info = Member_user::with('parent')->find($request->member_id);
 
-        if ($buy_package_member_info->approver_id == null) {
+        $package = Package::find($request->package_id);
 
-            $buy_package_member_info->approver_id = session()->get('admin_id');
+        $package_charge = intval($package->price)*0.02;
+
+        $package_price = round(intval($package->price) + $package_charge);
+
+        // if ($buy_package_member_info->approver_id == null) {
+
+        //     $buy_package_member_info->approver_id = session()->get('admin_id');
+
+        // }
+
+        if ($member_info->deposit_balance <= $package_price or $member_info->balance <= $package_price) {
+
+            return redirect()->back()->with('error', 'Not enough balance, please deposit first..!');
 
         }
 
-        if ($request->status == 1) {
+        if ($member_info->deposit_balance <= $package_price) {
+
+            $member_info->deposit_balance = intval($member_info->deposit_balance) - intval($package_price);
+
+        }else {
+
+            $member_info->balance = intval($member_info->deposit_balance) - intval($package_price);
+
+        }
 
             $member_info->package_id = $request->package_id;
 
-            $first_level_commission = round(round($buy_package_member_info->package->price/100)*10);
-            $second_level_commission = round(round($buy_package_member_info->package->price/100)*4);
-            $third_level_commission = round(round($buy_package_member_info->package->price/100)*2);
-            $fourth_level_commission = round(round($buy_package_member_info->package->price/100)*1);
-            $fifth_level_commission = round(round($buy_package_member_info->package->price/100)*0.5);
+            // $member_info->package_id = $request->package_id;
+
+            $first_level_commission = round(round($package->price/100)*10);
+            $second_level_commission = round(round($package->price/100)*4);
+            $third_level_commission = round(round($package->price/100)*2);
+            $fourth_level_commission = round(round($package->price/100)*1);
+            $fifth_level_commission = round(round($package->price/100)*0.5);
 
             if (!empty($member_info->parent->member_id)) {
 
@@ -558,21 +580,20 @@ class MemberUserController extends Controller
 
 
 
-        }
 
         $member_info->approver_id = session()->get('admin_id');
 
-        $buy_package_member_info->status = $request->status;
+        // $buy_package_member_info->status = $request->status;
 
         $member_info->status = $request->status;
 
-        $member_info->package_id = $buy_package_member_info->package_id;
+        $member_info->package_id = $package->package_id;
 
-        $buy_package_member_info->update();
+        // $buy_package_member_info->update();
 
         $member_info->update();
 
-        return redirect()->back()->with('success', 'User Updated..!');
+        return redirect()->back()->with('success', 'Package Activated..!');
 
     }
 

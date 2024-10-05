@@ -150,7 +150,7 @@ class PackageController extends Controller
 
         $buy_package->save();
 
-        return redirect()->route('home')->with('success', 'Information submited, your account will be activate soon..!');
+        return redirect()->route('home')->with('success', 'Information submitted, your account will be activate soon..!');
 
     }
 

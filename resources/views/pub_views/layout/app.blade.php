@@ -60,11 +60,15 @@
           $member = App\Models\Member_user::member();
 
           if (!empty($member)) {
-                session()->put('is_client', $member->is_client);
 
-                session()->put('status', $member->status);
+            session()->put('is_client', $member->is_client);
 
-                session()->put('balance', $member->balance);
+            session()->put('status', $member->status);
+
+            session()->put('balance', $member->balance);
+
+            session()->put('deposit_balance', $member->deposit_balance);
+
           }
 
         @endphp

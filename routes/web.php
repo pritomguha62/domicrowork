@@ -293,6 +293,9 @@ Route::prefix('/member_panel')->group(function(){
     Route::post('/activate_package_info', [PackageController::class, 'activate_package_info']
     )->name('member_panel.activate_package_info');
 
+    Route::post('/buy_package_member_info', [MemberUserController::class, 'buy_package_member_info']
+    )->name('member_panel.buy_package_member_info');
+
 
     // payment method
 

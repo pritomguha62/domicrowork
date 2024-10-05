@@ -35,7 +35,7 @@ activate package
                     <div class="bg-light p-5 rounded h-100 wow fadeInUp" data-wow-delay="0.2s">
                         <h4 class="text-primary">প্যাকেজ</h4>
                         <p class="mb-4 text-warning">একাউন্ট এক্টিভ করুন..</p>
-                        <form action="{{ route('member_panel.activate_package_info') }}" method="POST">
+                        <form action="{{ route('member_panel.buy_package_member_info') }}" method="POST">
 
                             @if (session()->has('error'))
                                 <p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
