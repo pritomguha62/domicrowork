@@ -42,6 +42,8 @@
 
             session()->put('is_client', $member->is_client);
 
+            session()->put('is_worker', $member->is_worker);
+
             session()->put('status', $member->status);
 
             session()->put('balance', $member->balance);
@@ -66,7 +68,7 @@
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
                 <a href="{{ route('client_panel.dashboard') }}" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary text-center"><i class="fa fa-hashtag me-2"></i>Do Micro <br> Work</h3>
+                    <h3 class="text-primary text-center">Do Micro <br> Work</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -84,7 +86,8 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Tasks</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{ route('client_panel.add_client_social_task') }}" class="dropdown-item">Create Social Task</a>
+                            <a href="{{ route('client_panel.add_client_social_task') }}" class="dropdown-item">Create Task</a>
+                            <a href="{{ route('worker_panel.worker_social_tasks') }}" class="dropdown-item">Complete Tasks</a>
                             {{-- <a href="typography.html" class="dropdown-item">Typography</a>
                             <a href="element.html" class="dropdown-item">Other Elements</a> --}}
                         </div>
@@ -113,9 +116,9 @@
         <div class="content">
             <!-- Navbar Start -->
             <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                <a href="{{ route('client_panel.dashboard') }}" class="navbar-brand d-flex d-lg-none me-4">
+                {{-- <a href="{{ route('client_panel.dashboard') }}" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
-                </a>
+                </a> --}}
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
@@ -161,7 +164,7 @@
                             <hr class="dropdown-divider">
                             <a href="#" class="dropdown-item text-center">See all message</a>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-bell me-lg-2"></i>
@@ -185,7 +188,7 @@
                             <hr class="dropdown-divider">
                             <a href="#" class="dropdown-item text-center">See all notifications</a>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="{{ asset('member_assets/img/user.png') }}" alt="" style="width: 40px; height: 40px;">

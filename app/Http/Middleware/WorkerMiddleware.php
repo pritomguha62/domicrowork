@@ -25,12 +25,12 @@ class WorkerMiddleware
             }else {
 
                 return redirect()->route('member_deactive');
-                
+
             }
 
         }else{
 
-            return redirect()->route('logout');
+            return redirect()->route('client_panel.dashboard')->with('error', 'Buy package to do daily tasks..!');
 
         }
 
