@@ -132,18 +132,18 @@ class MemberUserController extends Controller
 
         }
 
-        if ($request->role == 'is_worker') {
-            $member->is_worker = 1;
-            session()->put('is_worker', 1);
-        }
+        // if ($request->role == 'is_worker') {
+        //     $member->is_worker = 1;
+        //     session()->put('is_worker', 1);
+        // }
 
         $member->is_client = 1;
 
-        if ($request->role == 'both') {
-            $member->is_worker = 1;
-            session()->put('is_worker', 1);
-            $member->is_client = 1;
-        }
+        // if ($request->role == 'both') {
+        //     $member->is_worker = 1;
+        //     session()->put('is_worker', 1);
+        //     $member->is_client = 1;
+        // }
 
 
         $member->role_id = 4;
