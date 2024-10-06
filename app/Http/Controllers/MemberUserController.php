@@ -100,7 +100,7 @@ class MemberUserController extends Controller
             "email" => "required|email|unique:member_users,email",
             "password"=> "required|min:8|max:16",
             "confirm_password"=> "required|same:password",
-            "role" => "required",
+            // "role" => "required",
             // "terms_condition"=> "required",
         ]);
 

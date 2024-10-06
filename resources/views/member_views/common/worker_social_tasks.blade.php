@@ -49,6 +49,79 @@ social task
     </div>
 </div> --}}
 
+{{-- <h6 class="mb-4">Daily Tasks</h6> --}}
+
+{{-- <div class="col-12 col-md-12 col-lg-12"> --}}
+    {{-- <div class="bg-light rounded h-100 p-4"> --}}
+        <div class="bg-light col-12 col-md-12 col-lg-12 py-4">
+            <div class="table-responsive bg-white py-3 mt-4 rounded">
+                <table class="table">
+                    <thead style="border-style: none!important;">
+                        <tr style="border-style: none!important;">
+                            {{-- <th scope="col" style="border-style: none!important;">#</th> --}}
+                            <th scope="col" style="border-style: none!important;">Title</th>
+                            <th scope="col" style="border-style: none!important;">Category</th>
+                            <th scope="col" style="border-style: none!important;">Sub Category</th>
+                            <th scope="col" style="border-style: none!important;">Price</th>
+                            <th scope="col" style="border-style: none!important;">Due</th>
+                        </tr>
+                    </thead>
+                    <tbody style="border-style: none!important;">
+                        {{-- @php
+                            $i = 1;
+                        @endphp
+                        @foreach ($histories as $history) --}}
+                        <tr style="border-style: none!important;">
+                            {{-- <th scope="row" style="border-style: none!important;">...</th> --}}
+                            <td style="border-style: none!important;">....</td>
+                            <td style="border-style: none!important;">....</td>
+                            <td style="border-style: none!important;">....</td>
+                            <td style="border-style: none!important;">....</td>
+                            <td style="border-style: none!important;">....</td>
+                        </tr>
+                        {{-- @php
+                            $i++;
+                        @endphp
+                        @endforeach --}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive bg-white py-3 mt-4 rounded">
+                <table class="table">
+                    <thead style="border-style: none!important;">
+                        <tr style="border-style: none!important;">
+                            {{-- <th scope="col" style="border-style: none!important;">#</th> --}}
+                            <th scope="col" style="border-style: none!important;">Title</th>
+                            <th scope="col" style="border-style: none!important;">Category</th>
+                            <th scope="col" style="border-style: none!important;">Sub Category</th>
+                            <th scope="col" style="border-style: none!important;">Price</th>
+                            <th scope="col" style="border-style: none!important;">Due</th>
+                        </tr>
+                    </thead>
+                    <tbody style="border-style: none!important;">
+                        {{-- @php
+                            $i = 1;
+                        @endphp
+                        @foreach ($histories as $history) --}}
+                        <tr style="border-style: none!important;">
+                            {{-- <th scope="row" style="border-style: none!important;">...</th> --}}
+                            <td style="border-style: none!important;">....</td>
+                            <td style="border-style: none!important;">....</td>
+                            <td style="border-style: none!important;">....</td>
+                            <td style="border-style: none!important;">....</td>
+                            <td style="border-style: none!important;">....</td>
+                        </tr>
+                        {{-- @php
+                            $i++;
+                        @endphp
+                        @endforeach --}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {{-- </div> --}}
+{{-- </div> --}}
+
 
 @endsection
 
