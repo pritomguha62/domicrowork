@@ -23,7 +23,7 @@ class LoginMemberMiddleware
                 return redirect()->route('client_panel.dashboard');
             }
         }else {
-            return redirect()->route('worker_panel.dashboard');
+            return redirect()->route('client_panel.dashboard');
         }
 
     }

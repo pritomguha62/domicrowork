@@ -16,7 +16,7 @@ add social task
         <div class="bg-light p-5 rounded h-100 wow fadeInUp" data-wow-delay="0.2s">
             <h4 class="text-primary">Create Task</h4>
             <p class="mb-4 text-warning">Provide the task information..</p>
-            <form action="{{ route('member_panel.deposit_balance_info') }}" method="POST" id="paymentForm">
+            <form action="{{ route('client_panel.add_client_social_task_info') }}" method="POST" enctype="multipart/form-data" id="paymentForm">
 
                 @if (session()->has('error'))
                     <p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
@@ -81,7 +81,7 @@ add social task
                     </div>
                     <div class="mb-3">
                         <label for="ss_thumbnail" class="form-label">Screen Shot Of Thumbnail</label>
-                        <input name="ss_thumbnail" class="form-control" type="file" id="ss_thumbnail" multiple="">
+                        <input name="ss_thumbnail" class="form-control" type="file" id="ss_thumbnail">
                         @error('ss_thumbnail')
                             <p class="mb-0 alert alert-danger">{{ $message }}</p>
                         @enderror
@@ -197,19 +197,24 @@ add social task
         $('#work_amount').on('keyup', function() {
             var work_amount = $(this).val();
             var subcategorie_id = $('#sub_category').val();
+            var task_price_rate = $('#task_price_rate').val();
+
+            var task_price = task_price_rate*work_amount;
+
+            $('#price').val(task_price);
 
             if (work_amount) {
-                $.ajax({
-                    url: '/client_panel/get-subcategorie_info/' + subcategorie_id,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(data) {
-                        // $('#sub_category').empty();
-                        // $('#sub_category').append('<option value="">--Select Subcategory--</option>');
-                        var task_price = data.price*work_amount;
-                        $('#price').val(task_price);
-                    }
-                });
+                // $.ajax({
+                //     url: '/client_panel/get-subcategorie_info/' + subcategorie_id,
+                //     type: 'GET',
+                //     dataType: 'json',
+                //     success: function(data) {
+                //         // $('#sub_category').empty();
+                //         // $('#sub_category').append('<option value="">--Select Subcategory--</option>');
+                //         var task_price = data.price*work_amount;
+                //         $('#price').val(task_price);
+                //     }
+                // });
             }
 
 

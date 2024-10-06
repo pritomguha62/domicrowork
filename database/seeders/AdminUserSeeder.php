@@ -32,7 +32,7 @@ class AdminUserSeeder extends Seeder
         $developer = Admin_user::find(1);
 
         Admin_user::create([
-            'name' => 'Nayan Chowdhury',
+            'name' => 'Do Micro Work',
             'phone' => '',
             'email' => 'nayanchowdhury543@gmail.com',
             'email_verified' => 1,

@@ -62,7 +62,7 @@ Add Sub Category
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-form-label col-md-2">Price Per Single Work</label>
                                 <div class="col-md-8">
                                     <input name="price" type="text" class="form-control" />
@@ -70,7 +70,7 @@ Add Sub Category
                                 @error('price')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Status</label>
                                 <div class="col-md-8">

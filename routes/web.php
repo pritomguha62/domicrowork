@@ -311,16 +311,24 @@ Route::prefix('/member_panel')->group(function(){
 
 
 
-// Route::prefix('/worker_panel')->middleware('worker')->group(function(){
+Route::prefix('/worker_panel')->middleware('worker')->group(function(){
 
-//     Route::get('/dashboard', [MemberUserController::class, 'worker_dashboard']
-//     )->name('worker_panel.dashboard')->middleware('email_verify');
+    // Route::get('/dashboard', [MemberUserController::class, 'worker_dashboard']
+    // )->name('worker_panel.dashboard')->middleware('email_verify');
 
-//     Route::get('/', function () {
-//         return redirect()->route('worker_panel.dashboard');
-//     });
+    // Route::get('/', function () {
+    //     return redirect()->route('worker_panel.dashboard');
+    // });
 
-// });
+
+    // worker task
+
+    Route::get('/worker_social_tasks', [TaskController::class, 'worker_social_tasks']
+    )->name('worker_panel.worker_social_tasks')->middleware('worker');
+
+
+
+});
 
 
 
@@ -354,17 +362,20 @@ Route::prefix('/client_panel')->middleware('client')->group(function(){
     )->name('member_panel.deposit_balance_info');
 
 
-    // task
+    // client task
 
 
     Route::get('/add_client_social_task', [TaskController::class, 'add_client_social_task']
     )->name('client_panel.add_client_social_task');
 
 
+    Route::post('/add_client_social_task_info', [TaskController::class, 'add_client_social_task_info']
+    )->name('client_panel.add_client_social_task_info');
+
+
     Route::get('/get-subcategories/{category_id?}', [CategoryController::class, 'getSubcategories'])->name('client_panel.get.subcategories');
 
     Route::get('/get-subcategorie_info/{subcategory_id?}', [CategoryController::class, 'getSubcategorieinfo'])->name('client_panel.get.subcategorieinfo');
-
 
 
 

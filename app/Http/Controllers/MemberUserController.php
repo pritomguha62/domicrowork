@@ -137,9 +137,7 @@ class MemberUserController extends Controller
             session()->put('is_worker', 1);
         }
 
-        if ($request->role == 'is_client') {
-            $member->is_client = 1;
-        }
+        $member->is_client = 1;
 
         if ($request->role == 'both') {
             $member->is_worker = 1;

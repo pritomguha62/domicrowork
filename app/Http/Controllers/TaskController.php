@@ -156,6 +156,15 @@ class TaskController extends Controller
     }
 
 
+    public function worker_social_tasks(){
+
+        $worker_social_tasks = Task::with('sub_category')->where('status', 1)->get();
+
+        return view('member_views.common.worker_social_tasks', compact('worker_social_tasks'));
+
+    }
+
+
     public function add_client_social_task_info(Request $request){
 
         $request->validate([
@@ -164,8 +173,8 @@ class TaskController extends Controller
             'sub_category_id'=>'required',
             'description'=>'required',
             'required_proof'=>'required',
-            'task_price_rate'=>'required|min:2.5',
-            'work_amount'=>'required|min:5',
+            'task_price_rate'=>'required|numeric|min:2.5',
+            'work_amount'=>'required|numeric|min:5',
         ]);
 
         $social_task = new Task();
@@ -194,7 +203,7 @@ class TaskController extends Controller
         $social_task->task_price_rate = $request->task_price_rate;
         $social_task->work_amount = $request->work_amount;
         $social_task->price = $request->price;
-        $social_task->member_id = session()->get('member_id');
+        $social_task->client_id = session()->get('member_id');
         $social_task->save();
 
         return redirect()->back()->with('success', 'Task created..!');

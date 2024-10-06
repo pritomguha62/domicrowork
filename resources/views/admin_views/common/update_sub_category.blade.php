@@ -49,7 +49,7 @@ Update Sub Category
                                 @enderror
                             </div>
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-form-label col-md-2">Price Per Single Work</label>
                                 <div class="col-md-10">
                                     <input type="text" name="price" class="form-control" value="{{ $update_sub_category->price }}" />
@@ -57,7 +57,7 @@ Update Sub Category
                                 @error('price')
                                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Select Category</label>
