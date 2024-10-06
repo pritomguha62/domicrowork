@@ -28,10 +28,10 @@ home
 
 
 @if (session()->has('error'))
-<p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
+<p class="mb-0 alert alert-danger text-center">{{ session()->get('error') }}</p>
 @endif
 @if (session()->has('success'))
-<p class="mb-0 alert alert-success">{{ session()->get('success') }}</p>
+<p class="mb-0 alert alert-success text-center">{{ session()->get('success') }}</p>
 @endif
 
 <!-- About Start -->

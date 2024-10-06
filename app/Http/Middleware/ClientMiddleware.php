@@ -29,11 +29,11 @@ class ClientMiddleware
         }elseif(session()->get('role_id') == 4 && session()->get('is_client') == 0){
 
             // return redirect()->route('logout');
-            return redirect()->route('member_deactive');
-            
+            return redirect()->route('home')->with('error', 'Your account has been banned. If you think we have done a mistake, please contact us.');
+
         }else{
 
-            return redirect()->route('home')->with('error', 'Please register first..!');
+            return redirect()->route('member_deactive');
 
         }
 

@@ -16,7 +16,7 @@ class MemberUserSeeder extends Seeder
     public function run(): void
     {
 
-        $string_user_code = date('Ymds').'0000';
+        $string_user_code = '10'.date('Ym').'00';
 
         Member_user::create([
             'name' => 'Anonymous',
@@ -70,7 +70,7 @@ class MemberUserSeeder extends Seeder
         Member_user::create([
             'name' => 'L',
             'phone' => '',
-            'email' => 'lamiyachowdhuri3@Gmail.com',
+            'email' => 'lamiyachowdhuri3@gmail.com',
             'email_verified' => 1,
             'verify_token' => 657826,
             'user_code' => strval(abs(intval($string_user_code)+4)),

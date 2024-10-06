@@ -16,16 +16,12 @@ class LoginMemberMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
-        if (session()->get('is_worker') != 1) {
-            if (session()->get('is_client') != 1) {
-                return $next($request);
-            }else {
-                return redirect()->route('client_panel.dashboard');
-            }
+        if (session()->get('is_client') != 1) {
+            return $next($request);
         }else {
             return redirect()->route('client_panel.dashboard');
         }
-
+        
     }
 }
 

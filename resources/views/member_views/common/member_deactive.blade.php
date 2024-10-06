@@ -49,7 +49,7 @@
                     <div style="backdrop-filter: blur(4px);">
                         <img style="width: 30%;" src="{{ asset('pub_assets/img/logo.jpg') }}" alt="do micro work">
                         <h3 class="text-danger">Your account is deactive.!</h3>
-                        <p class="text-info text-center">Please buy any package to active your account. <br> For other issue... <br> <a href="{{ route('home') }}" target="_blank" rel="noopener noreferrer"><b>contact us</b></a>.</p>
+                        <p class="text-info text-center">Please buy any package to active your account. <br> For other issue... <br> <a href="{{ route('home') }}#contact_us" target="_blank" rel="noopener noreferrer"><b>contact us</b></a>.</p>
                     </div>
                     <div class="text-white py-4 my-2" style="background-color: rgb(102, 102, 239);">
                         <p class="text-center">Name : <b>{{ session()->get('name') }}</b></p>

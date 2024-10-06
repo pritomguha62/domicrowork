@@ -21,7 +21,7 @@ class StatusMiddleware
 
         }elseif (session()->get('role_id') == 4 && session()->get('status') == 1 && session()->get(key: 'is_worker') == 1) {
 
-            return redirect(route('worker_panel.dashboard'));
+            return redirect(route('client_panel.dashboard'));
 
         }elseif (session()->get('role_id') == 4 && session()->get('status') == 1 && session()->get(key: 'is_client') == 1) {
 
