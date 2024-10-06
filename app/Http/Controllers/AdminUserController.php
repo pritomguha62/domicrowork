@@ -99,7 +99,7 @@ class AdminUserController extends Controller
 
         $last_number = $last_admin_user->admin_id;
 
-        $string_user_code = date('Ymds').'00';
+        $string_user_code = date('Y').'000';
 
         $user_code = abs(intval($string_user_code)+$last_number);
 
@@ -162,8 +162,11 @@ class AdminUserController extends Controller
                 session()->forget('verify_token');
 
                 return redirect(route('admin_panel.signin'))->with('success', 'Email successfully verified. You will be notified by email if your registration is approved or not..!');
+
             }else {
+
                 return redirect(route('admin_user.token_verify'))->with('error', 'Email can not be verified, please retry..!');
+
             }
 
     }

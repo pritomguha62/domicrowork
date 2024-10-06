@@ -26,9 +26,13 @@ class ClientMiddleware
             //     return redirect()->route('member_deactive');
             // }
 
-        }else{
+        }elseif(session()->get('role_id') == 4 && session()->get('is_client') == 0){
 
             // return redirect()->route('logout');
+            return redirect()->route('member_deactive');
+            
+        }else{
+
             return redirect()->route('home')->with('error', 'Please register first..!');
 
         }

@@ -158,7 +158,7 @@ class MemberUserController extends Controller
 
         $last_number = $last_member_user->member_id;
 
-        $string_user_code = date('Ymds').'0000';
+        $string_user_code = '10'.date('Ym').'00';
 
         $user_code = abs(intval($string_user_code)+$last_number);
 
