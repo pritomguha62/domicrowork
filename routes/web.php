@@ -349,6 +349,13 @@ Route::prefix('/client_panel')->middleware('client')->group(function(){
     });
 
 
+    // profile
+
+
+    Route::get('/profile', [MemberUserController::class, 'profile']
+    )->name('member_panel.profile');
+
+
     // diposit
 
 

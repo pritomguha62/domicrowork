@@ -188,6 +188,14 @@ class MemberUserController extends Controller
     }
 
 
+    public function profile(){
+
+        $profile = Member_user::find(session()->get('member_id'));
+
+        return view('member_views.common.profile', compact('profile'));
+
+    }
+
     public function member_deactive(){
 
         return view('member_views.common.member_deactive');
@@ -745,7 +753,7 @@ class MemberUserController extends Controller
 
     public function histories(){
 
-        $histories = Passbook::where('receiver_user_code', session()->get('user_code'))->orWhere('sender_user_code', session()->get('user_code'))->get();
+        $histories = Passbook::where('receiver_user_code', session()->get('user_code'))->where('receiver_user_code', session()->get('user_code'))->orWhere('sender_user_code', session()->get('user_code'))->get();
 
         return view('member_views.common.histories', compact('histories'));
 
