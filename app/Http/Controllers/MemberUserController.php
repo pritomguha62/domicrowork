@@ -196,6 +196,56 @@ class MemberUserController extends Controller
 
     }
 
+    public function update_profile(Request $request){
+
+        $update_profile = Member_user::find(session()->get('member_id'));
+
+        $update_profile->name = $request->name;
+
+        $update_profile->email = $request->email;
+
+        // $update_profile->parent_user_code = $request->parent_user_code;
+
+        // if (!empty($parent_user_admin)) {
+
+        //     $update_profile->parent_user_code = $parent_user_admin->user_code;
+
+        // }elseif (!empty($parent_user_update_profile)) {
+
+        //     $update_profile->parent_user_code = $parent_user_update_profile->user_code;
+
+        //     $update_profile->parent_id = $parent_user_update_profile->update_profile_id;
+
+        // }else {
+
+        //     $update_profile->parent_user_code = null;
+
+        // }
+
+        // if ($request->role == 'is_worker') {
+        //     $update_profile->is_worker = 1;
+        //     session()->put('is_worker', 1);
+        // }
+
+        // $update_profile->is_client = 1;
+
+        // if ($request->role == 'both') {
+        //     $update_profile->is_worker = 1;
+        //     session()->put('is_worker', 1);
+        //     $update_profile->is_client = 1;
+        // }
+
+
+        // $update_profile->role_id = 4;
+
+        // $update_profile->password = Hash::make($request->password);
+
+        $update_profile->update();
+
+        return redirect()->back()->with('success', 'Profile Updated..!');
+
+    }
+
     public function member_deactive(){
 
         return view('member_views.common.member_deactive');

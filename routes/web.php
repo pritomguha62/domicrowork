@@ -355,6 +355,9 @@ Route::prefix('/client_panel')->middleware('client')->group(function(){
     Route::get('/profile', [MemberUserController::class, 'profile']
     )->name('member_panel.profile');
 
+    Route::post('/update_profile', [MemberUserController::class, 'update_profile']
+    )->name('member_panel.update_profile');
+
 
     // diposit
 

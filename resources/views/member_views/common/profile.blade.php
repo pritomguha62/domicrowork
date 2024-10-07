@@ -1,4 +1,10 @@
-@extends('member_views.layout.client_app') @section('title') profile @endsection @section('content')
+@extends('member_views.layout.client_app')
+
+@section('title')
+profile
+@endsection
+
+@section('content')
 
 <!-- Include jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -8,11 +14,12 @@
         <div class="bg-light p-5 rounded h-100 wow fadeInUp" data-wow-delay="0.2s">
             <h4 class="text-primary">Profile Info</h4>
             <p class="mb-4 text-warning">Check Profile Information..</p>
-            <form action="{{ route('member_register_info') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('member_panel.update_profile') }}" method="POST" enctype="multipart/form-data">
                 <div class="bg-light rounded p-sm-5 my-4 mx-3">
                     @if (session()->has('error'))
                     <p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
-                    @endif @if (session()->has('success'))
+                    @endif
+                    @if (session()->has('success'))
                     <p class="mb-0 alert alert-success">{{ session()->get('success') }}</p>
                     @endif @csrf
 
@@ -39,13 +46,13 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <div class="form-check">
-                            <div class="form-floating">
+                            <div class="form-floating" style="display: flex;">
                                 <input type="text" readonly class="form-control" id="refer_code" value="https://domicrowork.com/member_panel/signup?user_code={{ $profile->user_code }}" />
                                 <button type="button" class="btn btn-warning" value="copy" onclick="copyClipboardFunction()">Copy!</button>
                             </div>
                         </div>
                         <div class="form-check">
-                            <div class="form-floating">
+                            <div class="form-floating" style="display: flex;">
                                 <a class="btn btn-success" target="_blank" href="whatsapp://send?text={{ route('member_panel.signup').'?user_code='.$profile->user_code }}" data-action="share/whatsapp/share">
                                     Share on Whatsapp <i class="fa fa-share"></i>
                                 </a>
