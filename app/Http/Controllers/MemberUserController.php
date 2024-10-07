@@ -326,6 +326,7 @@ class MemberUserController extends Controller
             session()->put('role_id', $member_user->role_id);
             session()->put('user_code', $member_user->user_code);
             session()->put('email_verified', $member_user->email_verified);
+            session()->put('expire_date', $member_user->expire_date);
             session()->put('status', $member_user->status);
             if ($member_user->is_client == 1) {
                 // session()->forget('is_worker');
@@ -335,6 +336,14 @@ class MemberUserController extends Controller
             if ($member_user->is_worker == 1) {
                 // session()->forget('is_client');
                 session()->put('is_worker', 1);
+            }
+
+            if ($member_user->email_verified >= strval(now())) {
+
+                $member_user->is_worker = 0;
+
+                session()->put('is_worker', 0);
+
             }
 
             return redirect(route('client_panel.dashboard'));
@@ -479,7 +488,7 @@ class MemberUserController extends Controller
 
         $package_charge = intval($package->price)*0.02;
 
-        $package_price = round(intval($package->price) + $package_charge);
+        $package_price = round(intval($package->price) + $package_charge + 1);
 
         // if ($buy_package_member_info->approver_id == null) {
 
@@ -500,11 +509,11 @@ class MemberUserController extends Controller
 
         }
 
-        if ($member_info->deposit_balance <= $package_price) {
+        if ($member_info->deposit_balance >= $package_price) {
 
             $member_info->deposit_balance = intval($member_info->deposit_balance) - intval($package_price);
 
-            $member_info->expire_date = now()->addDays($package->validity);
+            $member_info->expire_date = now()->addDays(intval($package->validity));
 
             $member_info->status = 1;
 
@@ -743,7 +752,7 @@ class MemberUserController extends Controller
 
         $member_info->update();
 
-        return redirect()->back()->with('success', 'Package Activated..!');
+        return redirect()->route('client_panel.dashboard')->with('success', 'Package Activated..!');
 
     }
 

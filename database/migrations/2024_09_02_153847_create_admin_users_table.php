@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('balance')->default(0)->nullable();
-            $table->string('withdraws')->nullable();
+            $table->string('withdraws')->nullable()->default(0);
             $table->string('user_code')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('admin_id')->on('admin_users');

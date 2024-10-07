@@ -39,16 +39,16 @@ withdraw
                 @enderror
             </div>
             <div class="form-floating mb-3">
-                <input type="number" name="amount" id="amount" class="form-control" required id="floatingInputAmount" placeholder="Minimum - 500">
+                <input type="number" name="member_amount" id="member_amount" class="form-control" required id="floatingInputAmount" placeholder="Minimum - 500">
                 <label for="floatingInput">Amount</label>
-                @error('amount')
+                @error('member_amount')
                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                 @enderror
             </div>
             <div class="form-floating mb-3">
-                <input type="number" name="provident_fund" id="provident_fund" class="form-control" disabled id="floatingInputAmount" placeholder="Minimum - 525">
+                <input type="number" name="amount" id="amount" class="form-control" readonly id="floatingInputAmount" placeholder="Minimum - 525">
                 <label for="floatingInput">Minimum Balance Needed (With Provident Fund)</label>
-                @error('provident_fund')
+                @error('amount')
                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                 @enderror
             </div>
@@ -161,13 +161,15 @@ withdraw
 <script>
 
     $(document).ready(function() {
-        $('#amount').on('keyup', function() {
-            var work_amount = $(this).val();
-            var task_price_rate = 5%;
+        $('#member_amount').on('keyup', function() {
+            var member_amount = $(this).val();
+            var provident_fund = 5;
 
-            var task_price = task_price_rate*work_amount;
+            var charge = (member_amount/100)*provident_fund;
 
-            $('#provident_fund').val(task_price);
+            var amount = charge + member_amount;
+
+            $('#amount').val(amount);
 
 
         });

@@ -168,6 +168,21 @@ class WithdrawController extends Controller
 
         $member->update();
 
+        if ($request->status != 1) {
+
+            $subject_member = 'Withdraw request.';
+
+            $body_member = '
+            Hello, <br><br>
+            Your withdraw request has been rejected. Your balance has been returned. <br> <br>
+            Thank you, <br>
+            Do Micro Work.
+            ';
+
+            Mail::to($member->email)->send(new SendMail($subject_member, $body_member));
+
+        }
+
 
         return redirect()->route('admin_panel.withdraw_approvals')->with('success', 'Withdraw Status Updated..!');
 
