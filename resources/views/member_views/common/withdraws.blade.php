@@ -7,6 +7,9 @@ withdraw
 
 @section('content')
 
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <div class="col-sm-12 col-xl-6 mx-auto my-4">
     <form action="{{ route('client_panel.withdraw_request_member') }}" method="post">
@@ -36,9 +39,16 @@ withdraw
                 @enderror
             </div>
             <div class="form-floating mb-3">
-                <input type="number" name="amount" class="form-control" required id="floatingInputAmount" placeholder="Minimum - 500">
+                <input type="number" name="amount" id="amount" class="form-control" required id="floatingInputAmount" placeholder="Minimum - 500">
                 <label for="floatingInput">Amount</label>
                 @error('amount')
+                    <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" name="provident_fund" id="provident_fund" class="form-control" disabled id="floatingInputAmount" placeholder="Minimum - 525">
+                <label for="floatingInput">Minimum Balance Needed (With Provident Fund)</label>
+                @error('provident_fund')
                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                 @enderror
             </div>
@@ -148,7 +158,22 @@ withdraw
     </div>
 </div>
 
+<script>
 
+    $(document).ready(function() {
+        $('#amount').on('keyup', function() {
+            var work_amount = $(this).val();
+            var task_price_rate = 5%;
+
+            var task_price = task_price_rate*work_amount;
+
+            $('#provident_fund').val(task_price);
+
+
+        });
+    });
+
+</script>
 
 @endsection
 

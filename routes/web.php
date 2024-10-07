@@ -225,11 +225,25 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
 
     // notice
 
+
     Route::get('/create_notice', [NoticeController::class, 'create_notice']
     )->name('admin_panel.create_notice');
 
     Route::post('/create_notice_info', [NoticeController::class, 'create_notice_info']
     )->name('admin_panel.create_notice_info');
+
+
+    // withdraw
+
+
+    Route::get('/withdraw_approvals', [WithdrawController::class, 'withdraw_approvals']
+    )->name('admin_panel.withdraw_approvals');
+
+    Route::get('/update_withdraw_approval/{withdraw_id?}', [WithdrawController::class, 'update_withdraw_approval']
+    )->name('admin_panel.update_withdraw_approval');
+
+    Route::post('/withdraw_approval_info', [WithdrawController::class, 'withdraw_approval_info']
+    )->name('admin_panel.withdraw_approval_info');
 
 
 

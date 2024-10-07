@@ -46,20 +46,11 @@ class MemberUserController extends Controller
 
     public function client_dashboard(){
 
-        // if (session()->get('status') != 1 && session()->has(key: 'member_id')) {
+        $member_dashboard = Member_user::find(session()->get('member_id'));
 
-        //     return redirect()->route('member_deactive');
+        $member_refers = Member_user::where('parent_user_code', session()->get('user_code'))->get()->count();
 
-        // }
-
-
-        // if (session()->get('is_worker') == 1) {
-
-        //     return redirect()->route('worker_panel.dashboard');
-
-        // }
-
-        return view('member_views.common.client_dashboard');
+        return view('member_views.common.client_dashboard', compact('member_dashboard', 'member_refers'));
     }
 
 
@@ -248,7 +239,7 @@ class MemberUserController extends Controller
 
     }
 
-    
+
 
     public function member_deactive(){
 
@@ -512,6 +503,8 @@ class MemberUserController extends Controller
         if ($member_info->deposit_balance <= $package_price) {
 
             $member_info->deposit_balance = intval($member_info->deposit_balance) - intval($package_price);
+
+            $member_info->expire_date = now()->addDays($package->validity);
 
             $member_info->status = 1;
 

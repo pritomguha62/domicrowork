@@ -23,6 +23,7 @@ class Withdraw extends Model
         'user_code',
         'approver_id',
         'approver_user_code',
+        'unique_id_status',
         'status',
     ];
 

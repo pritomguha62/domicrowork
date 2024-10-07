@@ -18,7 +18,7 @@ class WithdrawController extends Controller
         $request->validate([
             'payment_method'=>'required',
             'account_num'=>'required',
-            'amount'=>'required|numeric|min:100',
+            'amount'=>'required|numeric|min:500',
         ]);
 
         // $payment_method = Payment_method::where('method_id', $request->method_id)->first();
@@ -41,32 +41,25 @@ class WithdrawController extends Controller
             $request->amount = intval($request->amount);
             $member->balance = intval($member->balance);
 
-            if ($member->withdraws == null) {
-                if ($member->balance >= 300 && $request->amount >= 300) {
-                    $member->balance = $member->balance - 200;
-                    $amount = $request->amount - 200;
-                    $admin->balance = intval($admin->balance) + 200;
-                    $admin->update();
-                    $request->amount = $amount;
+            // if ($member->withdraws == null) {
+            //     if ($member->balance >= 300 && $request->amount >= 300) {
+            //         $member->balance = $member->balance - 200;
+            //         $amount = $request->amount - 200;
+            //         $admin->balance = intval($admin->balance) + 200;
+            //         $admin->update();
+            //         $request->amount = $amount;
 
-                }else {
-                    return redirect()->back()->with('error', 'First withdraw amount must be 300 or more..!');
-                }
-            }
+            //     }else {
+            //         return redirect()->back()->with('error', 'First withdraw amount must be 300 or more..!');
+            //     }
+            // }
 
 
             $withdraw_request_member->amount = $request->amount;
 
-            $member->withdraws = intval($member->withdraws);
-
             $new_balance = $member->balance - $request->amount;
 
-            $new_withdraws = $member->withdraws + $request->amount;
-
-
             $member->balance = $new_balance;
-
-            $member->withdraws = $new_withdraws;
 
             $withdraw_request_member->save();
 
@@ -112,13 +105,79 @@ class WithdrawController extends Controller
 
     }
 
-    public function withdraw_approvals(Request $request){
+    public function withdraw_approvals(){
 
         $withdraw_approvals = Withdraw::where('status', 0)->get();
 
-        return view('admin_view.common.withdraw_approvals', compact('withdraw_approvals'));
+        return view('admin_views.common.withdraw_approvals', compact('withdraw_approvals'));
 
     }
+
+    public function update_withdraw_approval($withdraw_id){
+
+        $update_withdraw_approval = Withdraw::find($withdraw_id);
+
+        return view('admin_views.common.update_withdraw_approval', compact('update_withdraw_approval'));
+
+    }
+
+    public function withdraw_approval_info(Request $request){
+
+        $request->validate([
+            'payment_method'=>'required',
+            'account_num'=>'required',
+            'amount'=>'required|numeric|min:500',
+            'status'=>'required',
+            'withdraw_id'=>'required',
+        ]);
+
+        $withdraw_approval_info = Withdraw::find($request->withdraw_id);
+
+        $member = Member_user::where('member_id', $withdraw_approval_info->member_id)->first();
+
+        if ($withdraw_approval_info->unique_id_status != null) {
+
+            return redirect()->route('admin_panel.withdraw_approvals')->with('error', 'Withdraw has been proccessed..!');
+
+        }
+
+        if ($request->status == 1) {
+
+            $member->withdraws = intval($member->withdraws);
+
+
+            $new_withdraws = $member->withdraws + $withdraw_approval_info->amount;
+
+            $member->withdraws = $new_withdraws;
+
+            $withdraw_approval_info->status = 1;
+
+        }else {
+
+            $member->balance = intval($member->balance) + intval($withdraw_approval_info->amount);
+
+            $withdraw_approval_info->status = 3;
+
+        }
+
+        $withdraw_approval_info->approver_id = session()->get('admin_id');
+
+        $withdraw_approval_info->approver_user_code = session()->get('user_code');
+
+        $withdraw_approval_info->update();
+
+        $member->update();
+
+
+        return redirect()->route('admin_panel.withdraw_approvals')->with('success', 'Withdraw Status Updated..!');
+
+    }
+
+
+
+
+
+
 
 
 }

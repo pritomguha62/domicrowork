@@ -40,13 +40,14 @@ class Member_user extends Model
         'status',
         'comment',
         'password',
+        'expire_date',
     ];
 
 
     static public function member(){
 
         return self::find(session()->get('member_id'));
-        
+
     }
 
 

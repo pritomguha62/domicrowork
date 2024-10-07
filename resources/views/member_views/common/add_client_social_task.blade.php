@@ -203,21 +203,6 @@ add social task
 
             $('#price').val(task_price);
 
-            if (work_amount) {
-                // $.ajax({
-                //     url: '/client_panel/get-subcategorie_info/' + subcategorie_id,
-                //     type: 'GET',
-                //     dataType: 'json',
-                //     success: function(data) {
-                //         // $('#sub_category').empty();
-                //         // $('#sub_category').append('<option value="">--Select Subcategory--</option>');
-                //         var task_price = data.price*work_amount;
-                //         $('#price').val(task_price);
-                //     }
-                // });
-            }
-
-
         });
     });
 

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('user_code')->nullable();
             $table->string('approver_id')->nullable();
             $table->string('approver_user_code')->nullable();
+            $table->string('unique_id_status')->nullable();
             $table->integer('status')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

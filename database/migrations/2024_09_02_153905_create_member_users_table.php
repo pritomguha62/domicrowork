@@ -45,6 +45,7 @@ return new class extends Migration
             $table->integer('status')->default(0);
             $table->text('comment')->nullable();
             $table->string('password');
+            $table->string('expire_date')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
