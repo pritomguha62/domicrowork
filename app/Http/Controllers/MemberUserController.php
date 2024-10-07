@@ -104,9 +104,9 @@ class MemberUserController extends Controller
             // "terms_condition"=> "required",
         ]);
 
-        $parent_user_admin = Admin_user::where('user_code', $request->parent_user_code)->where('status', 1)->first();
+        $parent_user_admin = Admin_user::where('user_code', $request->parent_user_code)->first();
 
-        $parent_user_member = Member_user::where('user_code', $request->parent_user_code)->where('status', 1)->first();
+        $parent_user_member = Member_user::where('user_code', $request->parent_user_code)->first();
 
         $member = new Member_user();
 
@@ -530,9 +530,13 @@ class MemberUserController extends Controller
 
                 $passbook->receiver_user_code = $first_level_refer_member->user_code;
 
-                $passbook->save();
+                if ($first_level_refer_member->is_worker == 1) {
 
-                $first_level_refer_member->update();
+                    $passbook->save();
+
+                    $first_level_refer_member->update();
+
+                }
 
 
 
@@ -556,9 +560,14 @@ class MemberUserController extends Controller
 
                     $passbook->receiver_user_code = $second_level_refer_member->user_code;
 
-                    $passbook->save();
+                    if ($second_level_refer_member->is_worker == 1) {
 
-                    $second_level_refer_member->update();
+                        $passbook->save();
+
+                        $second_level_refer_member->update();
+
+                    }
+
 
 
                     if (!empty($second_level_refer_member->parent->member_id)) {
@@ -581,9 +590,13 @@ class MemberUserController extends Controller
 
                         $passbook->receiver_user_code = $third_level_refer_member->user_code;
 
-                        $passbook->save();
+                        if ($third_level_refer_member->is_worker == 1) {
 
-                        $third_level_refer_member->update();
+                            $passbook->save();
+
+                            $third_level_refer_member->update();
+                        }
+
 
                         if (!empty($third_level_refer_member->parent->member_id)) {
 
@@ -605,9 +618,15 @@ class MemberUserController extends Controller
 
                             $passbook->receiver_user_code = $fourth_level_refer_member->user_code;
 
-                            $passbook->save();
 
-                            $fourth_level_refer_member->update();
+                            if ($fourth_level_refer_member->is_worker == 1) {
+
+                                $passbook->save();
+
+                                $fourth_level_refer_member->update();
+
+                            }
+
 
 
                             if (!empty($fourth_level_refer_member->parent->member_id)) {
@@ -630,9 +649,13 @@ class MemberUserController extends Controller
 
                                 $passbook->receiver_user_code = $fifth_level_refer_member->user_code;
 
-                                $passbook->save();
+                                if ($fifth_level_refer_member->is_worker == 1) {
 
-                                $fifth_level_refer_member->update();
+                                    $passbook->save();
+
+                                    $fifth_level_refer_member->update();
+                                }
+
 
 
 
