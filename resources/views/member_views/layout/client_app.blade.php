@@ -206,18 +206,18 @@
 
 
             <!-- Blank Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="row bg-light rounded align-items-center justify-content-center mx-0">
-                    <div class="col-md-12 text-center">
+            <div class="container-fluid pt-4 px-4 text-center">
+                {{-- <div class="row bg-light rounded align-items-center justify-content-center mx-0">
+                    <div class="col-md-12 text-center"> --}}
                         @yield('content')
-                    </div>
-                </div>
+                    {{-- </div>
+                </div> --}}
             </div>
             <!-- Blank End -->
 
 
             <!-- Footer Start -->
-            <div class="container-fluid pt-4 px-4" style="margin-top: 80vh;">
+            <div class="container-fluid pt-4 px-4" style="margin-top: 10vh;">
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">

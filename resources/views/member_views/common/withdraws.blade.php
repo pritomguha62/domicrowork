@@ -8,8 +8,8 @@ withdraw
 @section('content')
 
 
-<div class="col-sm-12 col-xl-6 mx-auto">
-    <form action="" method="post">
+<div class="col-sm-12 col-xl-6 mx-auto my-4">
+    <form action="{{ route('client_panel.withdraw_request_member') }}" method="post">
 
         @if (session()->has('error'))
             <p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
@@ -23,21 +23,31 @@ withdraw
         <div class="bg-light rounded h-100 p-4">
             <h6 class="mb-4">Select Payment Method</h6>
             <div class="form-floating mb-3">
-                <select name="method_id" class="form-select" id="floatingSelectPayment"
+                <select name="payment_method" class="form-select" id="floatingSelect"
                     aria-label="Floating label select example">
                     <option selected>Select</option>
-                    @foreach ($payment_methods as $payment_method)
-                    <option value="{{ $payment_method->method_id }}">{{ $payment_method->name }} - {{ $payment_method->account_num }}</option>
-                    @endforeach
-                    {{-- <option value="2">Two</option>
-                    <option value="3">Three</option> --}}
+                    <option value="Bkash">Bkash</option>
+                    <option value="Nagad">Nagad</option>
+                    <option value="Rocket">Rocket</option>
                 </select>
-                <label for="floatingSelectPayment">Select Payment Method</label>
+                <label for="floatingSelect">Select Payment Method</label>
+                @error('payment_method')
+                    <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                @enderror
             </div>
             <div class="form-floating mb-3">
-                <input type="number" class="form-control" required id="floatingInputAmount"
-                    placeholder="Minimum - 500">
+                <input type="number" name="amount" class="form-control" required id="floatingInputAmount" placeholder="Minimum - 500">
                 <label for="floatingInput">Amount</label>
+                @error('amount')
+                    <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" name="account_num" class="form-control" id="floatingInputAccountNum" placeholder="01*********">
+                <label for="floatingInputAccountNum">Account Number</label>
+                @error('account_num')
+                    <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                @enderror
             </div>
             <div class="form-floating">
                 <input type="submit" class="btn btn-primary">
@@ -46,7 +56,7 @@ withdraw
     </form>
 </div>
 
-
+{{--
 <div class="col-sm-12 col-xl-6 mx-auto">
     <form action="{{ route('member_panel.add_member_payment_method') }}" method="post">
 
@@ -66,8 +76,6 @@ withdraw
                     aria-label="Floating label select example">
                     <option selected>Select</option>
                     <option value="Bkash">Bkash</option>
-                    {{-- <option value="2">Two</option>
-                    <option value="3">Three</option> --}}
                 </select>
                 <label for="floatingSelect">Select Payment Method</label>
             </div>
@@ -82,23 +90,12 @@ withdraw
             @error('account_num')
                 <p class="mb-0 alert alert-danger">{{ $message }}</p>
             @enderror
-            {{-- <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="floatingPassword"
-                    placeholder="Password">
-                <label for="floatingPassword">Password</label>
-            </div> --}}
             <div class="form-floating">
                 <input type="submit" class="btn btn-primary">
-                {{-- <label for="floatingInput">Bkash Account Number</label> --}}
             </div>
-            {{-- <div class="form-floating">
-                <textarea class="form-control" placeholder="Leave a comment here"
-                    id="floatingTextarea" style="height: 150px;"></textarea>
-                <label for="floatingTextarea">Comments</label>
-            </div> --}}
         </div>
     </form>
-</div>
+</div> --}}
 
 
 <div class="col-12 col-md-12 col-lg-12">
@@ -131,9 +128,9 @@ withdraw
                         <td>{{ $withdraw->user_code }}</td>
                         <td>{{ $withdraw->amount }}</td>
                         <td>
-                            @if ($refer->status == 1)
+                            @if ($withdraw->status == 1)
                             Approved
-                            @elseif ($refer->status == 0)
+                            @elseif ($withdraw->status == 0)
                             Pending
                             @else
                             Rejected

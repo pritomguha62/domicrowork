@@ -204,6 +204,8 @@ class MemberUserController extends Controller
 
         $update_profile->email = $request->email;
 
+        $update_profile->phone = $request->phone;
+
         // $update_profile->parent_user_code = $request->parent_user_code;
 
         // if (!empty($parent_user_admin)) {
@@ -245,6 +247,8 @@ class MemberUserController extends Controller
         return redirect()->back()->with('success', 'Profile Updated..!');
 
     }
+
+    
 
     public function member_deactive(){
 

@@ -11,6 +11,7 @@ use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -403,12 +404,16 @@ Route::prefix('/client_panel')->middleware('client')->group(function(){
     )->name('client_panel.refers');
 
 
+
     // withdraws
 
 
 
     Route::get('/withdraws', [MemberUserController::class, 'withdraws']
     )->name('client_panel.withdraws');
+
+    Route::post('/withdraw_request_member', [WithdrawController::class, 'withdraw_request_member']
+    )->name('client_panel.withdraw_request_member');
 
 
 

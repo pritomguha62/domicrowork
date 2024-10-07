@@ -16,24 +16,25 @@ class WithdrawController extends Controller
     public function withdraw_request_member(Request $request){
 
         $request->validate([
-            'method_id'=>'required',
+            'payment_method'=>'required',
+            'account_num'=>'required',
             'amount'=>'required|numeric|min:100',
         ]);
 
-        $payment_method = Payment_method::where('method_id', $request->method_id)->first();
+        // $payment_method = Payment_method::where('method_id', $request->method_id)->first();
 
         $member = Member_user::find(session()->get('member_id'));
 
-        $admin = Admin_user::where('status', 1)->where('email', 'nayanchowdhury543@gmail.com')->where('role_id', 1)->first();
+        $admin = Admin_user::find(2);
 
         $withdraw_request_member = new Withdraw();
 
         if ($request->amount <= $member->balance) {
 
             $withdraw_request_member->name = session()->get('name');
-            $withdraw_request_member->member_id = $payment_method->member_id;
-            $withdraw_request_member->payment_method = $payment_method->name;
-            $withdraw_request_member->account_num = $payment_method->account_num;
+            $withdraw_request_member->member_id = $member->member_id;
+            $withdraw_request_member->payment_method = $request->payment_method;
+            $withdraw_request_member->account_num = $request->account_num;
             $withdraw_request_member->user_code = session()->get('user_code');
 
 
@@ -77,7 +78,7 @@ class WithdrawController extends Controller
             Hello, <br><br>
             Your withdraw request has been sent. It may take some time for payment. <br> <br>
             Thank you, <br>
-            Effort E-learning MP.
+            Do Micro Work.
             ';
 
             Mail::to($member->email)->send(new SendMail($subject_member, $body_member));
@@ -88,10 +89,10 @@ class WithdrawController extends Controller
             Hello, <br><br>
             A new withdraw request was created. Please check withdraw information for approval. <br> <br>
             Thank you, <br>
-            Effort E-learning MP.
+            Do Micro Work.
             ';
 
-            Mail::to('mpeffortelearning@gmail.com')->send(new SendMail($subject_admin, $body_admin));
+            Mail::to('domicrowork@gmail.com')->send(new SendMail($subject_admin, $body_admin));
 
             return redirect()->back()->with('success', 'Withdraw Request Submited..!');
 
