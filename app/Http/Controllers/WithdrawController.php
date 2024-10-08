@@ -29,17 +29,19 @@ class WithdrawController extends Controller
 
         $withdraw_request_member = new Withdraw();
 
-        if ($request->amount <= $member->balance) {
+        $request->amount = intval($request->amount);
+
+        $member->balance = intval($member->balance);
+
+        $charge = ($request->amount/100) * intval(7);
+
+        if ($request->amount + $charge + 5 <= $member->balance) {
 
             $withdraw_request_member->name = session()->get('name');
             $withdraw_request_member->member_id = $member->member_id;
             $withdraw_request_member->payment_method = $request->payment_method;
             $withdraw_request_member->account_num = $request->account_num;
             $withdraw_request_member->user_code = session()->get('user_code');
-
-
-            $request->amount = intval($request->amount);
-            $member->balance = intval($member->balance);
 
             // if ($member->withdraws == null) {
             //     if ($member->balance >= 300 && $request->amount >= 300) {
@@ -57,7 +59,7 @@ class WithdrawController extends Controller
 
             $withdraw_request_member->amount = $request->amount;
 
-            $new_balance = $member->balance - $request->amount;
+            $new_balance = $member->balance - ($request->amount + $charge);
 
             $member->balance = $new_balance;
 
@@ -74,7 +76,7 @@ class WithdrawController extends Controller
             Do Micro Work.
             ';
 
-            Mail::to($member->email)->send(new SendMail($subject_member, $body_member));
+            // Mail::to($member->email)->send(new SendMail($subject_member, $body_member));
 
             $subject_admin = 'Withdraw request.';
 
@@ -85,7 +87,7 @@ class WithdrawController extends Controller
             Do Micro Work.
             ';
 
-            Mail::to('domicrowork@gmail.com')->send(new SendMail($subject_admin, $body_admin));
+            // Mail::to('domicrowork@gmail.com')->send(new SendMail($subject_admin, $body_admin));
 
             return redirect()->back()->with('success', 'Withdraw Request Submited..!');
 

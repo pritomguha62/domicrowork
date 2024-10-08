@@ -41,6 +41,18 @@ class MemberUserController extends Controller
 
         // }
 
+        $member_user = Member_user::find(session()->get('member_id'));
+
+        if ($member_user->expire_date < strval(now())) {
+
+            $member_user->is_worker = 0;
+
+            session()->put('is_worker', 0);
+
+            $member_user->update();
+
+        }
+
         return view('member_views.common.worker_dashboard');
     }
 
@@ -338,11 +350,13 @@ class MemberUserController extends Controller
                 session()->put('is_worker', 1);
             }
 
-            if ($member_user->email_verified >= strval(now())) {
+            if ($member_user->expire_date < strval(now())) {
 
                 $member_user->is_worker = 0;
 
                 session()->put('is_worker', 0);
+
+                $member_user->update();
 
             }
 
@@ -516,6 +530,8 @@ class MemberUserController extends Controller
             $member_info->expire_date = now()->addDays(intval($package->validity));
 
             $member_info->status = 1;
+
+            $member_info->is_worker = 1;
 
             $passbook = new Passbook();
 
@@ -852,6 +868,17 @@ class MemberUserController extends Controller
         $payment_methods = Payment_method::where('user_code', session()->get('user_code'))->where('member_id', session()->get('member_id'))->get();
 
         return view('member_views.common.withdraws', compact('withdraws', 'payment_methods'));
+
+    }
+
+
+    public function provident_fund(){
+
+        // $withdraws = Withdraw::where('user_code', session()->get('user_code'))->where('member_id', session()->get('member_id'))->get();
+
+        // $payment_methods = Payment_method::where('user_code', session()->get('user_code'))->where('member_id', session()->get('member_id'))->get();
+
+        return view('member_views.common.provident_fund');
 
     }
 

@@ -430,6 +430,14 @@ Route::prefix('/client_panel')->middleware('client')->group(function(){
     )->name('client_panel.withdraw_request_member');
 
 
+    // withdraws
+
+
+
+    Route::get('/provident_fund', [MemberUserController::class, 'provident_fund']
+    )->name('client_panel.provident_fund');
+
+
 
 });
 

@@ -158,7 +158,7 @@ class TaskController extends Controller
 
     public function worker_social_tasks(){
 
-        $worker_social_tasks = Task::with('sub_category')->where('status', 1)->get();
+        $worker_social_tasks = Task::with('category', 'sub_category')->where('status', 1)->get();
 
         return view('member_views.common.worker_social_tasks', compact('worker_social_tasks'));
 

@@ -122,6 +122,37 @@ social task
     {{-- </div> --}}
 {{-- </div> --}}
 
+{{-- @foreach ($worker_social_tasks as $worker_social_task) --}}
+
+<div class="col-12 col-md-12 col-lg-12 mt-4">
+    <div class="bg-light rounded h-100">
+        {{-- <h6 class="mb-4">Refer Commission</h6> --}}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        {{-- <th scope="col">#</th> --}}
+                        <th style="border-style: none!important; text-align: left;" scope="col" colspan="5">Title</th>
+                        <th style="border-style: none!important; text-align: left;" scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th style="border-style: none!important;" scope="row">1</th>
+                        <td style="border-style: none!important;">First Level Commission</td>
+                        <td style="border-style: none!important;">10%</td>
+                        <td style="border-style: none!important;">10%</td>
+                        <td style="border-style: none!important;">10%</td>
+                        <td style="border-style: none!important;">10%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{{-- @endforeach --}}
+
 
 @endsection
 

@@ -39,16 +39,16 @@ withdraw
                 @enderror
             </div>
             <div class="form-floating mb-3">
-                <input type="number" name="member_amount" id="member_amount" class="form-control" required id="floatingInputAmount" placeholder="Minimum - 500">
+                <input type="number" name="amount" id="amount" class="form-control" required id="floatingInputAmount" placeholder="Minimum - 500">
                 <label for="floatingInput">Amount</label>
-                @error('member_amount')
+                @error('amount')
                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                 @enderror
             </div>
             <div class="form-floating mb-3">
-                <input type="number" name="amount" id="amount" class="form-control" readonly placeholder="Minimum - 525">
-                <label for="floatingInput">Minimum Balance Needed (With Provident Fund)</label>
-                @error('amount')
+                <input type="number" name="member_amount" id="member_amount" class="form-control" readonly placeholder="Minimum - 525">
+                <label for="floatingInput">Minimum Balance Required (Admin Fees + Provident Fund)</label>
+                @error('member_amount')
                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                 @enderror
             </div>
@@ -161,15 +161,15 @@ withdraw
 <script>
 
     $(document).ready(function() {
-        $('#member_amount').on('keyup', function() {
+        $('#amount').on('keyup', function() {
             var member_amount = $(this).val();
             // var provident_fund = 5;
 
-            var charge = (parseInt(member_amount)/100)*5;
+            var charge = (parseInt(member_amount)/100)*7;
 
             var amount = parseInt(charge) + parseInt(member_amount) + parseInt(5);
 
-            $('#amount').val(amount);
+            $('#member_amount').val(amount);
 
 
         });

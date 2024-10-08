@@ -92,16 +92,60 @@ client dashboard
                         <td>10%</td>
                     </tr>
                     <tr>
-                        <th scope="row">1</th>
+                        <th scope="row">2</th>
                         <td>Second Level Commission</td>
                         <td>4%</td>
                     </tr>
                     <tr>
-                        <th scope="row">1</th>
+                        <th scope="row">3</th>
                         <td>Third Level Commission</td>
                         <td>2%</td>
                     </tr>
                     <tr>
+                        <th scope="row">4</th>
+                        <td>Fourth Level Commission</td>
+                        <td>1%</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>Fifth Level Commission</td>
+                        <td>0.5%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="col-12 col-md-12 col-lg-12 mt-4">
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">Work Commission</h6>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Level</th>
+                        <th scope="col">Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>First Level Commission</td>
+                        <td>4%</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Second Level Commission</td>
+                        <td>2%</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Third Level Commission</td>
+                        <td>1%</td>
+                    </tr>
+                    {{-- <tr>
                         <th scope="row">1</th>
                         <td>Fourth Level Commission</td>
                         <td>1%</td>
@@ -110,7 +154,7 @@ client dashboard
                         <th scope="row">1</th>
                         <td>Fifth Level Commission</td>
                         <td>0.5%</td>
-                    </tr>
+                    </tr> --}}
                 </tbody>
             </table>
         </div>
