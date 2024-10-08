@@ -26,7 +26,7 @@ withdraw
         <div class="bg-light rounded h-100 p-4">
             <h6 class="mb-4">Select Payment Method</h6>
             <div class="form-floating mb-3">
-                <select name="payment_method" class="form-select" id="floatingSelect"
+                <select name="payment_method" required class="form-select" id="floatingSelect"
                     aria-label="Floating label select example">
                     <option selected>Select</option>
                     <option value="Bkash">Bkash</option>
@@ -53,7 +53,7 @@ withdraw
                 @enderror
             </div>
             <div class="form-floating mb-3">
-                <input type="number" name="account_num" class="form-control" id="floatingInputAccountNum" placeholder="01*********">
+                <input type="number" name="account_num" required class="form-control" id="floatingInputAccountNum" placeholder="01*********">
                 <label for="floatingInputAccountNum">Account Number</label>
                 @error('account_num')
                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
@@ -65,47 +65,6 @@ withdraw
         </div>
     </form>
 </div>
-
-{{--
-<div class="col-sm-12 col-xl-6 mx-auto">
-    <form action="{{ route('member_panel.add_member_payment_method') }}" method="post">
-
-        @if (session()->has('error'))
-            <p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
-        @endif
-        @if (session()->has('success'))
-            <p class="mb-0 alert alert-success">{{ session()->get('success') }}</p>
-        @endif
-
-        @csrf
-
-        <div class="bg-light rounded h-100 p-4">
-            <h6 class="mb-4">Add Payment Method</h6>
-            <div class="form-floating mb-3">
-                <select name="name" class="form-select" id="floatingSelect"
-                    aria-label="Floating label select example">
-                    <option selected>Select</option>
-                    <option value="Bkash">Bkash</option>
-                </select>
-                <label for="floatingSelect">Select Payment Method</label>
-            </div>
-            @error('name')
-                <p class="mb-0 alert alert-danger">{{ $message }}</p>
-            @enderror
-            <div class="form-floating mb-3">
-                <input type="number" name="account_num" class="form-control" id="floatingInputAccountNum"
-                    placeholder="01*********">
-                <label for="floatingInputAccountNum">Bkash Account Number</label>
-            </div>
-            @error('account_num')
-                <p class="mb-0 alert alert-danger">{{ $message }}</p>
-            @enderror
-            <div class="form-floating">
-                <input type="submit" class="btn btn-primary">
-            </div>
-        </div>
-    </form>
-</div> --}}
 
 
 <div class="col-12 col-md-12 col-lg-12">

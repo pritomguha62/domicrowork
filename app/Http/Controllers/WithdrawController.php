@@ -76,7 +76,7 @@ class WithdrawController extends Controller
             Do Micro Work.
             ';
 
-            // Mail::to($member->email)->send(new SendMail($subject_member, $body_member));
+            Mail::to($member->email)->send(new SendMail($subject_member, $body_member));
 
             $subject_admin = 'Withdraw request.';
 
@@ -87,7 +87,7 @@ class WithdrawController extends Controller
             Do Micro Work.
             ';
 
-            // Mail::to('domicrowork@gmail.com')->send(new SendMail($subject_admin, $body_admin));
+            Mail::to('domicrowork@gmail.com')->send(new SendMail($subject_admin, $body_admin));
 
             return redirect()->back()->with('success', 'Withdraw Request Submited..!');
 

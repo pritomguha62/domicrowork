@@ -448,11 +448,11 @@ class MemberUserController extends Controller
 
             $passbook->receiver_admin_id = $admin->admin_id;
 
-            $passbook->sender_member_id = $update_member->member_id;
+            // $passbook->sender_member_id = $update_member->member_id;
 
             $passbook->amount = $update_deposit_info->deposit_balance;
 
-            $passbook->sender_user_code = $update_member->user_code;
+            // $passbook->sender_user_code = $update_member->user_code;
 
             $passbook->receiver_user_code = $admin->user_code;
 

@@ -2,7 +2,7 @@
 
 
 @section('title')
-history
+provident fund
 @endsection
 
 @section('content')
