@@ -46,7 +46,7 @@ withdraw
                 @enderror
             </div>
             <div class="form-floating mb-3">
-                <input type="number" name="amount" id="amount" class="form-control" readonly id="floatingInputAmount" placeholder="Minimum - 525">
+                <input type="number" name="amount" id="amount" class="form-control" readonly placeholder="Minimum - 525">
                 <label for="floatingInput">Minimum Balance Needed (With Provident Fund)</label>
                 @error('amount')
                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
@@ -163,11 +163,11 @@ withdraw
     $(document).ready(function() {
         $('#member_amount').on('keyup', function() {
             var member_amount = $(this).val();
-            var provident_fund = 5;
+            // var provident_fund = 5;
 
-            var charge = (member_amount/100)*provident_fund;
+            var charge = (parseInt(member_amount)/100)*5;
 
-            var amount = charge + member_amount;
+            var amount = parseInt(charge) + parseInt(member_amount) + parseInt(5);
 
             $('#amount').val(amount);
 
