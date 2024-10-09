@@ -559,6 +559,8 @@ class MemberUserController extends Controller
 
             $member_info->status = 1;
 
+            $member_info->is_worker = 1;
+
             $passbook = new Passbook();
 
             $passbook->sender_name = $member_info->name;
