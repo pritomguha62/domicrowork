@@ -53,6 +53,14 @@ apply social task
                     </div>
                 </div>
 
+                {{-- <div class="d-flex align-items-center border-bottom py-2">
+                    <div class="w-100 ms-3">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <span>Link : {{ $apply_social_task->work_link }}</span>
+                        </div>
+                    </div>
+                </div> --}}
+
                 <div class="d-flex align-items-center border-bottom py-2">
                     <div class="w-100 ms-3">
                         <div class="d-flex w-100 align-items-center justify-content-between">
@@ -90,7 +98,7 @@ apply social task
                 </div>
             </div>
         </div> --}}
-        <div class="col-sm-12 col-xl-6">
+        <div class="col-sm-12 col-xl-10">
             <div class="bg-light rounded h-100 p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h6 class="mb-0">Description</h6>

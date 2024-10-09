@@ -124,7 +124,7 @@ social task
 
 @foreach ($worker_social_tasks as $worker_social_task)
 
-<a href="{{ route('worker_panel.apply_social_tasks', ['task_id' => $worker_social_task->task_id]) }}">
+<a href="{{ route('worker_panel.apply_social_task', ['task_id' => $worker_social_task->task_id]) }}">
     <div class="col-12 col-md-12 col-lg-12 mt-4">
         <div class="bg-light rounded h-100">
             {{-- <h6 class="mb-4">Refer Commission</h6> --}}

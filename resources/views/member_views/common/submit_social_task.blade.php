@@ -31,40 +31,16 @@ add social task
                 <div class="row g-4">
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" name="title" class="form-control border-0" id="title" placeholder="Title" >
+                            <input type="text" name="title" class="form-control border-0" id="title" placeholder="Title" value="{{ $submit_social_task->title }}" >
                             <label for="title">Title</label>
                         </div>
                         @error('title')
                             <p class="mb-0 alert alert-danger">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="col-12">
-                        <div class="form-floating">
-                            <select name="category_id" id="category" class="form-select mb-3" id="">
-                                <option value="">Select</option>
-                                @foreach($categories as $category)
-                                <option value="{{ $category->category_id }}">{{ $category->title }}</option>
-                                @endforeach
-                            </select>
-                            <label for="category">--Select Category--</label>
-                        </div>
-                        @error('category_id')
-                            <p class="mb-0 alert alert-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="col-12">
-                        <div class="form-floating">
-                            <select name="sub_category_id" id="sub_category" class="form-select mb-3" id="">
-                                <option value="">Select</option>
-                            </select>
-                            <label for="sub_category">--Select Subcategory--</label>
-                        </div>
-                        @error('sub_category_id')
-                            <p class="mb-0 alert alert-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
                     <div class="form-floating">
-                        <textarea name="description" class="form-control" placeholder="Description" id="floatingTextarea" style="height: 150px;"></textarea>
+                        {{-- <textarea name="description" class="form-control" placeholder="Description" id="floatingTextarea" style="height: 150px;"></textarea> --}}
+                        <p>{{ $submit_social_task->description }}</p>
                         <label for="floatingTextarea">Description</label>
                         @error('description')
                             <p class="mb-0 alert alert-danger">{{ $message }}</p>
@@ -72,60 +48,19 @@ add social task
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" name="work_link" class="form-control border-0" id="work_link" placeholder="Content Link" >
+                            {{-- <input type="text" name="work_link" class="form-control border-0" id="work_link" placeholder="Content Link" > --}}
+                            <a href="{{ $submit_social_task->work_link }}" target="_blank" rel="noopener noreferrer"></a>
                             <label for="work_link">Content Link</label>
                         </div>
                         @error('work_link')
                             <p class="mb-0 alert alert-danger">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <label for="ss_thumbnail" class="form-label">Screen Shot Of Thumbnail</label>
-                        <input name="ss_thumbnail" class="form-control" type="file" id="ss_thumbnail">
-                        @error('ss_thumbnail')
-                            <p class="mb-0 alert alert-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
                     <div class="form-floating">
-                        <textarea name="required_proof" class="form-control" placeholder="Required Proof" id="floatingTextarea" style="height: 150px;"></textarea>
+                        {{-- <textarea name="required_proof" class="form-control" placeholder="Required Proof" id="floatingTextarea" style="height: 150px;"></textarea> --}}
+                        <p>{{ $submit_social_task->required_proof }}</p>
                         <label for="floatingTextarea">Required Proof</label>
                         @error('required_proof')
-                            <p class="mb-0 alert alert-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    {{-- <div class="col-12">
-                        <div class="form-floating">
-                            <textarea name="required_proof" id="required_proof" cols="30" rows="10"></textarea>
-                            <label for="required_proof">Required Proof</label>
-                        </div>
-                        @error('required_proof')
-                            <p class="mb-0 alert alert-danger">{{ $message }}</p>
-                        @enderror
-                    </div> --}}
-                    <div class="col-12">
-                        <div class="form-floating">
-                            <input type="text" name="task_price_rate" class="form-control border-0" id="task_price_rate" placeholder="Price Per Work" >
-                            <label for="task_price_rate">Price Per Work</label>
-                        </div>
-                        @error('task_price_rate')
-                            <p class="mb-0 alert alert-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="col-12">
-                        <div class="form-floating">
-                            <input type="number" name="work_amount" id="work_amount" class="form-control border-0" id="work_amount" placeholder="Number Of Works" >
-                            <label for="work_amount">Number Of Works</label>
-                        </div>
-                        @error('work_amount')
-                            <p class="mb-0 alert alert-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="col-12">
-                        <div class="form-floating">
-                            <input type="text" disabled name="price" class="form-control border-0" id="price" placeholder="Price" >
-                            <label for="price">Price</label>
-                        </div>
-                        @error('price')
                             <p class="mb-0 alert alert-danger">{{ $message }}</p>
                         @enderror
                     </div>

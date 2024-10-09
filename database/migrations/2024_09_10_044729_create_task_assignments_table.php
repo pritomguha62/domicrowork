@@ -17,7 +17,9 @@ return new class extends Migration
             $table->unsignedBigInteger('worker_id');
             $table->foreign('task_id')->references('task_id')->on('tasks')->onDelete('cascade');
             $table->foreign('worker_id')->references('member_id')->on('member_users')->onDelete('cascade');
-            $table->string('worker_file')->nullable();
+            $table->string('first_ss')->nullable();
+            $table->string('second_ss')->nullable();
+            $table->text('comment')->nullable();
             $table->string('code')->nullable();
             $table->integer('status')->default(0);
             $table->timestamp('created_at')->useCurrent();

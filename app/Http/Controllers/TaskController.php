@@ -238,11 +238,20 @@ class TaskController extends Controller
     }
 
 
-    public function apply_social_tasks($task_id){
+    public function apply_social_task($task_id){
 
         $apply_social_task = Task::with('category', 'sub_category')->find($task_id);
 
         return view('member_views.common.apply_social_task', compact('apply_social_task'));
+
+    }
+
+
+    public function submit_social_task($task_id){
+
+        $submit_social_task = Task::with('category', 'sub_category')->find($task_id);
+
+        return view('member_views.common.submit_social_task', compact('submit_social_task'));
 
     }
 
