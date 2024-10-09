@@ -11,7 +11,7 @@ class Task_assignments extends Model
 
     protected $table = 'task_assignments';
 
-    protected $primaryKey = 'task_id';
+    protected $primaryKey = 'task_worker_id';
 
     protected $fillable = [
         'task_id',
