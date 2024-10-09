@@ -341,6 +341,9 @@ Route::prefix('/worker_panel')->middleware('worker')->group(function(){
     Route::get('/worker_social_tasks', [TaskController::class, 'worker_social_tasks']
     )->name('worker_panel.worker_social_tasks')->middleware('worker');
 
+    Route::get('/apply_social_tasks/{task_id?}', [TaskController::class, 'apply_social_tasks']
+    )->name('worker_panel.apply_social_tasks')->middleware('worker');
+
 
 
 });

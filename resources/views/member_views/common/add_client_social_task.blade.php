@@ -31,7 +31,7 @@ add social task
                 <div class="row g-4">
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" name="title" class="form-control border-0" id="title" placeholder="User Code" >
+                            <input type="text" name="title" class="form-control border-0" id="title" placeholder="Title" >
                             <label for="title">Title</label>
                         </div>
                         @error('title')

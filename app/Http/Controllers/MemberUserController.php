@@ -500,7 +500,7 @@ class MemberUserController extends Controller
 
         $package = Package::find($request->package_id);
 
-        $package_charge = intval($package->price)*0.02;
+        $package_charge = floatval($package->price)*0.02;
 
         $package_price = round(intval($package->price) + $package_charge + 1);
 
@@ -584,11 +584,11 @@ class MemberUserController extends Controller
 
             // $member_info->package_id = $request->package_id;
 
-            $first_level_commission = round(round($package->price/100)*10);
-            $second_level_commission = round(round($package->price/100)*4);
-            $third_level_commission = round(round($package->price/100)*2);
-            $fourth_level_commission = round(round($package->price/100)*1);
-            $fifth_level_commission = round(round($package->price/100)*0.5);
+            $first_level_commission = round(floatval($package->price/100)*10);
+            $second_level_commission = round(floatval($package->price/100)*4);
+            $third_level_commission = round(floatval($package->price/100)*2);
+            $fourth_level_commission = round(floatval($package->price/100)*1);
+            $fifth_level_commission = round(floatval($package->price/100)*0.5);
 
             if (!empty($member_info->parent->member_id)) {
 

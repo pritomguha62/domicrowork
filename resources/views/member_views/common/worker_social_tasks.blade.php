@@ -122,36 +122,30 @@ social task
     {{-- </div> --}}
 {{-- </div> --}}
 
-{{-- @foreach ($worker_social_tasks as $worker_social_task) --}}
+@foreach ($worker_social_tasks as $worker_social_task)
 
-<div class="col-12 col-md-12 col-lg-12 mt-4">
-    <div class="bg-light rounded h-100">
-        {{-- <h6 class="mb-4">Refer Commission</h6> --}}
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        {{-- <th scope="col">#</th> --}}
-                        <th style="border-style: none!important; text-align: left;" scope="col" colspan="5">Title</th>
-                        <th style="border-style: none!important; text-align: left;" scope="col">Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th style="border-style: none!important;" scope="row">1</th>
-                        <td style="border-style: none!important;">First Level Commission</td>
-                        <td style="border-style: none!important;">10%</td>
-                        <td style="border-style: none!important;">10%</td>
-                        <td style="border-style: none!important;">10%</td>
-                        <td style="border-style: none!important;">10%</td>
-                    </tr>
-                </tbody>
-            </table>
+<a href="{{ route('worker_panel.apply_social_tasks', ['task_id' => $worker_social_task->task_id]) }}">
+    <div class="col-12 col-md-12 col-lg-12 mt-4">
+        <div class="bg-light rounded h-100">
+            {{-- <h6 class="mb-4">Refer Commission</h6> --}}
+            <div class="table-responsive">
+                <table class="table">
+                        <tr>
+                            <td style="border-style: none!important;" rowspan="2" colspan="2" scope="col"><img style="width: 120px;" src="{{ asset('storage/uploads/image/'.$worker_social_task->ss_thumbnail) }}" alt=""></td>
+                            <td colspan="2" style=" text-align: left; border-style: none!important;">{{ $worker_social_task->title }}</td>
+                            <td style=" text-align: left; border-style: none!important;">{{ $worker_social_task->task_price_rate }}</td>
+                        </tr>
+                        <tr>
+                            <td style="border-style: none!important;">{{ $worker_social_task->category->title }}</td>
+                            <td style="border-style: none!important;">{{ $worker_social_task->sub_category->title }}</td>
+                            <td style="border-style: none!important;">{{ $worker_social_task->work_amount }}</td>
+                        </tr>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-
-{{-- @endforeach --}}
+</a>
+@endforeach
 
 
 @endsection

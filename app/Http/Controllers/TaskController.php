@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Member_user;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -177,38 +178,74 @@ class TaskController extends Controller
             'work_amount'=>'required|numeric|min:5',
         ]);
 
-        $social_task = new Task();
-        $social_task->title = $request->title;
-        $social_task->category_id = $request->category_id;
-        $social_task->sub_category_id = $request->sub_category_id;
-        $social_task->description = $request->description;
-        $social_task->work_link = $request->work_link;
+        $member = Member_user::find(session()->get('member_id'));
 
-        if (!empty($request->ss_thumbnail)) {
+        $required_price = floatval($request->task_price_rate) * intval($request->work_amount);
 
-            $request->validate([
-                "ss_thumbnail"=> "required|max:7240",
-            ]);
+        if ($required_price < $member->deposit_balance or $required_price < $member->balance) {
 
-            $name = $request->title;
-            $image_name = $name.'_ss_thumbnail_'.date("Y_m_d_h_i_sa").'.'.$request->file('ss_thumbnail')->getClientOriginalExtension();
-            $request->file('ss_thumbnail')->move(public_path('storage/uploads/image/'), $image_name);
+            $social_task = new Task();
+            $social_task->title = $request->title;
+            $social_task->category_id = $request->category_id;
+            $social_task->sub_category_id = $request->sub_category_id;
+            $social_task->description = $request->description;
+            $social_task->work_link = $request->work_link;
 
-            $social_task->ss_thumbnail = $image_name;
+            if (!empty($request->ss_thumbnail)) {
 
+                $request->validate([
+                    "ss_thumbnail"=> "required|max:7240",
+                ]);
+
+                $name = $request->title;
+                $image_name = $name.'_ss_thumbnail_'.date("Y_m_d_h_i_sa").'.'.$request->file('ss_thumbnail')->getClientOriginalExtension();
+                $request->file('ss_thumbnail')->move(public_path('storage/uploads/image/'), $image_name);
+
+                $social_task->ss_thumbnail = $image_name;
+
+
+            }
+
+            $social_task->required_proof = $request->required_proof;
+            $social_task->task_price_rate = $request->task_price_rate;
+            $social_task->work_amount = $request->work_amount;
+            $social_task->price = $required_price;
+            $social_task->client_id = session()->get('member_id');
+            $social_task->save();
+
+            if ($member->deposit_balance > $required_price) {
+
+                $member->deposit_balance = intval($member->deposit_balance) - floatval($required_price);
+
+            }else{
+
+                $member->balance = intval($member->balance) - floatval($required_price);
+
+            }
+
+            $member->update();
+
+            return redirect()->back()->with('success', 'Task created..!');
+
+
+        }else {
+
+            return view('member_views.common.deposit', compact('required_price'));
 
         }
 
-        $social_task->required_proof = $request->required_proof;
-        $social_task->task_price_rate = $request->task_price_rate;
-        $social_task->work_amount = $request->work_amount;
-        $social_task->price = $request->price;
-        $social_task->client_id = session()->get('member_id');
-        $social_task->save();
-
-        return redirect()->back()->with('success', 'Task created..!');
 
     }
+
+
+    public function apply_social_tasks($task_id){
+
+        $apply_social_task = Task::with('category', 'sub_category')->find($task_id);
+
+        return view('member_views.common.apply_social_task', compact('apply_social_task'));
+
+    }
+
 
 
 
