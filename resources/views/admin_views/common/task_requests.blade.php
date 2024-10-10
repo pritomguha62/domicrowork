@@ -57,14 +57,17 @@ Deposit Requests
                                         @csrf
 
                                         <tr>
-                                            <td>{{ $task_request->member->name  }}</td>
-                                            <td>{{ $task_request->paid_from }}</td>
-                                            <td>{{ $task_request->trxid }}</td>
-                                            <td>{{ $task_request->task_balance }}</td>
-                                            <td>{{ $task_request->user_code }}</td>
+                                            <td>{{ $task_request->title  }}</td>
+                                            <td>{{ $task_request->category->title }}</td>
+                                            <td>{{ $task_request->sub_category->title }}</td>
+                                            <td>{{ $task_request->description }}</td>
+                                            <td><img width="200px" src="{{ asset('storage/uploads/image/'.$task_request->ss_thumbnail) }}" alt=""></td>
+                                            <td>{{ $task_request->task_price_rate }}</td>
+                                            <td>{{ $task_request->work_amount }}</td>
+                                            <td>{{ $task_request->price }}</td>
                                             <td>{{ $task_request->created_at }}</td>
                                             <td>
-                                                <a class="btn btn-success text-white" href="{{ route('admin_panel.update_task', ['task_id'=>$task_request->task_id]) }}">Update</a>
+                                                <a class="btn btn-success text-white" href="{{ route('admin_panel.update_deposit', ['task_id'=>$task_request->task_id]) }}">Update</a>
                                             </td>
                                         </tr>
 
