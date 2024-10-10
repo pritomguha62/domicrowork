@@ -259,6 +259,7 @@
                                     <li><a href="{{ route('admin_panel.add_social_task') }}">Add Social Task</a></li>
                                     <li><a href="{{ route('admin_panel.social_task') }}">View Social Task</a></li>
                                     <li><a href="inventoryreport.html">Click Task</a></li>
+                                    <li><a href="{{ route('admin_panel.task_requests') }}">Task Approval</a></li>
                                     {{-- <li><a href="salesreport.html">Sales Report</a></li>
                                     <li><a href="invoicereport.html">Invoice Report</a></li>
                                     <li><a href="purchasereport.html">Purchase Report</a></li>
