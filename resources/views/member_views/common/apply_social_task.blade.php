@@ -113,7 +113,7 @@ apply social task
 
         <div class="col-sm-12 col-xl-12">
             <div class="bg-white rounded h-100 p-4">
-                <a class="btn btn-success" href="#">Apply</a>
+                <a class="btn btn-success" href="{{ route('worker_panel.submit_social_task', ['task_id'=>$apply_social_task->task_id]) }}">Apply</a>
             </div>
         </div>
 

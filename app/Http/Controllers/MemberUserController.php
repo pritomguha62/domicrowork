@@ -557,6 +557,8 @@ class MemberUserController extends Controller
 
             $member_info->balance = intval($member_info->balance) - intval($package_price);
 
+            $member_info->expire_date = now()->addDays(intval($package->validity));
+
             $member_info->status = 1;
 
             $member_info->is_worker = 1;

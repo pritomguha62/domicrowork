@@ -87,7 +87,8 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Tasks</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ route('client_panel.add_client_social_task') }}" class="dropdown-item">Create Task</a>
-                            <a href="{{ route('worker_panel.worker_social_tasks') }}" class="dropdown-item">Complete Tasks</a>
+                            <a href="{{ route('worker_panel.worker_social_tasks') }}" class="dropdown-item">Complete Social Tasks</a>
+                            <a href="{{ route('worker_panel.worker_social_tasks') }}" class="dropdown-item">Complete Click Tasks</a>
                             {{-- <a href="typography.html" class="dropdown-item">Typography</a>
                             <a href="element.html" class="dropdown-item">Other Elements</a> --}}
                         </div>
@@ -197,7 +198,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="{{ route('member_panel.profile') }}" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Settings</a>
+                            <a href="#" class="dropdown-item">Support</a>
                             <a href="{{ route('logout') }}" class="dropdown-item">Log Out</a>
                         </div>
                     </div>

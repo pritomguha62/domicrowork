@@ -193,13 +193,6 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
 
 
 
-    // passbook
-
-
-    Route::get('/total_passbooks', [AdminUserController::class, 'total_passbooks']
-    )->name('admin_panel.total_passbooks')->middleware('admin');
-
-
     // task
 
 
@@ -208,6 +201,9 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
 
     Route::get('/social_task', [TaskController::class, 'admin_social_task']
     )->name('admin_panel.social_task');
+
+    Route::get('/task_requests', [TaskController::class, 'task_requests']
+    )->name('admin_panel.task_requests');
 
     Route::get('/get-subcategories/{category_id?}', [CategoryController::class, 'getSubcategories'])->name('get.subcategories');
 
@@ -221,6 +217,14 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
     Route::get('/update_social_task/{task_id?}', [TaskController::class, 'admin_update_social_task']
     )->name('admin_panel.update_social_task');
 
+
+
+
+    // passbook
+
+
+    Route::get('/total_passbooks', [AdminUserController::class, 'total_passbooks']
+    )->name('admin_panel.total_passbooks')->middleware('admin');
 
 
     // notice
@@ -346,6 +350,9 @@ Route::prefix('/worker_panel')->middleware('worker')->group(function(){
 
     Route::get('/submit_social_task/{task_id?}', [TaskController::class, 'submit_social_task']
     )->name('worker_panel.submit_social_task')->middleware('worker');
+
+    Route::post('/submit_social_task_info', [TaskController::class, 'submit_social_task_info']
+    )->name('worker_panel.submit_social_task_info')->middleware('worker');
 
 
 

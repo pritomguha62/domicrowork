@@ -87,8 +87,8 @@ add social task
                         @enderror
                     </div>
                     <div class="form-floating">
-                        <textarea name="required_proof" class="form-control" placeholder="Required Proof" id="floatingTextarea" style="height: 150px;"></textarea>
-                        <label for="floatingTextarea">Required Proof</label>
+                        <textarea name="required_proof" class="form-control" placeholder="Required Proof" id="floatingTextarea1" style="height: 150px;"></textarea>
+                        <label for="floatingTextarea1">Required Proof</label>
                         @error('required_proof')
                             <p class="mb-0 alert alert-danger">{{ $message }}</p>
                         @enderror

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Member_user;
 use App\Models\Task;
+use App\Models\Task_assignments;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -157,9 +158,25 @@ class TaskController extends Controller
     }
 
 
+    public function task_requests(){
+
+        $task_requests = Task::where('status', 0)->get();
+
+        return view('admin_views.common.task_requests', compact('task_requests'));
+
+    }
+
+
     public function worker_social_tasks(){
 
-        $worker_social_tasks = Task::with('category', 'sub_category')->where('status', 1)->get();
+        // $task_assignments = Task_assignments::where('member_id', session()->get('member_id'))
+        $workerId = 1; // Replace with the specific worker's ID
+
+        $worker_social_tasks = Task::whereDoesntHave('worker', function($query) use ($workerId) {
+            $query->where('worker_id', $workerId);
+        })->get();
+
+        // $worker_social_tasks = Task::with('category', 'sub_category')->where('status', 1)->get();
 
         return view('member_views.common.worker_social_tasks', compact('worker_social_tasks'));
 
@@ -233,6 +250,62 @@ class TaskController extends Controller
             return view('member_views.common.deposit', compact('required_price'));
 
         }
+
+
+    }
+
+
+    public function submit_social_task_info(Request $request){
+
+        $request->validate([
+            'task_id'=>'required',
+            'first_ss'=>'required',
+            'second_ss'=>'required',
+        ]);
+
+        $member = Member_user::find(session()->get('member_id'));
+
+        $required_price = floatval($request->task_price_rate) * intval($request->work_amount);
+
+            $task_assignment = new Task_assignments();
+            $task_assignment->task_id = $request->task_id;
+
+            if (!empty($request->first_ss)) {
+
+                $request->validate([
+                    "first_ss"=> "required|max:7240",
+                ]);
+
+                $name = 'task';
+                $image_name1 = $name.'_first_ss_'.date("Y_m_d_h_i_sa").'.'.$request->file('first_ss')->getClientOriginalExtension();
+                $request->file('first_ss')->move(public_path('storage/uploads/image/'), $image_name1);
+
+                $task_assignment->first_ss = $image_name1;
+
+
+            }
+
+            if (!empty($request->second_ss)) {
+
+                $request->validate([
+                    "second_ss"=> "required|max:7240",
+                ]);
+
+                $name = 'task';
+                $image_name2 = $name.'_second_ss_'.date("Y_m_d_h_i_sa").'.'.$request->file('second_ss')->getClientOriginalExtension();
+                $request->file('second_ss')->move(public_path('storage/uploads/image/'), $image_name2);
+
+                $task_assignment->second_ss = $image_name2;
+
+
+            }
+
+        $task_assignment->status = 0;
+        $task_assignment->worker_id = session()->get('member_id');
+        $task_assignment->save();
+
+        return redirect()->route('worker_panel.worker_social_tasks')->with('success', 'Task submitted..!');
+
 
 
     }

@@ -2,7 +2,7 @@
 
 
 @section('title')
-add social task
+submit social task
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@ add social task
         <div class="bg-light p-5 rounded h-100 wow fadeInUp" data-wow-delay="0.2s">
             <h4 class="text-primary">Create Task</h4>
             <p class="mb-4 text-warning">Provide the task information..</p>
-            <form action="{{ route('client_panel.add_client_social_task_info') }}" method="POST" enctype="multipart/form-data" id="paymentForm">
+            <form action="{{ route('worker_panel.submit_social_task_info') }}" method="POST" enctype="multipart/form-data" id="paymentForm">
 
                 @if (session()->has('error'))
                     <p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
@@ -31,7 +31,7 @@ add social task
                 <div class="row g-4">
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" name="title" class="form-control border-0" id="title" placeholder="Title" value="{{ $submit_social_task->title }}" >
+                            <input type="text" name="title" disabled class="form-control border-0" id="title" placeholder="Title" value="{{ $submit_social_task->title }}" >
                             <label for="title">Title</label>
                         </div>
                         @error('title')
@@ -49,8 +49,8 @@ add social task
                     <div class="col-12">
                         <div class="form-floating">
                             {{-- <input type="text" name="work_link" class="form-control border-0" id="work_link" placeholder="Content Link" > --}}
-                            <a href="{{ $submit_social_task->work_link }}" target="_blank" rel="noopener noreferrer"></a>
-                            <label for="work_link">Content Link</label>
+                            <a href="{{ $submit_social_task->work_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-warning">Content Link</a>
+                            {{-- <label for="work_link">Content Link</label> --}}
                         </div>
                         @error('work_link')
                             <p class="mb-0 alert alert-danger">{{ $message }}</p>
@@ -64,11 +64,31 @@ add social task
                             <p class="mb-0 alert alert-danger">{{ $message }}</p>
                         @enderror
                     </div>
+                    <div class="form-floating">
+                        <input type="file" name="first_ss" class="form-control" placeholder="First Screen Shot" id="first_ss">
+                        <label for="first_ss">First Screen Shot</label>
+                        @error('first_ss')
+                            <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="form-floating">
+                        <input type="file" name="second_ss" class="form-control" placeholder="Second Screen Shot" id="second_ss">
+                        <label for="second_ss">Second Screen Shot</label>
+                        @error('second_ss')
+                            <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="form-floating">
+                        <textarea name="comment" class="form-control" placeholder="Comment" id="floatingTextarea3" style="height: 150px;"></textarea>
+                        <label for="floatingTextarea">Comment</label>
+                        @error('comment')
+                            <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="col-12">
-                        {{-- <input type="hidden" hidden name="package_id" id="package_id" value="{{ $package->package_id }}"> --}}
-                        {{-- <input type="hidden" hidden name="member_id" id="member_id" value="{{ session()->get('member_id') }}"> --}}
-                        <input type="hidden" hidden name="member_payment_id" id="member_payment_id" value="{{ uniqid() }}">
-                        <input type="submit" id="payButton" class="btn btn-primary w-100 py-3" value="Create">
+                        <input type="hidden" hidden name="task_id" id="task_id" value="{{ $submit_social_task->task_id }}">
+                        {{-- <input type="hidden" hidden name="member_payment_id" id="member_payment_id" value="{{ uniqid() }}"> --}}
+                        <input type="submit" id="payButton" class="btn btn-primary py-3" value="Submit">
                     </div>
                 </div>
             </form>
