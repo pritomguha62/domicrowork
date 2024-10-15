@@ -502,19 +502,77 @@ class TaskController extends Controller
 
     }
 
-    public function accept_task(){
+    public function accept_task($task_worker_id){
 
-        $confirm_tasks = Task_assignments::with('task', 'worker')->where('status', 0)->get();
+        $accept_task = Task_assignments::with('worker', 'task')->find($task_worker_id);
+        
+        $accept_task->status = 1;
 
-        return view('admin_views.common.confirm_tasks', compact('confirm_tasks'));
+        $worker = Member_user::find($accept_task->worker_id);
+
+        $first_commission = floatval($accept_task->task->task_price_rate)/100 * 4;
+
+        $second_commission = floatval($accept_task->task->task_price_rate)/100 * 2;
+
+        $third_commission = floatval($accept_task->task->task_price_rate)/100 * 1;
+
+        if (!empty($worker)) {
+
+            $worker->balance = floatval($worker->balance) + floatval($accept_task->task->task_price_rate);
+
+            $worker->update();
+
+        }
+
+        $first_parent = Member_user::where('member_id', $worker->parent_id)->where('parent_user_code', $worker->parent_user_code)->where('status', 1)->first();
+
+        $second_parent = Member_user::where('member_id', $first_parent->parent_id)->where('parent_user_code', $first_parent->parent_user_code)->where('status', 1)->first();
+
+        $third_parent = Member_user::where('member_id', $second_parent->parent_id)->where('parent_user_code', $second_parent->parent_user_code)->where('status', 1)->first();
+
+        if ($first_parent) {
+
+            $first_parent->balance = intval(floatval($first_parent->balance) + floatval($first_commission));
+
+            $first_parent->update();
+
+        }
+
+        if ($second_parent) {
+
+            $second_parent->balance = intval(floatval($second_parent->balance) + floatval($second_commission));
+
+            $second_parent->update();
+
+        }
+
+        if ($third_parent) {
+
+            $third_parent->balance = intval(floatval($third_parent->balance) + floatval($third_commission));
+
+            $third_parent->update();
+
+        }
+
+        $accept_task->status = 1;
+
+        return redirect()->back()->with('success', 'Task Accepted..!');
+
+        // return view('admin_views.common.confirm_tasks', compact('confirm_tasks'));
 
     }
 
-    public function reject_task(){
+    public function reject_task($task_worker_id){
 
-        $confirm_tasks = Task_assignments::with('task', 'worker')->where('status', 0)->get();
+        $reject_task = Task_assignments::find($task_worker_id);
 
-        return view('admin_views.common.confirm_tasks', compact('confirm_tasks'));
+        $reject_task->status = 3;
+
+        $reject_task->update();
+
+        return redirect()->back()->with('error', 'Task rejected..!');
+
+        // return view('admin_views.common.confirm_tasks', compact('confirm_tasks'));
 
     }
 

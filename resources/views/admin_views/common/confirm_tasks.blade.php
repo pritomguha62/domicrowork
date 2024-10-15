@@ -65,7 +65,8 @@ Confirm Tasks
                                             <td>{{ $confirm_task->task->task_price_rate }}</td>
                                             <td>{{ $confirm_task->created_at }}</td>
                                             <td>
-                                                <a class="btn btn-success text-white" href="{{ route('admin_panel.confirm_task', ['task_worker_id '=>$confirm_task->task_worker_id ]) }}">Activate</a>
+                                                <a class="btn btn-success text-white" href="{{ route('admin_panel.accept_task', ['task_worker_id '=>$confirm_task->task_worker_id ]) }}">Activate</a>
+                                                <a class="btn btn-danger text-white" href="{{ route('admin_panel.reject_task', ['task_worker_id '=>$confirm_task->task_worker_id ]) }}">Activate</a>
                                             </td>
                                         </tr>
 

@@ -12,9 +12,9 @@ use App\Models\Passbook;
 use App\Models\Payment_method;
 use App\Models\Role;
 use App\Models\Withdraw;
-use Hash;
 use Illuminate\Http\Request;
-use Mail;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class MemberUserController extends Controller
 {
