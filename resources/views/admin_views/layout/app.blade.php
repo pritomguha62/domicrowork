@@ -261,6 +261,7 @@
                                     <li><a href="{{ route('admin_panel.add_click_task') }}">Add Click Task</a></li>
                                     <li><a href="{{ route('admin_panel.click_tasks') }}">View Click Tasks</a></li>
                                     <li><a href="{{ route('admin_panel.task_requests') }}">Task Approval</a></li>
+                                    <li><a href="{{ route('admin_panel.confirm_tasks') }}">Confirm Tasks</a></li>
                                     {{-- <li><a href="salesreport.html">Sales Report</a></li>
                                     <li><a href="invoicereport.html">Invoice Report</a></li>
                                     <li><a href="purchasereport.html">Purchase Report</a></li>

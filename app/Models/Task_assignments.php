@@ -24,11 +24,23 @@ class Task_assignments extends Model
     ];
 
 
-    // public function admin(){
+    public function admin(){
 
-    //     return $this->belongsToMany(Admin_user::class, 'admin_users', 'admin_id', 'admin_id');
+        return $this->belongsToMany(Admin_user::class, 'admin_users', 'admin_id', 'admin_id');
 
-    // }
+    }
+
+    public function worker(){
+
+        return $this->belongsToMany(Member_user::class, 'member_users', 'member_id', 'worker_id');
+
+    }
+
+    public function task(){
+
+        return $this->belongsToMany(Task::class, 'tasks', 'task_id', 'task_id');
+
+    }
 
 
 

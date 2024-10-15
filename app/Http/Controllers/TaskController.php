@@ -494,6 +494,30 @@ class TaskController extends Controller
 
     }
 
+    public function admin_confirm_tasks(){
+
+        $confirm_tasks = Task_assignments::with('task', 'worker')->where('status', 0)->get();
+
+        return view('admin_views.common.confirm_tasks', compact('confirm_tasks'));
+
+    }
+
+    public function accept_task(){
+
+        $confirm_tasks = Task_assignments::with('task', 'worker')->where('status', 0)->get();
+
+        return view('admin_views.common.confirm_tasks', compact('confirm_tasks'));
+
+    }
+
+    public function reject_task(){
+
+        $confirm_tasks = Task_assignments::with('task', 'worker')->where('status', 0)->get();
+
+        return view('admin_views.common.confirm_tasks', compact('confirm_tasks'));
+
+    }
+
 
 
 

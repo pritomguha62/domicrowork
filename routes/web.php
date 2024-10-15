@@ -234,6 +234,15 @@ Route::prefix('/admin_panel')->middleware('admin_panel')->group(function(){
 
     Route::get('/activate_task/{task_id?}', [TaskController::class, 'activate_task']
     )->name('admin_panel.activate_task');
+    
+    Route::get('/confirm_tasks', [TaskController::class, 'admin_confirm_tasks']
+    )->name('admin_panel.confirm_tasks');
+
+    Route::get('/accept_task/{task_worker_id?}', [TaskController::class, 'accept_task']
+    )->name('admin_panel.accept_task');
+
+    Route::get('/reject_task/{task_worker_id?}', [TaskController::class, 'reject_task']
+    )->name('admin_panel.reject_task');
 
 
 
