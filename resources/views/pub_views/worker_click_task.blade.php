@@ -32,40 +32,44 @@ worker click task
         <div class="row g-5" id="active_package">
             <div class="col-xl-6 mx-auto text-center">
                 <div class="wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="bg-light p-5 rounded h-100 wow fadeInUp" data-wow-delay="0.2s">
-                        <h4 class="text-primary">প্যাকেজ</h4>
-                        <p class="mb-4 text-warning">একাউন্ট এক্টিভ করুন..</p>
-                        <form action="{{ route('member_panel.buy_package_member_info') }}" method="POST">
+                    @foreach ($click_tasks as $click_task)
+                        
+                        <div class="bg-light p-5 rounded h-100 wow fadeInUp mb-4" data-wow-delay="0.2s">
+                            <h2 class="text-primary">{{ $click_task->title }}</h2>
+                            <p class="mb-4">{{ $click_task->description }}</p>
+                            {{-- <form action="{{ route('member_panel.buy_package_member_info') }}" method="POST">
 
-                            @if (session()->has('error'))
-                                <p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
-                            @endif
+                                @if (session()->has('error'))
+                                    <p class="mb-0 alert alert-danger">{{ session()->get('error') }}</p>
+                                @endif
 
-                            @if (session()->has('success'))
-                                <p class="mb-0 alert alert-success">{{ session()->get('success') }}</p>
-                            @endif
+                                @if (session()->has('success'))
+                                    <p class="mb-0 alert alert-success">{{ session()->get('success') }}</p>
+                                @endif
 
-                            @csrf
+                                @csrf
 
-                            <div class="row g-4">
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" name="user_code" class="form-control border-0" id="user_code" placeholder="User Code" value="{{ !empty(session()->get('user_code')) ? session()->get('user_code') : '' }}">
-                                        <label for="user_code">User Code</label>
+                                <div class="row g-4">
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" name="user_code" class="form-control border-0" id="user_code" placeholder="User Code" value="{{ !empty(session()->get('user_code')) ? session()->get('user_code') : '' }}">
+                                            <label for="user_code">User Code</label>
+                                        </div>
+                                        @error('user_code')
+                                            <p class="mb-0 alert alert-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
-                                    @error('user_code')
-                                        <p class="mb-0 alert alert-danger">{{ $message }}</p>
-                                    @enderror
+                                    <p>মূল্যঃ <b>{{ $package->price }}</b> + চার্জঃ <b>{{ round(intval($package->price) * 0.02) + 1 }}</b> = মোটঃ <b>{{ round(intval($package->price) + round(intval($package->price) * 0.02)) + 1 }}</b></p>
+                                    <div class="col-12">
+                                        <input type="hidden" hidden name="package_id" id="package_id" value="{{ $package->package_id }}">
+                                        <input type="hidden" hidden name="member_id" id="member_id" value="{{ session()->get('member_id') }}">
+                                        <button type="submit" class="btn btn-primary w-100 py-3">কিনুন</button>
+                                    </div>
                                 </div>
-                                <p>মূল্যঃ <b>{{ $package->price }}</b> + চার্জঃ <b>{{ round(intval($package->price) * 0.02) + 1 }}</b> = মোটঃ <b>{{ round(intval($package->price) + round(intval($package->price) * 0.02)) + 1 }}</b></p>
-                                <div class="col-12">
-                                    <input type="hidden" hidden name="package_id" id="package_id" value="{{ $package->package_id }}">
-                                    <input type="hidden" hidden name="member_id" id="member_id" value="{{ session()->get('member_id') }}">
-                                    <button type="submit" class="btn btn-primary w-100 py-3">কিনুন</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form> --}}
+                        </div>
+
+                    @endforeach
                 </div>
             </div>
         </div>

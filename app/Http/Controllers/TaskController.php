@@ -276,7 +276,9 @@ class TaskController extends Controller
 
     public function worker_click_task(){
 
-        return view('pub_views.worker_click_task');
+        $click_tasks = Task::where('sub_category_id', null)->get();
+
+        return view('pub_views.worker_click_task', compact('click_tasks'));
 
     }
 
@@ -454,7 +456,8 @@ class TaskController extends Controller
 
         // Check if completing the task would exceed the daily income limit
         if (($member->daily_income + $task->task_price_rate) > $dailyIncomeLimit) {
-            return response()->json(['message' => 'Daily income limit reached.'], 403);
+            // return response()->json(['message' => 'Daily income limit reached.'], 403);
+            return redirect()->back()->with('error', 'Daily income limit reached.');
         }
 
         // Update worker's daily income
@@ -463,6 +466,7 @@ class TaskController extends Controller
         $member->update();
         
         $task_assignment = new Task_assignments();
+
         $task_assignment->task_id = $request->task_id;
 
         if (!empty($request->first_ss)) {
