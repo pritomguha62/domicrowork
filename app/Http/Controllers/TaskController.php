@@ -452,8 +452,8 @@ class TaskController extends Controller
         }
 
         // Update worker's daily income
-        $member->daily_income += $task->reward;
-        
+        $member->daily_income += floatval($task->price);
+
         $member->update();
         
         $task_assignment = new Task_assignments();
