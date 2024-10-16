@@ -42,6 +42,8 @@ return new class extends Migration
             $table->foreign('approver_id')->references('admin_id')->on('admin_users');
             $table->integer('is_client')->default(0);
             $table->integer('is_worker')->default(0);
+            $table->decimal('daily_income', 8, 2)->default(0);  // Current daily income
+            $table->date('income_reset_date')->nullable();       // The date when income was last updated
             $table->integer('status')->default(0);
             $table->text('comment')->nullable();
             $table->string('password');
