@@ -23,7 +23,7 @@ class PackageSeeder extends Seeder
             $package->title = 'Package 1';
             $package->validity = 365;
             $package->price = 1800;
-            $package->task_amount = 20;
+            $package->task_amount = 40;
             // $package->limit = 20000;
             $package->status = 1;
             $package->save();
@@ -34,7 +34,7 @@ class PackageSeeder extends Seeder
         $package->title = 'Package 2';
         $package->validity = 365;
         $package->price = 3600;
-        $package->task_amount = 40;
+        $package->task_amount = 100;
         // $package->limit = 20000;
         $package->status = 1;
         $package->save();
@@ -44,9 +44,9 @@ class PackageSeeder extends Seeder
         $package->title = 'Package 3';
         $package->validity = 365;
         $package->price = 7500;
-        $package->task_amount = 60;
+        $package->task_amount = 230;
         // $package->limit = 20000;
-        $package->status = 1;
+        $package->status = 0;
         $package->save();
 
         // $package = new Package();
