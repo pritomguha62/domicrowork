@@ -274,6 +274,12 @@ class TaskController extends Controller
 
     }
 
+    public function worker_click_task(){
+
+        return view('pub_views.worker_click_task');
+
+    }
+
 
     public function add_client_social_task(){
 
