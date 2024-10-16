@@ -12,7 +12,7 @@ deposit
     <div class="bg-light rounded h-100 p-4">
         <div class="bg-light p-5 rounded h-100 wow fadeInUp" data-wow-delay="0.2s">
             <h4 class="text-primary">Deposit</h4>
-            <p class="mb-4 text-warning">Deposit Balance To Buy A Package..</p>
+            <h6 class="mb-4">Deposit Balance To Buy A Package..</h6>
             <form action="{{ route('member_panel.deposit_balance_info') }}" method="POST" id="paymentForm">
 
                 @if (session()->has('error'))
@@ -59,9 +59,10 @@ deposit
                         @enderror
                     </div>
                     {{-- <p>মূল্যঃ <b>{{ $package->price }}</b></p> --}}
+                    <p class="text-warning">Send money (Personal)..</p>
                     <div class="col-12">
                         <div class="form-floating" style="display: flex;">
-                            <input type="text" readonly class="form-control" id="account_number" value="">
+                            <input type="text" readonly class="form-control" id="account_number" value="+880 1875-080086">
                             <button type="button" class="btn btn-warning" value="copy" onclick="copyClipboardFunction()">Copy!</button>
                         </div>
                         @error('account_number')

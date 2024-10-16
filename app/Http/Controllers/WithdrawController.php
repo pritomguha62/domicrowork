@@ -8,7 +8,7 @@ use App\Models\Member_user;
 use App\Models\Payment_method;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 class WithdrawController extends Controller
 {
@@ -42,19 +42,6 @@ class WithdrawController extends Controller
             $withdraw_request_member->payment_method = $request->payment_method;
             $withdraw_request_member->account_num = $request->account_num;
             $withdraw_request_member->user_code = session()->get('user_code');
-
-            // if ($member->withdraws == null) {
-            //     if ($member->balance >= 300 && $request->amount >= 300) {
-            //         $member->balance = $member->balance - 200;
-            //         $amount = $request->amount - 200;
-            //         $admin->balance = intval($admin->balance) + 200;
-            //         $admin->update();
-            //         $request->amount = $amount;
-
-            //     }else {
-            //         return redirect()->back()->with('error', 'First withdraw amount must be 300 or more..!');
-            //     }
-            // }
 
 
             $withdraw_request_member->amount = $request->amount;

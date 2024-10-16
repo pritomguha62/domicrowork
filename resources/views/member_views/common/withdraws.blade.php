@@ -24,7 +24,9 @@ withdraw
         @csrf
 
         <div class="bg-light rounded h-100 p-4">
-            <h6 class="mb-4">Select Payment Method</h6>
+            <h4 class="mb-4">Select Payment Method</h4>
+            <p class="mb-1 text-warning">You have to keep minimum 5 balance in your account..</p>
+            <p class="mb-4 text-danger">Note : Admin fee and provident fund fee wil be deducted..</p>
             <div class="form-floating mb-3">
                 <select name="payment_method" required class="form-select" id="floatingSelect"
                     aria-label="Floating label select example">
@@ -47,7 +49,7 @@ withdraw
             </div>
             <div class="form-floating mb-3">
                 <input type="number" name="member_amount" id="member_amount" class="form-control" readonly placeholder="Minimum - 525">
-                <label for="floatingInput">Minimum Balance Required (Admin Fees + Provident Fund)</label>
+                <label for="floatingInput">You will get</label>
                 @error('member_amount')
                     <p class="mb-0 alert alert-danger">{{ $message }}</p>
                 @enderror
@@ -126,7 +128,7 @@ withdraw
 
             var charge = (parseInt(member_amount)/100)*7;
 
-            var amount = parseInt(charge) + parseInt(member_amount) + parseInt(5);
+            var amount = parseInt(member_amount) - parseInt(charge);
 
             $('#member_amount').val(amount);
 
