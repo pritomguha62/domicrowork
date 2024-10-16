@@ -432,11 +432,11 @@ class TaskController extends Controller
             'second_ss'=>'required',
         ]);
 
-        $member = Member_user::find(session()->get('member_id'));
+        $member = Member_user::with('package')->find(session()->get('member_id'));
 
-        $required_price = floatval($request->task_price_rate) * intval($request->work_amount);
+        // $required_price = floatval($request->task_price_rate) * intval($request->work_amount);
 
-        $dailyIncomeLimit = 200;
+        $dailyIncomeLimit = $member->package->task_amount;
         // Check if the worker's income should be reset
         if ($member->income_reset_date != now()->toDateString()) {
             // It's a new day, so reset the income
@@ -451,38 +451,43 @@ class TaskController extends Controller
             return response()->json(['message' => 'Daily income limit reached.'], 403);
         }
 
-            $task_assignment = new Task_assignments();
-            $task_assignment->task_id = $request->task_id;
+        // Update worker's daily income
+        $member->daily_income += $task->reward;
+        
+        $member->update();
+        
+        $task_assignment = new Task_assignments();
+        $task_assignment->task_id = $request->task_id;
 
-            if (!empty($request->first_ss)) {
+        if (!empty($request->first_ss)) {
 
-                $request->validate([
-                    "first_ss"=> "required|max:7240",
-                ]);
+            $request->validate([
+                "first_ss"=> "required|max:7240",
+            ]);
 
-                $name = 'task';
-                $image_name1 = $name.'_first_ss_'.date("Y_m_d_h_i_sa").'.'.$request->file('first_ss')->getClientOriginalExtension();
-                $request->file('first_ss')->move(public_path('storage/uploads/image/'), $image_name1);
+            $name = 'task';
+            $image_name1 = $name.'_first_ss_'.date("Y_m_d_h_i_sa").'.'.$request->file('first_ss')->getClientOriginalExtension();
+            $request->file('first_ss')->move(public_path('storage/uploads/image/'), $image_name1);
 
-                $task_assignment->first_ss = $image_name1;
-
-
-            }
-
-            if (!empty($request->second_ss)) {
-
-                $request->validate([
-                    "second_ss"=> "required|max:7240",
-                ]);
-
-                $name = 'task';
-                $image_name2 = $name.'_second_ss_'.date("Y_m_d_h_i_sa").'.'.$request->file('second_ss')->getClientOriginalExtension();
-                $request->file('second_ss')->move(public_path('storage/uploads/image/'), $image_name2);
-
-                $task_assignment->second_ss = $image_name2;
+            $task_assignment->first_ss = $image_name1;
 
 
-            }
+        }
+
+        if (!empty($request->second_ss)) {
+
+            $request->validate([
+                "second_ss"=> "required|max:7240",
+            ]);
+
+            $name = 'task';
+            $image_name2 = $name.'_second_ss_'.date("Y_m_d_h_i_sa").'.'.$request->file('second_ss')->getClientOriginalExtension();
+            $request->file('second_ss')->move(public_path('storage/uploads/image/'), $image_name2);
+
+            $task_assignment->second_ss = $image_name2;
+
+
+        }
 
         $task_assignment->status = 0;
         $task_assignment->worker_id = session()->get('member_id');
