@@ -26,12 +26,60 @@ worker click task
 
 @section('content')
 
+<style>
+    path{
+        display: none;
+    }
+
+    .w-5,.h-5{
+        display: none;
+    }
+
+    .hidden{
+        display: none;
+    }
+
+    
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $("a:contains('Previous')").hide();
+        $("span:contains('Previous')").hide();
+        $("a:contains('Next')").hide();
+        $("span:contains('Next')").hide();
+
+        // Initial countdown value
+        let countdownValue = 5;
+        let countdownElement = $('#countdown');
+        let nextButton = $('#next-button');
+
+        // Countdown interval
+        let countdownInterval = setInterval(function() {
+            countdownValue--;
+            countdownElement.text(countdownValue); // Update the countdown
+
+            // When countdown reaches 0
+            if (countdownValue === 0) {
+                clearInterval(countdownInterval); // Stop the countdown
+                countdownElement.hide(); // Hide the countdown
+                nextButton.show(); // Show the "Next" button
+                $("a:contains('Next')").show();
+            }
+        }, 1000); // Update every second
+        
+    });
+</script>
+
 <!-- Contact Start -->
 <div class="container-fluid contact py-5">
     <div class="container py-5">
         <div class="row g-5" id="active_package">
             <div class="col-xl-6 mx-auto text-center">
                 <div class="wow fadeInUp" data-wow-delay="0.2s">
+                    <h2 id="countdown"></h2>
                     @foreach ($click_tasks as $click_task)
                         
                         <div class="bg-light p-5 rounded h-100 wow fadeInUp mb-4" data-wow-delay="0.2s">
@@ -70,31 +118,16 @@ worker click task
                         </div>
 
                     @endforeach
+
+                    <div >
+                        {{ $click_tasks->links() }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- Contact End -->
-
-
-<script>
-    function copyClipboardFunction() {
-        // Get the text field
-        var copyText = document.getElementById("account_number");
-
-        // Select the text field
-        copyText.select();
-        copyText.setSelectionRange(0, 999999999999999); // For mobile devices
-
-        // Copy the text inside the text field
-        navigator.clipboard.writeText(copyText.value);
-
-        // Alert the copied text
-        alert("Copied the text: " + copyText.value);
-    }
-</script>
-
 
 @endsection
 

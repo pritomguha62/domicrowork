@@ -276,7 +276,7 @@ class TaskController extends Controller
 
     public function worker_click_task(){
 
-        $click_tasks = Task::where('sub_category_id', null)->get();
+        $click_tasks = Task::limit(1)->where('sub_category_id', null)->where('status', 1)->paginate(1);
 
         return view('pub_views.worker_click_task', compact('click_tasks'));
 
