@@ -447,12 +447,12 @@ class TaskController extends Controller
         $task = Task::find($request->task_id);
 
         // Check if completing the task would exceed the daily income limit
-        if (($member->daily_income + $task->price) > $dailyIncomeLimit) {
+        if (($member->daily_income + $task->task_price_rate) > $dailyIncomeLimit) {
             return response()->json(['message' => 'Daily income limit reached.'], 403);
         }
 
         // Update worker's daily income
-        $member->daily_income += floatval($task->price);
+        $member->daily_income += floatval($task->task_price_rate);
 
         $member->update();
         
