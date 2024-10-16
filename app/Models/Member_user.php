@@ -37,6 +37,8 @@ class Member_user extends Model
         'task_amount',
         'role_id',
         'approver_id',
+        'daily_income', 
+        'income_reset_date',
         'status',
         'comment',
         'password',

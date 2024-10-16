@@ -436,6 +436,21 @@ class TaskController extends Controller
 
         $required_price = floatval($request->task_price_rate) * intval($request->work_amount);
 
+        $dailyIncomeLimit = 200;
+        // Check if the worker's income should be reset
+        if ($member->income_reset_date != now()->toDateString()) {
+            // It's a new day, so reset the income
+            $member->daily_income = 0;
+            $member->income_reset_date = now()->toDateString();
+        }
+
+        $task = Task::find($request->task_id);
+
+        // Check if completing the task would exceed the daily income limit
+        if (($member->daily_income + $task->price) > $dailyIncomeLimit) {
+            return response()->json(['message' => 'Daily income limit reached.'], 403);
+        }
+
             $task_assignment = new Task_assignments();
             $task_assignment->task_id = $request->task_id;
 
