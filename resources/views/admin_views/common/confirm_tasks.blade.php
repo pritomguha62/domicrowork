@@ -56,17 +56,27 @@ Confirm Tasks
                                         @csrf
 
                                         <tr>
-                                            <td>{{ $confirm_task->task->title  }}</td>
-                                            <td>{{ $confirm_task->task->category->title }}->{{ $confirm_task->task->sub_category->title }}</td>
-                                            <td>{{ $confirm_task->work_link }}</td>
-                                            <td>{{ $confirm_task->description }}</td>
-                                            <td><img width="200px" src="{{ asset('storage/uploads/image/'.$confirm_task->first_ss) }}" alt=""></td>
-                                            <td><img width="200px" src="{{ asset('storage/uploads/image/'.$confirm_task->second_ss) }}" alt=""></td>
-                                            <td>{{ $confirm_task->task->task_price_rate }}</td>
+                                            <td>
+                                                {{-- {{ $confirm_task->task->title  }} --}}
+                                            </td>
+                                            <td>
+                                                {{-- {{ $confirm_task->task->category->title }}->{{ $confirm_task->task->sub_category->title }} --}}
+                                            </td>
+                                            <td>
+                                                {{ $confirm_task->work_link }}
+                                            </td>
+                                            <td>
+                                                {{-- {{ $confirm_task->description }} --}}
+                                            </td>
+                                            <td><img width="50px" src="{{ asset('storage/uploads/image/'.$confirm_task->first_ss) }}" alt=""></td>
+                                            <td><img width="50px" src="{{ asset('storage/uploads/image/'.$confirm_task->second_ss) }}" alt=""></td>
+                                            <td>
+                                                {{-- {{ $confirm_task->task->task_price_rate }} --}}
+                                            </td>
                                             <td>{{ $confirm_task->created_at }}</td>
                                             <td>
-                                                <a class="btn btn-success text-white" href="{{ route('admin_panel.accept_task', ['task_worker_id '=>$confirm_task->task_worker_id ]) }}">Activate</a>
-                                                <a class="btn btn-danger text-white" href="{{ route('admin_panel.reject_task', ['task_worker_id '=>$confirm_task->task_worker_id ]) }}">Activate</a>
+                                                <a class="btn btn-success text-white" href="{{ route('admin_panel.accept_task', ['task_worker_id '=>$confirm_task->task_worker_id ]) }}">Accept</a>
+                                                <a class="btn btn-danger text-white" href="{{ route('admin_panel.reject_task', ['task_worker_id '=>$confirm_task->task_worker_id ]) }}">Reject</a>
                                             </td>
                                         </tr>
 

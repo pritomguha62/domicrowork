@@ -309,16 +309,19 @@ class TaskController extends Controller
 
         // $task_assignments = Task_assignments::where('member_id', session()->get('member_id'))
 
-        $todayTasks = Task::whereDate('created_at', Carbon::today())
-        ->orderBy('created_at', 'desc')
-        ->limit(20)
-        ->get();
+        // $todayTasks = Task::whereDate('created_at', Carbon::today())
+        // ->orderBy('created_at', 'desc')
+        // ->limit(20)
+        // ->get();
 
         $workerId = session()->get('member_id'); // Replace with the specific worker's ID
 
-        $worker_social_tasks = $todayTasks::whereDoesntHave('worker', function($query) use ($workerId) {
+        $worker_social_tasks = Task::whereDoesntHave('worker', function($query) use ($workerId) {
             $query->where('worker_id', $workerId);
-        })->get();
+        })->whereDate('created_at', Carbon::today())
+        ->orderBy('created_at', 'desc')
+        ->limit(20)
+        ->get();
 
         // $worker_social_tasks = Task::with('category', 'sub_category')->where('status', 1)->get();
 
@@ -496,7 +499,7 @@ class TaskController extends Controller
 
     public function admin_confirm_tasks(){
 
-        $confirm_tasks = Task_assignments::with('task', 'worker')->where('status', 0)->get();
+        $confirm_tasks = Task_assignments::where('status', 0)->get();
 
         return view('admin_views.common.confirm_tasks', compact('confirm_tasks'));
 
