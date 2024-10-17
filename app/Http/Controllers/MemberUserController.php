@@ -541,7 +541,7 @@ class MemberUserController extends Controller
 
             $passbook->sender_member_id = $member_info->member_id;
 
-            $passbook->receiver_member_id = $admin->admin_id;
+            $passbook->receiver_admin_id = $admin->admin_id;
 
             $passbook->sender_user_code = $member_info->user_code;
 
@@ -571,7 +571,7 @@ class MemberUserController extends Controller
 
             $passbook->sender_member_id = $member_info->member_id;
 
-            $passbook->receiver_member_id = $admin->admin_id;
+            $passbook->receiver_admin_id = $admin->admin_id;
 
             $passbook->sender_user_code = $member_info->user_code;
 
@@ -606,7 +606,9 @@ class MemberUserController extends Controller
 
                 $passbook->receiver_member_id = $first_level_refer_member->member_id;
 
-                $passbook->sender_user_code = $first_level_refer_member->member_id;
+                $passbook->sender_user_code = $member_info->user_code;
+
+                $passbook->sender_member_id = $member_info->member_id;
 
                 $first_level_refer_member->balance = intval(round($first_level_refer_member->balance + $first_level_commission));
 
@@ -636,7 +638,9 @@ class MemberUserController extends Controller
 
                     $passbook->receiver_member_id = $second_level_refer_member->member_id;
 
-                    $passbook->sender_user_code = $second_level_refer_member->member_id;
+                    $passbook->sender_user_code = $member_info->user_code;
+    
+                    $passbook->sender_member_id = $member_info->member_id;
 
                     $second_level_refer_member->balance = intval(round($second_level_refer_member->balance + $second_level_commission));
 
@@ -666,7 +670,9 @@ class MemberUserController extends Controller
 
                         $passbook->receiver_member_id = $third_level_refer_member->member_id;
 
-                        $passbook->sender_user_code = $third_level_refer_member->member_id;
+                        $passbook->sender_user_code = $member_info->user_code;
+        
+                        $passbook->sender_member_id = $member_info->member_id;
 
                         $third_level_refer_member->balance = intval(round($third_level_refer_member->balance + $third_level_commission));
 
@@ -694,7 +700,9 @@ class MemberUserController extends Controller
 
                             $passbook->receiver_member_id = $fourth_level_refer_member->member_id;
 
-                            $passbook->sender_user_code = $fourth_level_refer_member->member_id;
+                            $passbook->sender_user_code = $member_info->user_code;
+            
+                            $passbook->sender_member_id = $member_info->member_id;
 
                             $fourth_level_refer_member->balance = intval(round($fourth_level_refer_member->balance + $fourth_level_commission));
 
@@ -725,7 +733,9 @@ class MemberUserController extends Controller
 
                                 $passbook->receiver_member_id = $fifth_level_refer_member->member_id;
 
-                                $passbook->sender_user_code = $fifth_level_refer_member->member_id;
+                                $passbook->sender_user_code = $member_info->user_code;
+                
+                                $passbook->sender_member_id = $member_info->member_id;
 
                                 $fifth_level_refer_member->balance = intval(round($fifth_level_refer_member->balance + $fifth_level_commission));
 
@@ -849,7 +859,7 @@ class MemberUserController extends Controller
 
         $package_charge = intval($package->price)*0.02;
 
-        $package_price = round(intval($package->price) + $package_charge + 1);
+        $package_price = round(intval($package->price) + $package_charge + 4);
 
         return view('member_views.common.deposit', compact('package_price'));
 

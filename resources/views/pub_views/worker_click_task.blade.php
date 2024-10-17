@@ -121,7 +121,7 @@ worker click task
                     $("a:contains('Next')").show();
 
                     // $.ajax({
-                    //     url: '{{ route('worker_panel.worker_social_task_info') }}', // Laravel route
+                    //     url: '{{ route('worker_panel.worker_click_task_info') }}', // Laravel route
                     //     type: 'POST',
                     //     data: {
                     //         task_id: taskId,
@@ -162,7 +162,7 @@ worker click task
                     @endphp
                     @foreach ($click_tasks as $click_task)
                         
-                        <div id="countdown{{ $i }}">5</div>
+                        <h2 id="countdown{{ $i }}">5</h2>
 
                         <div class="bg-light p-5 rounded h-100 wow fadeInUp mb-4" data-wow-delay="0.2s">
                             <h2 class="text-primary">{{ $click_task->title }}</h2>

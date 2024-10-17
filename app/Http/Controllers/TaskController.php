@@ -7,7 +7,9 @@ use App\Models\Member_user;
 use App\Models\Task;
 use App\Models\Task_assignments;
 use Carbon\Carbon;
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class TaskController extends Controller
 {
@@ -276,9 +278,9 @@ class TaskController extends Controller
 
     public function worker_click_task(){
 
-        $click_tasks = Task::limit(10)->where('sub_category_id', null)->where('status', 1)->paginate(3);
+            $click_tasks = Task::where('sub_category_id', null)->where('status', 1)->paginate(3);
 
-        return view('pub_views.worker_click_task', compact('click_tasks'));
+            return view('pub_views.worker_click_task', compact('click_tasks'));
 
     }
 
