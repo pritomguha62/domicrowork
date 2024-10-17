@@ -337,6 +337,7 @@ class TaskController extends Controller
         $worker_social_tasks = Task::whereDoesntHave('worker', function($query) use ($workerId) {
             $query->where('worker_id', $workerId);
         })->whereDate('created_at', Carbon::today())
+        ->where('sub_category_id', '!=', null)
         ->orderBy('created_at', 'desc')
         ->limit(20)
         ->get();
