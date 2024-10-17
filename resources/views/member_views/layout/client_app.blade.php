@@ -88,7 +88,7 @@
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ route('client_panel.add_client_social_task') }}" class="dropdown-item">Create Task</a>
                             <a href="{{ route('worker_panel.worker_social_tasks') }}" class="dropdown-item">Complete Social Tasks</a>
-                            <a href="{{ route('worker_panel.worker_click_task') }}" class="dropdown-item">Complete Click Tasks</a>
+                            <a href="{{ route('posts', ['worker_id' => session()->get('member_id')]) }}" class="dropdown-item">Complete Click Tasks</a>
                             {{-- <a href="typography.html" class="dropdown-item">Typography</a>
                             <a href="element.html" class="dropdown-item">Other Elements</a> --}}
                         </div>

@@ -21,6 +21,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MemberUserController::class, 'home']
 )->name('home');
 
+// posts
+
+
+Route::get('/posts', [TaskController::class, 'worker_click_task']
+)->name('posts');
+
 Route::post('/contact_us', [MemberUserController::class, 'contact_us']
 )->name('contact_us');
 
@@ -347,6 +353,7 @@ Route::prefix('/member_panel')->group(function(){
 
     Route::post('/add_member_payment_method', [PaymentMethodController::class, 'add_member_payment_method']
     )->name('member_panel.add_member_payment_method');
+
 
 
 });
