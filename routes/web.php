@@ -376,8 +376,8 @@ Route::prefix('/worker_panel')->middleware('worker')->group(function(){
 
     // worker task
 
-    Route::get('/worker_social_tasks', [TaskController::class, 'worker_social_tasks']
-    )->name('worker_panel.worker_social_tasks')->middleware('worker');
+    Route::get('/worker_social_task_info', [TaskController::class, 'worker_social_task_info']
+    )->name('worker_panel.worker_social_task_info')->middleware('worker');
 
     Route::get('/worker_click_task', [TaskController::class, 'worker_click_task']
     )->name('worker_panel.worker_click_task')->middleware('worker');

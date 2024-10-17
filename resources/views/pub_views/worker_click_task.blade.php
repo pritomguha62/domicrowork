@@ -48,8 +48,14 @@ worker click task
     $(document).ready(function() {
         $("a:contains('Previous')").hide();
         $("span:contains('Previous')").hide();
-        $("a:contains('Next')").hide();
+        // $("a:contains('Next')").hide();
         $("span:contains('Next')").hide();
+        $("#next_button1").hide();
+        $("#next_button2").hide();
+        $("#next_button3").hide();
+        $("#countdown1").hide();
+        $('#countdown2').hide();
+        $('#countdown3').hide();
     });
 </script>
 @if (!empty($_GET['worker_id']))
@@ -86,35 +92,56 @@ worker click task
         }, 1000); // Update every second
 
 
-            $('#next_button1').on('click', function() {
-                let countdownValue = 5;
-                $('#countdown2').show();
-                let countdownInterval = setInterval(function() {
-                    countdownValue--;
-                    $('#countdown2').text(countdownValue);
-                    if (countdownValue <= 0) {
-                        clearInterval(countdownInterval);
-                        $('#countdown2').hide();
-                        $('#next_button2').show();
-                    }
-                }, 1000);
-            });
-        
+        $('#next_button1').on('click', function() {
+            let countdownValue = 5;
+            $('#countdown2').show();
+            $('#next_button1').hide();
+            let countdownInterval = setInterval(function() {
+                countdownValue--;
+                $('#countdown2').text(countdownValue);
+                if (countdownValue <= 0) {
+                    clearInterval(countdownInterval);
+                    $('#countdown2').hide();
+                    $('#next_button2').show();
+                }
+            }, 1000);
+        });
+    
 
-            $('#next_button2').on('click', function() {
-                let countdownValue = 5;
-                $('#countdown3').show();
-                let countdownInterval = setInterval(function() {
-                    countdownValue--;
-                    $('#countdown3').text(countdownValue);
-                    if (countdownValue <= 0) {
-                        clearInterval(countdownInterval);
-                        $('#countdown3').hide();
-                        $("a:contains('Next')").show();
-                    }
-                }, 1000);
-            });
-        
+        $('#next_button2').on('click', function() {
+            let countdownValue = 5;
+            $('#countdown3').show();
+            $('#next_button2').hide();
+            let countdownInterval = setInterval(function() {
+                countdownValue--;
+                $('#countdown3').text(countdownValue);
+                if (countdownValue <= 0) {
+                    clearInterval(countdownInterval);
+                    $('#countdown3').hide();
+                    $("a:contains('Next')").show();
+
+                    // $.ajax({
+                    //     url: '{{ route('worker_panel.worker_social_task_info') }}', // Laravel route
+                    //     type: 'POST',
+                    //     data: {
+                    //         task_id: taskId,
+                    //         _token: '{{ csrf_token() }}' // Laravel CSRF token
+                    //     },
+                    //     success: function(response) {
+                    //         if (response.status === 'success') {
+                    //             $('#message').html('<p>' + response.message + '</p>');
+                    //         }
+                    //     },
+                    //     error: function(xhr) {
+                    //         let error = xhr.responseJSON.message;
+                    //         $('#message').html('<p>Error: ' + error + '</p>');
+                    //     }
+                    // });
+                    
+                }
+            }, 1000);
+        });
+    
 
 
         
