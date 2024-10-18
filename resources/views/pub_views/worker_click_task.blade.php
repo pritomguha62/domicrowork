@@ -120,23 +120,23 @@ worker click task
                     $('#countdown3').hide();
                     $("a:contains('Next')").show();
 
-                    // $.ajax({
-                    //     url: '{{ route('worker_panel.worker_click_task_info') }}', // Laravel route
-                    //     type: 'POST',
-                    //     data: {
-                    //         task_id: taskId,
-                    //         _token: '{{ csrf_token() }}' // Laravel CSRF token
-                    //     },
-                    //     success: function(response) {
-                    //         if (response.status === 'success') {
-                    //             $('#message').html('<p>' + response.message + '</p>');
-                    //         }
-                    //     },
-                    //     error: function(xhr) {
-                    //         let error = xhr.responseJSON.message;
-                    //         $('#message').html('<p>Error: ' + error + '</p>');
-                    //     }
-                    // });
+                    $.ajax({
+                        url: '{{ route('worker_panel.worker_click_task_info') }}', // Laravel route
+                        type: 'POST',
+                        data: {
+                            task_id: taskId,
+                            _token: '{{ csrf_token() }}' // Laravel CSRF token
+                        },
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                $('#message').html('<p>' + response.message + '</p>');
+                            }
+                        },
+                        error: function(xhr) {
+                            let error = xhr.responseJSON.message;
+                            $('#message').html('<p>Error: ' + error + '</p>');
+                        }
+                    });
                     
                 }
             }, 1000);
@@ -148,6 +148,7 @@ worker click task
     });
 </script>
 
+
 @endif
 
 <!-- Contact Start -->
@@ -156,29 +157,44 @@ worker click task
         <div class="row g-5" id="active_package">
             <div class="col-xl-6 mx-auto text-center">
                 <div class="wow fadeInUp" data-wow-delay="0.2s">
-                    <h2 id="countdown"></h2>
                     @php
                         $i = 1;
                     @endphp
-                    @foreach ($click_tasks as $click_task)
+                    @foreach ($posts as $click_task)
                         
                         <h2 id="countdown{{ $i }}">5</h2>
 
                         <div class="bg-light p-5 rounded h-100 wow fadeInUp mb-4" data-wow-delay="0.2s">
-                            <h2 class="text-primary">{{ $click_task->title }}</h2>
+                            {{-- <h2 class="text-primary">Task {{ $i }}</h2> --}}
+                            <h3 class="text-primary">{{ $click_task->title }}</h3>
                             <p class="mb-4">{{ $click_task->description }}</p>
                         </div>
 
-                        <button class="mx-auto btn btn-warning" id="next_button{{ $i }}">Next</button>
+                        <h2 id="countdown"></h2>
+                        <button class="mx-auto btn btn-warning" id="next_button{{ $i }}">{{ $i }}</button>
 
                         @php
                         $i++
                     @endphp
                     @endforeach
 
-                    <div>
+                    {{-- <div>
                         {{ $click_tasks->links() }}
+                    </div> --}}
+
+                    <!-- Pagination Controls -->
+                    <div class="pagination">
+                        @if ($page > 1)
+                            <!-- Previous Button (Decrement Page) -->
+                            <a href="{{ route('posts', ['page' => $page - 1]) }}">Previous</a>
+                        @endif
+
+                        @if (($page * $limit) < $totalPosts)
+                            <!-- Next Button (Increment Page) -->
+                            <a href="{{ route('posts', ['worker_id' => session()->get('member_id'), 'page' => $page + 1]) }}">Next</a>
+                        @endif
                     </div>
+
                 </div>
             </div>
         </div>

@@ -276,19 +276,45 @@ class TaskController extends Controller
 
     }
 
-    public function worker_click_task(){
+    public function worker_click_task(Request $request){
 
-            $click_tasks = Task::where('sub_category_id', null)->where('status', 1)->paginate(3);
+            // $click_tasks = Task::where('sub_category_id', null)->where('status', 1)->paginate(3);
 
-            return view('pub_views.worker_click_task', compact('click_tasks'));
+            // Set the limit of records to fetch per page
+            $limit = 3;
+            
+            // Get the current page from the request, default to 1 if not present
+            $page = $request->input('page', 1);
+            
+            // Calculate the offset based on the page number and limit
+            $offset = ($page - 1) * $limit;
+
+            $workerId = session()->get('member_id');
+
+            // Fetch the next 3 posts starting from the offset
+            $posts = Task::whereDoesntHave('worker', function($query) use ($workerId) {
+                $query->where('worker_id', $workerId);
+            })->skip($offset)->take($limit)->get();
+            
+            // Count the total number of posts (for "Next" link logic)
+            $totalPosts = Task::count();
+            
+
+            return view('pub_views.worker_click_task', compact('posts', 'page', 'totalPosts', 'limit'));
 
     }
 
-    public function worker_click_task_info(){
+    public function worker_click_task_info(Request $request){
 
-        // $click_tasks = Task::limit(1)->where('sub_category_id', null)->where('status', 1)->paginate(1);
+        
+        $task_assignment = new Task_assignments();
 
-        // return view('pub_views.worker_click_task', compact('click_tasks'));
+        $task_assignment->task_id = $request->task_id;
+
+        $task_assignment->status = 0;
+        $task_assignment->worker_id = session()->get('member_id');
+        $task_assignment->save();
+
 
     }
 
@@ -349,26 +375,22 @@ class TaskController extends Controller
     }
 
 
-    public function worker_click_tasks(){
+    // public function worker_click_tasks(){
 
-        // $task_assignments = Task_assignments::where('member_id', session()->get('member_id'))
+    //     $todayTasks = Task::whereDate('created_at', Carbon::today())
+    //     ->orderBy('created_at', 'desc')
+    //     ->limit(20)
+    //     ->get();
 
-        $todayTasks = Task::whereDate('created_at', Carbon::today())
-        ->orderBy('created_at', 'desc')
-        ->limit(20)
-        ->get();
+    //     $workerId = session()->get('member_id'); // Replace with the specific worker's ID
 
-        $workerId = session()->get('member_id'); // Replace with the specific worker's ID
+    //     $worker_social_tasks = $todayTasks::whereDoesntHave('worker', function($query) use ($workerId) {
+    //         $query->where('worker_id', $workerId);
+    //     })->get();
 
-        $worker_social_tasks = $todayTasks::whereDoesntHave('worker', function($query) use ($workerId) {
-            $query->where('worker_id', $workerId);
-        })->get();
+    //     return view('member_views.common.worker_social_tasks', compact('worker_social_tasks'));
 
-        // $worker_social_tasks = Task::with('category', 'sub_category')->where('status', 1)->get();
-
-        return view('member_views.common.worker_social_tasks', compact('worker_social_tasks'));
-
-    }
+    // }
 
 
     public function add_client_social_task_info(Request $request){
