@@ -67,6 +67,8 @@ class MemberUserSeeder extends Seeder
             'password' => Hash::make('12345678'),
         ]);
 
+        $srijon_da = Member_user::find(3);
+
         Member_user::create([
             'name' => 'L',
             'phone' => '',
@@ -85,10 +87,10 @@ class MemberUserSeeder extends Seeder
 
         $faker = Faker::create();
 
-        for ($i=4; $i < 101; $i++) {
+        for ($i=4; $i < 103; $i++) {
             $member = new Member_user();
 
-            $string_user_code = date('Ymds').'0000';
+            // $string_user_code = date('Ymds').'0000';
 
             $member->name = $faker->name;
             $member->phone = $faker->phoneNumber;
@@ -96,9 +98,13 @@ class MemberUserSeeder extends Seeder
             $member->email_verified = 1;
             $member->verify_token = $faker->numberBetween(100000, 999999);
             $member->user_code = strval(abs(intval($string_user_code)+$i));
-            $member->parent_user_code = $developer->user_code;
-            $member->package_id = $faker->numberBetween(1, 3);
+            $member->parent_user_code = $srijon_da->user_code;
+            $member->parent_id = $srijon_da->member_id;
+            $member->package_id = $faker->numberBetween(1, 2);
             $member->role_id = 4;
+            $member->is_client = 1;
+            $member->is_worker = 1;
+            $member->status = 1;
             $member->password = $faker->password;
             $member->save();
         }

@@ -57,7 +57,7 @@ package
                             {{-- <div class="mx-auto mb-2">মেয়াদ <br> <b>{{ $member_package->validity }}</b></div> --}}
                             <div class="mb-4" style="font-size: 14px; display: flex;">
                                 <div style="margin-right: 15%" class="col-2">মূল্য <br> <b>{{ $member_package->price }}</b></div>
-                                <div style="margin-right: 15%" class="col-4">দৈনিক আয় <br> <b>{{ $member_package->daily_income }}</b></div>
+                                <div style="margin-right: 15%" class="col-4">দৈনিক আয় <br> <b>{{ $member_package->task_amount }}</b></div>
                                 <div style="margin-right: 15%" class="col-2">মেয়াদ <br> <b>{{ $member_package->validity }}</b></div>
                              {{-- : <b></b> --}}
                             </div>
