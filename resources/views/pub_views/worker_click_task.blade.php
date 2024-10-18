@@ -152,14 +152,14 @@ worker click task
                             _token: '{{ csrf_token() }}' // Laravel CSRF token
                         },
                         success: function(response) {
-                            // if (response.status === 'success') {
-                                // $('#message').html('<p>' + response.message + '</p>');
-                                alert(response.message);
-                            // }
+                            if (response.status === 'success') {
+                                $('#message').html("<p class='text-success'>" + response.message + "</p>");
+                            //     alert(response.message);
+                            }
                         },
                         error: function(xhr) {
                             let error = xhr.responseJSON.message;
-                            $('#message').html('<p>Error: ' + error + '</p>');
+                            $('#message').html("<p class='text-danger'>Error: " + error + "</p>");
                         }
                     });
                     
@@ -213,8 +213,9 @@ worker click task
                     @endif --}}
 
                     @if (!empty($_GET['worker_id']))
+                        <div id="message" class="mx-auto text-center"></div>
                         <!-- Pagination Controls -->
-                        <div class="pagination">
+                        <div class="pagination mx-auto text-center">
                             @if ($page > 1)
                                 <!-- Previous Button (Decrement Page) -->
                                 <a href="{{ route('posts', ['page' => $page - 1]) }}">Previous</a>
@@ -222,7 +223,7 @@ worker click task
 
                             @if (($page * $limit) < $totalPosts)
                                 <!-- Next Button (Increment Page) -->
-                                <a href="{{ route('posts', ['worker_id' => session()->get('member_id'), 'page' => $page + 1]) }}">Next</a>
+                                <a class="mx-auto btn btn-success text-white" href="{{ route('posts', ['worker_id' => session()->get('member_id'), 'page' => $page + 1]) }}">Next</a>
                             @endif
                         </div>
                     @endif

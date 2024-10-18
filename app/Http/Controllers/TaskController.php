@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Member_user;
+use App\Models\Passbook;
 use App\Models\Task;
 use App\Models\Task_assignments;
 use Carbon\Carbon;
@@ -367,48 +368,131 @@ class TaskController extends Controller
 
             $worker->update();
 
-        }
+            $passbook = new Passbook();
 
-        $first_parent = Member_user::where('member_id', $worker->parent_id)->where('parent_user_code', $worker->parent_user_code)->where('status', 1)->first();
+            $passbook->sender_name = 'Admin';
 
-        $second_parent = Member_user::where('member_id', $first_parent->parent_id)->where('parent_user_code', $first_parent->parent_user_code)->where('status', 1)->first();
+            $passbook->receiver_name = $worker->name;
 
-        $third_parent = Member_user::where('member_id', $second_parent->parent_id)->where('parent_user_code', $second_parent->parent_user_code)->where('status', 1)->first();
+            $passbook->receiver_member_id = $worker->member_id;
+
+            // $passbook->sender_user_code = $member_info->user_code;
+
+            // $passbook->sender_member_id = $member_info->member_id;
 
 
-        $first_commission = floatval($task_price_rate)/100 * 4;
+            $passbook->amount = $task_price_rate;
 
-        $second_commission = floatval($task_price_rate)/100 * 2;
+            $passbook->receiver_user_code = $worker->user_code;
 
-        $third_commission = floatval($task_price_rate)/100 * 1;
-
-        if ($first_parent) {
-
-            $first_parent->balance = intval(floatval($first_parent->balance) + floatval($first_commission));
-
-            $first_parent->update();
+            $passbook->save();
 
         }
 
-        if ($second_parent) {
+        if (!empty($worker->parent_id)) {
 
-            $second_parent->balance = intval(floatval($second_parent->balance) + floatval($second_commission));
-
-            $second_parent->update();
-
-        }
-
-        if ($third_parent) {
-
-            $third_parent->balance = intval(floatval($third_parent->balance) + floatval($third_commission));
-
-            $third_parent->update();
+            $first_parent = Member_user::where('member_id', $worker->parent_id)->where('parent_user_code', $worker->parent_user_code)->where('status', 1)->first();
+    
+            $second_parent = Member_user::where('member_id', $first_parent->parent_id)->where('parent_user_code', $first_parent->parent_user_code)->where('status', 1)->first();
+    
+            $third_parent = Member_user::where('member_id', $second_parent->parent_id)->where('parent_user_code', $second_parent->parent_user_code)->where('status', 1)->first();
+    
+    
+            $first_commission = floatval($task_price_rate)/100 * 4;
+    
+            $second_commission = floatval($task_price_rate)/100 * 2;
+    
+            $third_commission = floatval($task_price_rate)/100 * 1;
+    
+            if ($first_parent) {
+    
+                $first_parent->balance = intval(floatval($first_parent->balance) + floatval($first_commission));
+    
+                $first_parent->update();
+    
+                
+                $passbook = new Passbook();
+    
+                $passbook->sender_name = $worker->name;
+    
+                $passbook->receiver_name = $first_parent->name;
+    
+                $passbook->receiver_member_id = $first_parent->member_id;
+    
+                $passbook->sender_user_code = $worker->user_code;
+    
+                $passbook->sender_member_id = $worker->member_id;
+    
+    
+                $passbook->amount = $task_price_rate;
+    
+                $passbook->receiver_user_code = $first_parent->user_code;
+    
+                $passbook->save();
+    
+            }
+    
+            if ($second_parent) {
+    
+                $second_parent->balance = intval(floatval($second_parent->balance) + floatval($second_commission));
+    
+                $second_parent->update();
+    
+                
+                $passbook = new Passbook();
+    
+                $passbook->sender_name = $worker->name;
+    
+                $passbook->receiver_name = $second_parent->name;
+    
+                $passbook->receiver_member_id = $second_parent->member_id;
+    
+                $passbook->sender_user_code = $worker->user_code;
+    
+                $passbook->sender_member_id = $worker->member_id;
+    
+    
+                $passbook->amount = $task_price_rate;
+    
+                $passbook->receiver_user_code = $second_parent->user_code;
+    
+                $passbook->save();
+    
+            }
+    
+            if ($third_parent) {
+    
+                $third_parent->balance = intval(floatval($third_parent->balance) + floatval($third_commission));
+    
+                $third_parent->update();
+                
+                $passbook = new Passbook();
+    
+                $passbook->sender_name = $worker->name;
+    
+                $passbook->receiver_name = $third_parent->name;
+    
+                $passbook->receiver_member_id = $third_parent->member_id;
+    
+                $passbook->sender_user_code = $worker->user_code;
+    
+                $passbook->sender_member_id = $worker->member_id;
+    
+    
+                $passbook->amount = $task_price_rate;
+    
+                $passbook->receiver_user_code = $third_parent->user_code;
+    
+                $passbook->save();
+    
+    
+            }
 
         }
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Reward claimed successfully!',
+            'message' => 'Completed!',
         ]);
 
 
