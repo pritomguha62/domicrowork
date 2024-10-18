@@ -278,7 +278,13 @@ class TaskController extends Controller
 
     public function worker_click_task(Request $request){
 
-            // $click_tasks = Task::where('sub_category_id', null)->where('status', 1)->paginate(3);
+        if (empty(session()->get('member_id'))) {
+            
+            $posts = Task::where('sub_category_id', null)->where('status', 1)->paginate(3)->get();
+
+            return view('pub_views.worker_click_task', compact('posts'));
+
+        }
 
             // Set the limit of records to fetch per page
             $limit = 3;
@@ -293,7 +299,7 @@ class TaskController extends Controller
 
             // Fetch the next 3 posts starting from the offset
             $posts = Task::whereDoesntHave('worker', function($query) use ($workerId) {
-                $query->where('worker_id', $workerId);
+                $query->where('worker_id', $workerId)->whereDate('task_assignments.created_at', '<', Carbon::today());
             })->skip($offset)->take($limit)->get();
             
             // Count the total number of posts (for "Next" link logic)
@@ -306,14 +312,104 @@ class TaskController extends Controller
 
     public function worker_click_task_info(Request $request){
 
+        $member = Member_user::find(session()->get('member_id'));
+
+        if($member->package->package_id == 1){
+
+            $task_price_rate = 1;
+            
+        }elseif($member->package->package_id == 2){
+
+            $task_price_rate = 4;
+
+        }
+
+        $dailyIncomeLimit = $member->package->task_amount;
+
+        // Check if completing the task would exceed the daily income limit
+        if (($member->daily_income + $task_price_rate) > $dailyIncomeLimit) {
+            // return response()->json(['message' => 'Daily income limit reached.'], 403);
+            return redirect()->back()->with('error', 'Daily income limit reached.');
+        }
+
+        $task_assignment = new Task_assignments();
+
+        $task_assignment->task_id = $request->task_number_1;
+
+        $task_assignment->status = 1;
+        $task_assignment->approver_id = 2;
+        $task_assignment->worker_id = session()->get('member_id');
+        $task_assignment->save();
         
         $task_assignment = new Task_assignments();
 
-        $task_assignment->task_id = $request->task_id;
+        $task_assignment->task_id = $request->task_number_2;
 
-        $task_assignment->status = 0;
+        $task_assignment->status = 1;
+        $task_assignment->approver_id = 2;
         $task_assignment->worker_id = session()->get('member_id');
         $task_assignment->save();
+        
+        $task_assignment = new Task_assignments();
+
+        $task_assignment->task_id = $request->task_number_3;
+
+        $task_assignment->status = 1;
+        $task_assignment->approver_id = 2;
+        $task_assignment->worker_id = session()->get('member_id');
+        $task_assignment->save();
+
+        $worker = Member_user::find(session()->get('member_id'));
+
+        if (!empty($worker)) {
+
+            $worker->balance = floatval($worker->balance) + floatval($task_price_rate);
+
+            $worker->update();
+
+        }
+
+        $first_parent = Member_user::where('member_id', $worker->parent_id)->where('parent_user_code', $worker->parent_user_code)->where('status', 1)->first();
+
+        $second_parent = Member_user::where('member_id', $first_parent->parent_id)->where('parent_user_code', $first_parent->parent_user_code)->where('status', 1)->first();
+
+        $third_parent = Member_user::where('member_id', $second_parent->parent_id)->where('parent_user_code', $second_parent->parent_user_code)->where('status', 1)->first();
+
+
+        $first_commission = floatval($task_price_rate)/100 * 4;
+
+        $second_commission = floatval($task_price_rate)/100 * 2;
+
+        $third_commission = floatval($task_price_rate)/100 * 1;
+
+        if ($first_parent) {
+
+            $first_parent->balance = intval(floatval($first_parent->balance) + floatval($first_commission));
+
+            $first_parent->update();
+
+        }
+
+        if ($second_parent) {
+
+            $second_parent->balance = intval(floatval($second_parent->balance) + floatval($second_commission));
+
+            $second_parent->update();
+
+        }
+
+        if ($third_parent) {
+
+            $third_parent->balance = intval(floatval($third_parent->balance) + floatval($third_commission));
+
+            $third_parent->update();
+
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Reward claimed successfully!',
+        ]);
 
 
     }
