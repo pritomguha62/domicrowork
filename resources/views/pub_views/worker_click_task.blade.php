@@ -154,7 +154,7 @@ worker click task
                         success: function(response) {
                             // if (response.status === 'success') {
                                 // $('#message').html('<p>' + response.message + '</p>');
-                                alert(response);
+                                alert(response.message);
                             // }
                         },
                         error: function(xhr) {
@@ -191,7 +191,7 @@ worker click task
 
                         <div class="bg-light p-5 rounded h-100 wow fadeInUp mb-4" data-wow-delay="0.2s">
                             {{-- <h2 class="text-primary">Task {{ $i }}</h2> --}}
-                            <input type="hidden" hidden id="task_number_{{ $i }}">
+                            <input type="hidden" hidden id="task_number_{{ $i }}" value="{{ $click_task->task_id }}">
                             <h3 class="text-primary">{{ $click_task->title }}</h3>
                             <p class="mb-4">{{ $click_task->description }}</p>
                         </div>
